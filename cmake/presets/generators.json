@@ -1,0 +1,22 @@
+{
+	"version": 5,
+	"configurePresets": [
+		{
+			"name": "ninja",
+			"hidden": true,
+			"generator": "Ninja"
+		},
+		{
+			"name": "vs19_x64",
+			"hidden": true,
+			"generator": "Visual Studio 16 2019",
+			"architecture": "x64"
+		},
+		{
+			"name": "vs22_x64",
+			"hidden": true,
+			"generator": "Visual Studio 17 2022",
+			"architecture": "x64"
+		}
+	]
+}

@@ -1,0 +1,57 @@
+{
+	"version": 5,
+	"cmakeMinimumRequired": { "major": 3, "minor": 23, "patch": 0 },
+	"include": [
+		"cmake/presets/common.json",
+		"cmake/presets/generators.json",
+		"cmake/presets/windows.json"
+	],
+	"configurePresets": [
+		{
+			"displayName": "[VS2022][MSVC] Debug (x64)",
+			"name": "vs22_msvc_x64_debug",
+			"inherits": [ "vs22_x64", "win_msvc_x64", "debug" ]
+		},
+		{
+			"displayName": "[VS2022][MSVC] Release (x64)",
+			"name": "vs22_msvc_x64_release",
+			"inherits": [ "vs22_x64", "win_msvc_x64", "release" ]
+		},
+
+		{
+			"displayName": "[VS2019][MSVC] Debug (x64)",
+			"name": "vs19_msvc_x64_debug",
+			"inherits": [ "vs19_x64", "win_msvc_x64", "debug" ]
+		},
+		{
+			"displayName": "[VS2019][MSVC] Release (x64)",
+			"name": "vs19_msvc_x64_release",
+			"inherits": [ "vs19_x64", "win_msvc_x64", "release" ]
+		},
+
+
+		{
+			"displayName": "[Ninja][MSVC] Debug (x64)",
+			"name": "ninja_msvc_x64_debug",
+			"inherits": [ "ninja", "win_msvc_x64", "debug" ]
+		},
+		{
+			"displayName": "[Ninja][MSVC] Release (x64)",
+			"name": "ninja_msvc_x64_release",
+			"inherits": [ "ninja", "win_msvc_x64", "release" ]
+		},
+
+		{
+			"displayName": "[Ninja][Clang] Debug (x64)",
+			"name": "ninja_msvc_clang_x64_debug",
+			"inherits": [ "ninja", "win_msvc_clang_x64", "debug" ]
+		},
+		{
+			"displayName": "[Ninja][Clang] Release (x64)",
+			"name": "ninja_msvc_clang_x64_release",
+			"inherits": [ "ninja", "win_msvc_clang_x64", "release" ]
+		}
+
+
+	]
+}

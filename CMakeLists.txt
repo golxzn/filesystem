@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.23)
+
+project(resman
+	VERSION 1.0.0
+	DESCRIPTION "golxzn resource manager"
+	LANGUAGES CXX
+)
+
+include(cmake/options.cmake)
+include(cmake/definitions.cmake)
+
+add_subdirectory(${GRM_CODE_DIR})
+

@@ -1,0 +1,53 @@
+{
+	"version": 5,
+	"configurePresets": [
+		{
+			"name": "export_compile_commands",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_EXPORT_COMPILE_COMMANDS": true
+			}
+		},
+		{
+			"name": "c_standard",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_C_STANDARD": "17",
+				"CMAKE_C_STANDARD_REQUIRED": true
+			}
+		},
+		{
+			"name": "cpp_standard",
+			"hidden": true,
+			"cacheVariables": {
+				"CMAKE_CXX_STANDARD": "20",
+				"CMAKE_CXX_STANDARD_REQUIRED": true
+			}
+		},
+
+		{
+			"name": "misc",
+			"hidden": true,
+			"inherits": [ "export_compile_commands", "c_standard", "cpp_standard" ]
+		},
+
+		{
+			"name": "release",
+			"hidden": true,
+			"inherits": [ "misc" ],
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"GRM_DEFINITIONS_RELEASE": "NDEBUG;GRM_RELEASE"
+			}
+		},
+		{
+			"name": "debug",
+			"hidden": true,
+			"inherits": [ "misc" ],
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"GRM_DEFINITIONS_DEBUG": "PL_DEBUG;GRM_DEBUG"
+			}
+		}
+	]
+}
