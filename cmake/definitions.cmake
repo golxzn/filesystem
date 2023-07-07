@@ -13,7 +13,8 @@ unset(upper_build_type)
 
 if(GRM_SYSTEM)
 	string(TOUPPER ${GRM_SYSTEM} upper_system)
-	list(APPEND GRM_DEFINITIONS GRM_${upper_system})
+	list(APPEND GRM_DEFINITIONS GRM_SYSTEM_NAME="${GRM_SYSTEM}")
+	list(APPEND GRM_DEFINITIONS GRM_${upper_system}=1)
 endif()
 
 unset(__me_suffixes)

@@ -2,6 +2,7 @@
 
 `golxzn::resman` is a simple resource manager which provides basic access to application resources
 and user directory.
+`golxzn::resman` is dependenceless. There's only STL usage and platform specific headers.
 
 ## __How does it work?__
 

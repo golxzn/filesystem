@@ -1,0 +1,49 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch tests",
+				"type": "cppvsdbg",
+				"request": "launch",
+				"program": "${command:cmake.launchTargetPath}",
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}/bin",
+			}
+		],
+	},
+	"settings": {
+		// Extension: shardulm94.trailing-spaces
+		"trailing-spaces.trimOnSave": false,
+		"trailing-spaces.deleteModifiedLinesOnly": true,
+
+		// Extension: ms-vscode.cmake-tools
+		"cmake.configureOnOpen": false,
+		"cmake.skipConfigureIfCachePresent": false,
+		"cmake.useCMakePresets": "always",
+		"cmake.parallelJobs": 16,
+		"cSpell.words": [ "resman" ],
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools-extension-pack",
+			"jeff-hykin.better-cpp-syntax",
+			"ms-vscode.cmake-tools",
+			"josetr.cmake-language-support-vscode",
+			"twxs.cmake",
+			"eamodio.gitlens",
+			"paragdiwan.gitpatch",
+			"mhutchie.git-graph",
+			"ms-dotnettools.vscode-dotnet-runtime",
+			"shardulm94.trailing-spaces",
+			"Gruntfuggly.todo-tree",
+			"VisualStudioExptTeam.vscodeintellicode",
+			"streetsidesoftware.code-spell-checker",
+		]
+	}
+}
