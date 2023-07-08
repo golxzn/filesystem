@@ -2,23 +2,53 @@
 
 #include <deque>
 #include <string>
+#include <optional>
 #include <string_view>
+#include <unordered_map>
 
 namespace golxzn {
 
+namespace details {
+
+template<class T>
+struct transparent_hash {
+	using hash_type = std::hash<T>;
+	using is_transparent = void;
+
+	std::size_t operator()(const T &v) const noexcept { return hash_type{}(v); }
+};
+
+template<>
+struct transparent_hash<std::string> {
+	using hash_type = std::hash<std::string_view>;
+	using is_transparent = void;
+
+	std::size_t operator()(const std::string &v)      const noexcept { return hash_type{}(v); }
+	std::size_t operator()(const std::string_view &v) const noexcept { return hash_type{}(v); }
+	std::size_t operator()(const char *const v)       const noexcept { return hash_type{}(v); }
+};
+
+} // namespace
+
+/**
+ * @brief Golxzn Resource Manager
+ * @details Use this class to load resources from the program's directory.
+ * @warning Every methods with string arguments instead of wstring cause a memory allocation.
+ */
 class resman final {
-	using string_view_list = std::initializer_list<std::string_view>;
 public:
-	static constexpr char separator{ '/' };
-	static constexpr std::string_view default_application_name{ "unknown_application" };
-	static constexpr string_view_list default_assets_directory_names{
-		"assets",
-		"resources"
-		"res",
-	};
+	using associations_type = std::unordered_map<
+		std::string, std::wstring, details::transparent_hash<std::string>, std::equal_to<>
+	>;
+
+	static constexpr std::wstring_view none{ L"" };
+	static constexpr std::wstring::value_type separator{ L'/' };
+	static constexpr std::wstring_view default_application_name{ L"unknown_application" };
+	static constexpr std::wstring_view default_assets_directory_name{ L"assets" };
+	static constexpr std::string_view protocol_separator{ "://" };
 
 	struct error {
-		std::string message;
+		std::wstring message;
 
 		bool has_error() const noexcept;
 
@@ -35,20 +65,105 @@ public:
 
 	/**
 	 * @brief Initialize the Resource Manager
-	 * @details This method does two thing:
-	 * 1. Looks for the provided assets directories.
-	 * 2. Creates a directory for the application user data.
 	 *
 	 * @param application_name Your application name or the name of the user assets directory
-	 * @param assets_names List of the assets directories names to search for
+	 * @param assets_name The name of the assets directory to search for
 	 * @return error The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error initialize(const std::string_view application_name,
-		const string_view_list assets_names = default_assets_directory_names);
+	[[nodiscard]] static error initialize(const std::wstring_view application_name,
+		const std::wstring_view assets_name = default_assets_directory_name);
 
 	/**
-	 * @brief Initialize the Resource Manager
-	 * @details @see initialize(std::string_view application_name, string_view_list assets_names)
+	 * @brief Sets the application name object
+	 * @details Sets the name of the application which is used in the directory path for user data.
+	 * If the name is empty, the default name will be used.
+	 * @warning This method doesn't change the name of the user data directory!
+	 * @param application_name application name
+	 */
+	static void set_application_name(const std::wstring_view application_name) noexcept;
+
+	/**
+	 * @brief Add the association between the protocol and the prefix. (ex. "res://" and "user://")
+	 *
+	 * @param extension Protocol extension (ex. "res://"). Has to end with "://"
+	 * @param prefix Prefix of the path. Has to end with a slash!
+	 */
+	static void associate(std::string_view protocol, std::wstring &&prefix) noexcept;
+
+	/**
+	 * @brief Get the association object
+	 *
+	 * @param protocol The protocol. Has to end with "://". If the prefix is not set, it returns an
+	 * @ref golxzn::resman::none
+	 * @return prefix
+	 */
+	static std::wstring_view get_association(const std::string_view protocol) noexcept;
+
+	/**
+	 * @brief Get the application name
+	 *
+	 * @return std::string_view application name
+	 */
+	[[nodiscard]] static std::wstring_view application_name() noexcept;
+
+	/**
+	 * @brief Get the user data directory object
+	 * @details Same as @ref golxzn::resman::get_association("user://")
+	 * Gets the full path of the user data directory:
+	 *  - Windows: `%USERPROFILE%/AppData/Roaming/<application name>`
+	 *  - MacOS: `$HOME/Library/Application Support/<application name>`
+	 *  - Linux: `$XDG_CONFIG_HOME/<application name>` or `$HOME/.config/<application name>`
+	 *
+	 * @return user directory or @ref golxzn::resman::none if it's not set
+	 */
+	[[nodiscard]] static std::wstring_view user_data_directory() noexcept;
+
+	/**
+	 * @brief Get the assets directories
+	 * @details Same as @ref golxzn::resman::get_association("res://")
+	 *
+	 * @return assets directory or @ref golxzn::resman::none if it's not set
+	 */
+	[[nodiscard]] static std::wstring_view assets_directory() noexcept;
+
+	/**
+	 * @brief Fix the path separators to the '/' and remove the trailing slash.
+	 *
+	 * @param path std::wstring_view path
+	 * @return std::wstring canonical path
+	 */
+	[[nodiscard]] static std::wstring normalize(std::wstring_view path);
+
+	/**
+	 * @brief Get the absolute path of this application.
+	 */
+	[[nodiscard]] static std::wstring current_directory();
+
+	/**
+	 * @brief Convert a string to wide string
+	 *
+	 * @param str string to convert
+	 * @return std::wstring converted wide string
+	 */
+	[[nodiscard]] static std::wstring to_wide(const std::string_view str) noexcept;
+
+	/**
+	 * @brief Convert a wide string to string
+	 *
+	 * @param wstr wide string to convert
+	 * @return std::string converted string
+	 */
+	[[nodiscard]] static std::string to_narrow(const std::wstring_view wstr) noexcept;
+
+	/**
+	 * @addtogroup Narrow string aliases
+	 * @warning Every methods with string arguments instead of wstring cause a memory allocation.
+	 * @{
+	 */
+
+	/**
+	 * @brief Alias for wide version of golxzn::resman::initialize
+	 * @details @see golxzn::resman::initialize(std::wstring_view application_name, std::wstring_view assets_name)
 	 *
 	 * @param application_name Your application name or the name of the user assets directory
 	 * @param assets_name The name of the assets directory to search for
@@ -56,8 +171,9 @@ public:
 	 */
 	[[nodiscard]] static error initialize(const std::string_view application_name,
 		const std::string_view assets_name);
+
 	/**
-	 * @brief Sets the application name object
+	 * @brief Narrow string alias for set_application_name
 	 * @details Sets the name of the application which is used in the directory path for user data.
 	 * If the name is empty, the default name will be used.
 	 * @warning This method doesn't change the name of the user data directory!
@@ -66,58 +182,23 @@ public:
 	static void set_application_name(const std::string_view application_name) noexcept;
 
 	/**
-	 * @brief Get the application name
-	 *
-	 * @return std::string_view application name
-	 */
-	[[nodiscard]] static std::string_view application_name() noexcept;
-
-	/**
-	 * @brief Get the user data directory object
-	 * @details Gets the full path of the user data directory:
-	 *  - Windows: `%USERPROFILE%/AppData/Roaming/<application name>`
-	 *  - MacOS: `$HOME/Library/Application Support/<application name>`
-	 *  - Linux: `$XDG_CONFIG_HOME/<application name>` or `$HOME/.config/<application name>`
-	 * @return std::string user data directory path
-	 */
-	[[nodiscard]] static std::wstring_view user_data_directory() noexcept;
-
-	/**
-	 * @brief Get the assets directories
-	 *
-	 * @return std::vector<std::string> Assets directories paths
-	 */
-	[[nodiscard]] static const std::deque<std::string> &assets_directory() noexcept;
-
-	/**
 	 * @brief Fix the path separators to the '/' and remove the trailing slash.
-	 *
-	 * @warning This method copies the path to the internal buffer!
-	 * If you need to use it many times, it is better to use the
 	 * @see golxzn::resman::normalize(std::wstring_view path) method.
 	 *
 	 * @param path std::string_view path
 	 * @return std::wstring canonical path
 	 */
-	static std::wstring normalize(const std::string_view path);
+	[[nodiscard]] static std::wstring normalize(const std::string_view path);
 
-	/**
-	 * @brief Fix the path separators to the '/' and remove the trailing slash.
-	 *
-	 * @param path std::wstring_view path
-	 * @return std::wstring canonical path
-	 */
-	static std::wstring normalize(std::wstring_view path);
+
+	/** @} */
 
 private:
-	static std::string appname;
-	static std::wstring user_data_dir;
-	static std::deque<std::string> assets_dirs;
+	static std::wstring appname;
+	static associations_type associations;
 
-	static bool setup_assets_directories(const string_view_list assets_names);
-	static bool setup_user_data_directory();
-
-	static void normalize(std::wstring &path) noexcept;
+	static std::wstring setup_assets_directories(const std::wstring_view assets_names);
+	static std::wstring setup_user_data_directory();
 };
 
 namespace resources { using manager = resman; }

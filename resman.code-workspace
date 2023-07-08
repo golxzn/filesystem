@@ -18,6 +18,7 @@
 		],
 	},
 	"settings": {
+
 		// Extension: shardulm94.trailing-spaces
 		"trailing-spaces.trimOnSave": false,
 		"trailing-spaces.deleteModifiedLinesOnly": true,
@@ -27,6 +28,8 @@
 		"cmake.skipConfigureIfCachePresent": false,
 		"cmake.useCMakePresets": "always",
 		"cmake.parallelJobs": 16,
+
+		// Extension: streetsidesoftware.code-spell-checker
 		"cSpell.words": [ "resman" ],
 	},
 	"extensions": {

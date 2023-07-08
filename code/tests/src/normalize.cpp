@@ -4,8 +4,6 @@
 
 #include <golxzn/resman.hpp>
 
-#include "common.hpp"
-
 TEST_CASE("resman::normalize", "[resman][normalize]") {
 	using namespace std::string_view_literals;
 	static const std::unordered_map<std::wstring_view, std::wstring_view> tests{
@@ -23,9 +21,9 @@ TEST_CASE("resman::normalize", "[resman][normalize]") {
 	};
 
 	for (const auto [from, to] : tests) {
-		INFO("Converting from '" << fortest::wstring2string(from) <<
-			"' to '" << fortest::wstring2string(to) << "'");
-		INFO("Actual result: '" << fortest::wstring2string(golxzn::resman::normalize(from)) << "'");
+		INFO("Converting from '" << gxzn::resman::to_narrow(from) <<
+			"' to '" << gxzn::resman::to_narrow(to) << "'");
+		INFO("Actual result: '" << gxzn::resman::to_narrow(golxzn::resman::normalize(from)) << "'");
 		REQUIRE(golxzn::resman::normalize(from) == to);
 	}
 }
