@@ -47,9 +47,19 @@ public:
 	static constexpr std::wstring_view default_assets_directory_name{ L"assets" };
 	static constexpr std::string_view protocol_separator{ "://" };
 
+	/**
+	 * @brief Struct returned by some methods to tell if there's an error
+	 * @warning This struct has unexplicit conversion to bool! Use carefully!
+	 */
 	struct error {
 		std::wstring message;
 
+		/**
+		 * @brief Checks if there's an error
+		 *
+		 * @return true Something wrong (error message is not empty)
+		 * @return false All right (error message is empty)
+		 */
 		bool has_error() const noexcept;
 
 		/**
@@ -67,11 +77,13 @@ public:
 	 * @brief Initialize the Resource Manager
 	 *
 	 * @param application_name Your application name or the name of the user assets directory
-	 * @param assets_name The name of the assets directory to search for
+	 * @param assets_path The name of the assets directory or the full path to the directory.
+	 * If there's [LETTER]:/ or / at the beginning of the string, the path will be used as it is.
+	 * Otherwise the path is relative to the program's directory.
 	 * @return error The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error initialize(const std::wstring_view application_name,
-		const std::wstring_view assets_name = default_assets_directory_name);
+		const std::wstring_view assets_path = default_assets_directory_name);
 
 	/**
 	 * @brief Sets the application name object
@@ -127,6 +139,13 @@ public:
 	[[nodiscard]] static std::wstring_view assets_directory() noexcept;
 
 	/**
+	 * @brief Get the associations
+	 *
+	 * @return const associations_type& associations
+	 */
+	[[nodiscard]] static const associations_type &associations() noexcept;
+
+	/**
 	 * @brief Fix the path separators to the '/' and remove the trailing slash.
 	 *
 	 * @param path std::wstring_view path
@@ -136,6 +155,7 @@ public:
 
 	/**
 	 * @brief Get the absolute path of this application.
+	 * @returns std::wstring Absolute path of the application or, in the failure case, a "./".
 	 */
 	[[nodiscard]] static std::wstring current_directory();
 
@@ -163,14 +183,14 @@ public:
 
 	/**
 	 * @brief Alias for wide version of golxzn::resman::initialize
-	 * @details @see golxzn::resman::initialize(std::wstring_view application_name, std::wstring_view assets_name)
+	 * @details @see golxzn::resman::initialize(std::wstring_view application_name, std::wstring_view assets_path)
 	 *
 	 * @param application_name Your application name or the name of the user assets directory
-	 * @param assets_name The name of the assets directory to search for
+	 * @param assets_path The name of the assets directory to search for
 	 * @return error The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error initialize(const std::string_view application_name,
-		const std::string_view assets_name);
+		const std::string_view assets_path);
 
 	/**
 	 * @brief Narrow string alias for set_application_name
@@ -195,9 +215,9 @@ public:
 
 private:
 	static std::wstring appname;
-	static associations_type associations;
+	static associations_type associations_map;
 
-	static std::wstring setup_assets_directories(const std::wstring_view assets_names);
+	static std::wstring setup_assets_directories(const std::wstring_view assets_path);
 	static std::wstring setup_user_data_directory();
 };
 

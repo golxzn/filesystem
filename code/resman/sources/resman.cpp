@@ -59,7 +59,7 @@ static std::wstring unix_get_home() {
 namespace golxzn {
 
 
-resman::associations_type resman::associations{};
+resman::associations_type resman::associations_map{};
 std::wstring resman::appname{ resman::default_application_name };
 
 
@@ -74,11 +74,11 @@ resman::error::operator bool() const noexcept { return !has_error(); }
 //======================================== resman::public ========================================//
 
 
-resman::error resman::initialize(const std::wstring_view app_name, const std::wstring_view asset_name) {
+resman::error resman::initialize(const std::wstring_view app_name, const std::wstring_view assets_path) {
 	set_application_name(app_name);
 
 	error err{};
-	if (auto assets_dir{ setup_assets_directories(asset_name) }; !assets_dir.empty()) [[likely]] {
+	if (auto assets_dir{ setup_assets_directories(assets_path) }; !assets_dir.empty()) [[likely]] {
 		associate("res://", std::move(assets_dir));
 	} else {
 		err.message = L"Failed to setup assets directories";
@@ -109,13 +109,14 @@ void resman::associate(const std::string_view protocol_view, std::wstring &&pref
 		protocol += protocol_separator;
 	}
 
-	associations.emplace(std::move(protocol), std::move(prefix));
+	associations_map.insert_or_assign(std::move(protocol), std::move(prefix));
 }
 
 std::wstring_view resman::get_association(const std::string_view protocol) noexcept {
 	if (protocol.empty()) [[unlikely]] return none;
 
-	if (const auto found{ associations.find(protocol) }; found != std::cend(associations)) [[likely]] {
+	if (const auto found{ associations_map.find(protocol) };
+			found != std::cend(associations_map)) [[likely]] {
 		return found->second;
 	}
 	return none;
@@ -131,6 +132,10 @@ std::wstring_view resman::user_data_directory() noexcept {
 
 std::wstring_view resman::assets_directory() noexcept {
 	return get_association("res://");
+}
+
+const resman::associations_type &resman::associations() noexcept {
+	return associations_map;
 }
 
 std::wstring resman::normalize(std::wstring_view str) {
@@ -191,10 +196,12 @@ std::wstring resman::normalize(std::wstring_view str) {
 }
 
 std::wstring resman::current_directory() {
+
 #if defined(GRM_WINDOWS)
 
-	if (std::string path(MAX_PATH, '\0'); GetModuleFileNameA(NULL, path.data(), path.size())) {
-		path.resize(path.find_last_of("\\/"));
+	std::wstring path(MAX_PATH, L'\0');
+	if (const size_t length{ GetCurrentDirectoryW(path.size(), path.data()) }; length != 0) {
+		path.resize(length);
 		return normalize(path);
 	}
 
@@ -205,7 +212,7 @@ std::wstring resman::current_directory() {
 	}
 
 #endif
-	return L"";
+	return L"./";
 };
 
 std::wstring resman::to_wide(const std::string_view str) noexcept {
@@ -255,11 +262,12 @@ std::wstring resman::normalize(const std::string_view str) {
 //======================================== resman::private =======================================//
 
 
-std::wstring resman::setup_assets_directories(const std::wstring_view assets_names) {
-	// Find the directory with name 'assets_names' in current directory and set it as assets directory
-	// If there is no directory with such name, go down to the parent directory and try again
-	// If there is no parent directory, create assets directory and set it as assets directory
-	return std::wstring{ assets_names };
+std::wstring resman::setup_assets_directories(const std::wstring_view assets_path) {
+	if (assets_path.starts_with(separator) || assets_path.find(L":") == 1) {
+		return normalize(assets_path);
+	}
+
+	return normalize(current_directory() + std::wstring{ assets_path });
 }
 
 std::wstring resman::setup_user_data_directory() {
@@ -296,5 +304,6 @@ std::wstring resman::setup_user_data_directory() {
 #endif
 	return normalize(user_data_dir);
 }
+
 
 } // namespace golxzn
