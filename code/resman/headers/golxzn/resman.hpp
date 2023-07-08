@@ -19,13 +19,14 @@ struct transparent_hash {
 };
 
 template<>
-struct transparent_hash<std::string> {
-	using hash_type = std::hash<std::string_view>;
+struct transparent_hash<std::wstring> {
+	using char_type = std::wstring::value_type;
+	using hash_type = std::hash<std::wstring_view>;
 	using is_transparent = void;
 
-	std::size_t operator()(const std::string &v)      const noexcept { return hash_type{}(v); }
-	std::size_t operator()(const std::string_view &v) const noexcept { return hash_type{}(v); }
-	std::size_t operator()(const char *const v)       const noexcept { return hash_type{}(v); }
+	std::size_t operator()(const std::wstring &v)      const noexcept { return hash_type{}(v); }
+	std::size_t operator()(const std::wstring_view &v) const noexcept { return hash_type{}(v); }
+	std::size_t operator()(const char_type *const v)   const noexcept { return hash_type{}(v); }
 };
 
 } // namespace
@@ -38,14 +39,14 @@ struct transparent_hash<std::string> {
 class resman final {
 public:
 	using associations_type = std::unordered_map<
-		std::string, std::wstring, details::transparent_hash<std::string>, std::equal_to<>
+		std::wstring, std::wstring, details::transparent_hash<std::wstring>, std::equal_to<>
 	>;
 
 	static constexpr std::wstring_view none{ L"" };
 	static constexpr std::wstring::value_type separator{ L'/' };
 	static constexpr std::wstring_view default_application_name{ L"unknown_application" };
 	static constexpr std::wstring_view default_assets_directory_name{ L"assets" };
-	static constexpr std::string_view protocol_separator{ "://" };
+	static constexpr std::wstring_view protocol_separator{ L"://" };
 
 	/**
 	 * @brief Struct returned by some methods to tell if there's an error
@@ -95,12 +96,22 @@ public:
 	static void set_application_name(const std::wstring_view application_name) noexcept;
 
 	/**
-	 * @brief Add the association between the protocol and the prefix. (ex. "res://" and "user://")
+	 * @brief Add the association between the protocol and the prefix. (ex. L"res://" and L"user://")
+	 * @details Add custom protocol to your application. For example, you could have a L"ab-test://"
+	 * association with your own separated assets directory.
+	 * @example
+	 * @code{.cpp}
+	 * golxzn::resman::associate(L"ab-test://", gxzn::resman::assets_directory() + L"../ab-test/");
+	 * // Result:
+	 * // res://textures/image.png     -> C:/Program Files/MyCoolApp/assets/textures/image.png
+	 * // ab-test://textures/image.png -> C:/Program Files/MyCoolApp/ab-test/textures/image.png
+	 * @endcode
 	 *
+	 * @warning L"res://", L"user://", L"temp://" are reserved and cannot be used.
 	 * @param extension Protocol extension (ex. "res://"). Has to end with "://"
 	 * @param prefix Prefix of the path. Has to end with a slash!
 	 */
-	static void associate(std::string_view protocol, std::wstring &&prefix) noexcept;
+	static void associate(std::wstring_view protocol, std::wstring &&prefix) noexcept;
 
 	/**
 	 * @brief Get the association object
@@ -109,7 +120,7 @@ public:
 	 * @ref golxzn::resman::none
 	 * @return prefix
 	 */
-	static std::wstring_view get_association(const std::string_view protocol) noexcept;
+	[[nodiscard]] static std::wstring_view get_association(const std::wstring_view protocol) noexcept;
 
 	/**
 	 * @brief Get the application name
@@ -120,7 +131,7 @@ public:
 
 	/**
 	 * @brief Get the user data directory object
-	 * @details Same as @ref golxzn::resman::get_association("user://")
+	 * @details Same as @ref golxzn::resman::get_association(L"user://")
 	 * Gets the full path of the user data directory:
 	 *  - Windows: `%USERPROFILE%/AppData/Roaming/<application name>`
 	 *  - MacOS: `$HOME/Library/Application Support/<application name>`
@@ -132,7 +143,7 @@ public:
 
 	/**
 	 * @brief Get the assets directories
-	 * @details Same as @ref golxzn::resman::get_association("res://")
+	 * @details Same as @ref golxzn::resman::get_association(L"res://")
 	 *
 	 * @return assets directory or @ref golxzn::resman::none if it's not set
 	 */
@@ -202,6 +213,32 @@ public:
 	static void set_application_name(const std::string_view application_name) noexcept;
 
 	/**
+	 * @brief Add the association between the protocol and the prefix. (ex. "res://" and "user://")
+	 * @details Add custom protocol to your application. For example, you could have a "ab-test://"
+	 * association with your own separated assets directory.
+	 * @example
+	 * @code{.cpp}
+	 * golxzn::resman::associate("ab-test://", gxzn::resman::assets_directory() + L"../ab-test/");
+	 * // Result:
+	 * // res://textures/image.png     -> C:/Program Files/MyCoolApp/assets/textures/image.png
+	 * // ab-test://textures/image.png -> C:/Program Files/MyCoolApp/ab-test/textures/image.png
+	 * @endcode
+	 *
+	 * @param extension Protocol extension (ex. "res://"). Has to end with "://"
+	 * @param prefix Prefix of the path. Has to end with a slash!
+	 */
+	static void associate(const std::string_view protocol, const std::string_view prefix) noexcept;
+
+	/**
+	 * @brief Get the association object
+	 *
+	 * @param protocol The protocol. Has to end with "://". If the prefix is not set, it returns an
+	 * @ref golxzn::resman::none
+	 * @return prefix
+	 */
+	[[nodiscard]] static std::wstring_view get_association(const std::string_view protocol) noexcept;
+
+	/**
 	 * @brief Fix the path separators to the '/' and remove the trailing slash.
 	 * @see golxzn::resman::normalize(std::wstring_view path) method.
 	 *
@@ -217,11 +254,16 @@ private:
 	static std::wstring appname;
 	static associations_type associations_map;
 
+	static std::wstring replace_association_prefix(std::wstring_view path) noexcept;
 	static std::wstring setup_assets_directories(const std::wstring_view assets_path);
 	static std::wstring setup_user_data_directory();
 };
 
 namespace resources { using manager = resman; }
+
+//======================================== Implementation ========================================//
+
+
 
 } // namespace golxzn
 

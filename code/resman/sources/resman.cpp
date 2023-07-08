@@ -79,13 +79,15 @@ resman::error resman::initialize(const std::wstring_view app_name, const std::ws
 
 	error err{};
 	if (auto assets_dir{ setup_assets_directories(assets_path) }; !assets_dir.empty()) [[likely]] {
-		associate("res://", std::move(assets_dir));
+		associate(L"res://", std::wstring{ assets_dir });
+		associate(L"assets://", std::move(assets_dir));
 	} else {
 		err.message = L"Failed to setup assets directories";
 	}
 
 	if (auto user_dir{ setup_user_data_directory() }; !user_dir.empty()) [[likely]] {
-		associate("user://", std::move(user_dir));
+		associate(L"user://", std::wstring{ user_dir });
+		associate(L"temp://", std::move(user_dir) + L"temp/");
 	} else {
 		err.message += std::format(L"{} '{}' {}",
 			(err.has_error() ? L" and" : L"Failed to setup"), appname, L"user data directory");
@@ -101,10 +103,10 @@ void resman::set_application_name(const std::wstring_view application_name) noex
 	}
 }
 
-void resman::associate(const std::string_view protocol_view, std::wstring &&prefix) noexcept {
+void resman::associate(const std::wstring_view protocol_view, std::wstring &&prefix) noexcept {
 	if (protocol_view.empty()) [[unlikely]] return;
 
-	std::string protocol{ protocol_view };
+	std::wstring protocol{ protocol_view };
 	if (!protocol_view.ends_with(protocol_separator)) [[unlikely]] {
 		protocol += protocol_separator;
 	}
@@ -112,7 +114,7 @@ void resman::associate(const std::string_view protocol_view, std::wstring &&pref
 	associations_map.insert_or_assign(std::move(protocol), std::move(prefix));
 }
 
-std::wstring_view resman::get_association(const std::string_view protocol) noexcept {
+std::wstring_view resman::get_association(const std::wstring_view protocol) noexcept {
 	if (protocol.empty()) [[unlikely]] return none;
 
 	if (const auto found{ associations_map.find(protocol) };
@@ -254,6 +256,14 @@ void resman::set_application_name(const std::string_view application_name) noexc
 	set_application_name(to_wide(application_name));
 }
 
+void resman::associate(const std::string_view protocol_view, const std::string_view prefix) noexcept {
+	associate(to_wide(protocol_view), to_wide(prefix));
+}
+
+std::wstring_view resman::get_association(const std::string_view protocol) noexcept {
+	return get_association(to_wide(protocol));
+}
+
 std::wstring resman::normalize(const std::string_view str) {
 	return normalize(to_wide(str));
 }
@@ -261,6 +271,16 @@ std::wstring resman::normalize(const std::string_view str) {
 
 //======================================== resman::private =======================================//
 
+
+std::wstring resman::replace_association_prefix(std::wstring_view path) noexcept {
+	for (const auto &[key, value] : associations_map) {
+		if (path.starts_with(key)) {
+			path.remove_prefix(key.size());
+			return normalize(value + std::wstring{ path });
+		}
+	}
+	return normalize(path);
+}
 
 std::wstring resman::setup_assets_directories(const std::wstring_view assets_path) {
 	if (assets_path.starts_with(separator) || assets_path.find(L":") == 1) {
