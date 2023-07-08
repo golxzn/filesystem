@@ -18,6 +18,9 @@
 		],
 	},
 	"settings": {
+		"files.readonlyInclude": {
+			"LICENSE": true,
+		},
 
 		// Extension: shardulm94.trailing-spaces
 		"trailing-spaces.trimOnSave": false,
