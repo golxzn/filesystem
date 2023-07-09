@@ -4,6 +4,14 @@
 and user directory.
 `golxzn::resman` is dependenceless. There's only STL usage and platform specific headers.
 
+## __Platform support__
+
+✅ __Windows__ (tested);
+⚠️ __Linux__;
+⚠️ __MacOS__;
+
+I'm planning to add support for __Android__ and __iOS__ in the future.
+
 ## __How does it work?__
 
 When you initialize this library using `golxzn::resman::initialize` method, library does 2 thing:
@@ -20,9 +28,9 @@ resources directory up
 
 This library creates application directory for data which could be modified at:
 
- * For linux: `/home/you/.config/your_app_name`;
- * For Windows: `%APPDATA%/your_app_name`;
- * For MacOS: `/Users/you/Library/Application Support/`
+* For Linux: `/home/you/.config/your_app_name`;
+* For Windows: `%APPDATA%/your_app_name`;
+* For MacOS: `/Users/you/Library/Application Support/your_app_name`;
 
 ## __CMake integration__
 
@@ -55,5 +63,10 @@ int main() {
 
 ```
 
-You could use `golxzn` namespace or just `gxzn`.
+You could use either a `golxzn::resman` namespace or just `gxzn::resman` or `golxzn::resources::manager`:
+
+```cpp
+golxzn::resources::manager::initialize("your_app_name");
+gxzn::resman::initialize("your_app_name");
+```
 
