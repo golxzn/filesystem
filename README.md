@@ -6,9 +6,9 @@ and user directory.
 
 ## __Platform support__
 
-✅ __Windows__ (tested);
-⚠️ __Linux__;
-⚠️ __MacOS__;
+✅ __Windows__ (tested); <br>
+⚠️ __Linux__; <br>
+⚠️ __MacOS__; <br>
 
 I'm planning to add support for __Android__ and __iOS__ in the future.
 
