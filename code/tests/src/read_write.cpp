@@ -33,7 +33,7 @@ TEST_CASE("resman", "[resman][read_write]") {
 		REQUIRE(content.size() == expected_content.size());
 		REQUIRE(std::equal(std::begin(content), std::end(content), std::begin(expected_content)));
 
-		BENCHMARK("Read res://test.bin") { return gxzn::resman::read_binary(path); };
+		// BENCHMARK("Read res://test.bin") { return gxzn::resman::read_binary(path); };
 	}
 
 	SECTION("Write user://write.bin") {
@@ -47,6 +47,6 @@ TEST_CASE("resman", "[resman][read_write]") {
 		REQUIRE(content.size() == expected_content.size());
 		REQUIRE(std::equal(std::begin(content), std::end(content), std::begin(expected_content)));
 
-		BENCHMARK("Write user://write.bin") { return gxzn::resman::write_binary(path, expected_content); };
+		// BENCHMARK("Write user://write.bin") { return gxzn::resman::write_binary(path, expected_content); };
 	}
 }
