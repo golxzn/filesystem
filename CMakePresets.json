@@ -50,8 +50,12 @@
 			"displayName": "[Ninja][Clang] Release (x64)",
 			"name": "ninja_msvc_clang_x64_release",
 			"inherits": [ "ninja", "win_msvc_clang_x64", "release" ]
-		}
+		},
 
+		{
+			"name": "ci-windows",
+			"inherits": "vs22_msvc_x64_debug"
+		}
 
 	]
 }
