@@ -12,6 +12,11 @@ FetchContent_Declare(Catch2
 FetchContent_MakeAvailable(Catch2)
 message(CHECK_PASS "Catch2 fetched")
 
+include(CTest)
+include(Catch)
+
+enable_testing()
+
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
 
@@ -20,3 +25,5 @@ target_link_libraries(tests PRIVATE
 	Catch2::Catch2WithMain
 	golxzn::resman
 )
+
+catch_discover_tests(tests)

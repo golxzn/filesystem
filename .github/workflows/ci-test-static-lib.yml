@@ -23,11 +23,14 @@ jobs:
 
     - name: Configure
       shell: pwsh
-      run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])"
+      run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])" --fresh
 
     - name: Build
-      run: cmake --build build --config Release -j 8
+      run: cmake --build "build/ci-$("${{ matrix.os }}".split("-")[0])" --config Release -j 8
+
+    - name: Install
+      run: cmake --install "build/ci-$("${{ matrix.os }}".split("-")[0])" --config Release --prefix prefix
 
     - name: Test
-      working-directory: bin
+      working-directory: build/ci-$("${{ matrix.os }}".split("-")[0])
       run: ctest --output-on-failure -C Release -j 8

@@ -42,7 +42,7 @@
 
 		{
 			"name": "ci-windows",
-			"inherits": "vs22_msvc_x64_debug"
+			"inherits": "vs22_msvc_x64_release"
 		}
 
 	]
