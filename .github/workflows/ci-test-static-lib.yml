@@ -16,21 +16,26 @@ jobs:
       matrix:
         os: [windows-2022]
 
+
     runs-on: ${{ matrix.os }}
+
+    env:
+      preset: ci-$("${{ matrix.os }}
+      build_directory: build/ci-$("${{ matrix.os }}".split("-")[0])
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Configure
       shell: pwsh
-      run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])" --fresh
+      run: cmake "--preset=$preset" --fresh
 
     - name: Build
-      run: cmake --build "build/ci-$("${{ matrix.os }}".split("-")[0])" --config Release -j 8
+      run: cmake --build $build_directory --config Release -j 8
 
     - name: Install
-      run: cmake --install "build/ci-$("${{ matrix.os }}".split("-")[0])" --config Release --prefix prefix
+      run: cmake --install $build_directory --config Release --prefix prefix
 
     - name: Test
-      working-directory: build/ci-$("${{ matrix.os }}".split("-")[0])
+      working-directory: $build_directory/code/tests
       run: ctest --output-on-failure -C Release -j 8
