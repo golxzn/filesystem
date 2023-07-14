@@ -20,7 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      preset: ci-$("${{ matrix.os }}
+      preset: ci-$("${{ matrix.os }}".split("-")[0])
       build_directory: build/ci-$("${{ matrix.os }}".split("-")[0])
 
     steps:
@@ -28,14 +28,14 @@ jobs:
 
     - name: Configure
       shell: pwsh
-      run: cmake --preset=${{ preset }} --fresh
+      run: cmake "--preset=$preset" --fresh
 
     - name: Build
-      run: cmake --build ${{ build_directory }} --config Release -j 8
+      run: cmake --build "$build_directory" --config Release -j 8
 
     - name: Install
-      run: cmake --install ${{ build_directory }} --config Release --prefix prefix
+      run: cmake --install "$build_directory" --config Release --prefix prefix
 
     - name: Test
-      working-directory: ${{ build_directory }}/code/tests
+      working-directory: "$build_directory/code/tests"
       run: ctest --output-on-failure -C Release -j 8
