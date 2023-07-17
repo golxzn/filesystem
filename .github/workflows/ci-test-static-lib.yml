@@ -17,19 +17,22 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    env:
+      platform: $(${{ matrix.os }}.split("-")[0])
+
     steps:
       - uses: actions/checkout@v2
 
       - name: Configure
         shell: pwsh
-        run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])" --fresh
+        run: cmake "--preset=ci-${{ env.platform }} --fresh
 
       - name: Build
-        run: cmake --build "--preset=ci-$("${{ matrix.os }}".split("-")[0])-build"
+        run: cmake --build "--preset=${{ env.platform }}-build"
 
       - name: Install
-        run: cmake --install "build/ci-$("${{ matrix.os }}".split("-")[0])" --config ${{ env.BUILD_TYPE }} --prefix prefix
+        run: cmake --install "build/ci-${{ env.platform }}" --config ${{ env.BUILD_TYPE }} --prefix prefix
 
       - name: Test
-        working-directory: $build/ci-$("${{ matrix.os }}".split("-")[0])/code/tests
-        run: ctest "--preset=ci-$("${{ matrix.os }}".split("-")[0])-test" --build-run-dir bin
+        working-directory: $build/ci-${{ env.platform }}/code/tests
+        run: ctest "--preset=ci-${{ env.platform }}-test"
