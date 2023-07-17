@@ -25,7 +25,7 @@ jobs:
         run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])" --fresh
 
       - name: Build
-        run: cmake --build "--preset="ci-$("${{ matrix.os }}".split("-")[0])-build"
+        run: cmake --build "--preset=ci-$("${{ matrix.os }}".split("-")[0])-build"
 
       - name: Install
         run: cmake --install "build/ci-$("${{ matrix.os }}".split("-")[0])" --config ${{ env.BUILD_TYPE }} --prefix prefix
