@@ -44,6 +44,41 @@
 			"name": "ci-windows",
 			"inherits": "vs22_msvc_x64_release"
 		}
+	],
+	"buildPresets": [
+		{
+			"name": "ci-windows-build",
+			"configurePreset": "ci-windows",
+			"inherits": "ci",
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" }
+		},
 
+		{
+			"name": "ci",
+			"hidden": true,
+			"configuration": "Release",
+			"jobs": 8
+		}
+	],
+	"testPresets": [
+		{
+			"name": "ci-windows-test",
+			"configurePreset": "ci-windows",
+			"inherits": "ci",
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" }
+		},
+
+		{
+			"name": "ci",
+			"hidden": true,
+			"configuration": "Release",
+			"output": {
+				"outputOnFailure": true
+			},
+			"execution": {
+				"stopOnFailure": false,
+				"jobs": 8
+			}
+		}
 	]
 }
