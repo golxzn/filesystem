@@ -25,11 +25,11 @@ jobs:
         run: cmake "--preset=ci-$("${{ matrix.os }}".split("-")[0])" --fresh
 
       - name: Build
-        run: cmake --build "build/ci-$("${{ matrix.os }}".split("-")[0])" --config $BUILD_TYPE -j 8
+        run: cmake --build "build/ci-$("${{ matrix.os }}".split("-")[0])" --config ${{ env.BUILD_TYPE }} -j 8
 
       - name: Install
-        run: cmake --install "build/ci-$("${{ matrix.os }}".split("-")[0])" --config $BUILD_TYPE --prefix prefix
+        run: cmake --install "build/ci-$("${{ matrix.os }}".split("-")[0])" --config ${{ env.BUILD_TYPE }} --prefix prefix
 
       - name: Test
         working-directory: $build/ci-$("${{ matrix.os }}".split("-")[0])/code/tests
-        run: ctest --output-on-failure -C $BUILD_TYPE -j 8
+        run: ctest --output-on-failure -C ${{ env.BUILD_TYPE }} -j 8
