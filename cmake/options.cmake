@@ -20,7 +20,6 @@ include(GetSystemInfo)
 get_system_info(GRM_SYSTEM GRM_ARCH)
 
 set(GRM_OUT ${CMAKE_BINARY_DIR})
-set(GRM_ROOT ${CMAKE_SOURCE_DIR})
 set(GRM_CODE_DIR ${GRM_ROOT}/code/resman CACHE PATH "Code directory")
 set(GRM_TEST_DIR ${GRM_ROOT}/code/tests  CACHE PATH "Tests directory")
 
