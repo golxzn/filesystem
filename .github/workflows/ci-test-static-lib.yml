@@ -18,8 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      platform: $(${{ matrix.os }}.split("-")[0])
-
+      platform: $("${{ matrix.os }}".split("-")[0])
     steps:
       - uses: actions/checkout@v2
 
