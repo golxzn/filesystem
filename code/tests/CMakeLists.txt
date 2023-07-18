@@ -24,8 +24,6 @@ target_link_libraries(tests PRIVATE
 include(CTest)
 include(Catch)
 
-catch_discover_tests(tests
-	WORKING_DIRECTORY ${GRM_ROOT}/bin
-)
+catch_discover_tests(tests)
 
 install(TARGETS tests DESTINATION ${GRM_ROOT}/bin)
