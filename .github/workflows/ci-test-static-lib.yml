@@ -19,6 +19,7 @@ jobs:
 
     env:
       platform: $("${{ matrix.os }}".split("-")[0])
+
     steps:
       - uses: actions/checkout@v2
 
@@ -27,11 +28,14 @@ jobs:
         run: cmake "--preset=ci-${{ env.platform }}" --fresh
 
       - name: Build
+        shell: pwsh
         run: cmake --build "--preset=ci-${{ env.platform }}-build"
 
       - name: Install
+        shell: pwsh
         run: cmake --install "build/ci-${{ env.platform }}" --config ${{ env.BUILD_TYPE }} --prefix prefix
 
       - name: Test
+        shell: pwsh
         working-directory: $build/ci-${{ env.platform }}/code/tests
         run: ctest "--preset=ci-${{ env.platform }}-test"
