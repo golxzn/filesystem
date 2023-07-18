@@ -38,4 +38,4 @@ jobs:
 
       - name: Test
         shell: pwsh
-        run: ctest "--preset=ci-${{ env.platform }}-test" -S "build/ci-${{ env.platform }}/code/tests"
+        run: ctest "--preset=ci-${{ env.platform }}-test"
