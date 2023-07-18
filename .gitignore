@@ -977,9 +977,6 @@ _deps
 *.out
 *.app
 
-# C/C++ binary extension file
-*.bin
-
 ##### C
 # Prerequisites
 *.d

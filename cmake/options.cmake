@@ -34,7 +34,9 @@ endif()
 if(CMAKE_CXX_STANDARD LESS 20)
 	message(FATAL_ERROR "CMAKE_CXX_STANDARD must be at least 20")
 endif()
-
+if(GRM_BUILD_TEST)
+	enable_testing()
+endif()
 
 message(STATUS "-- -- -- -- -- -- -- resman configuration -- -- -- -- -- -- -- --")
 message(STATUS "System:                 ${GRM_SYSTEM} (${GRM_ARCH})")
