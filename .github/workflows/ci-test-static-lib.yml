@@ -13,7 +13,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-2022]
+        os: [windows-2022] # + ubuntu-latest, macos-latest] To implement those platforms
+                           # we need to create ci-<OS> presets for CMake.
 
     runs-on: ${{ matrix.os }}
 
@@ -37,5 +38,4 @@ jobs:
 
       - name: Test
         shell: pwsh
-        working-directory: $build/ci-${{ env.platform }}/code/tests
-        run: ctest "--preset=ci-${{ env.platform }}-test"
+        run: ctest "--preset=ci-${{ env.platform }}-test" -S "$build/ci-${{ env.platform }}/code/tests"

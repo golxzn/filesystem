@@ -26,6 +26,4 @@ target_link_libraries(tests PRIVATE
 	golxzn::resman
 )
 
-catch_discover_tests(tests
-	WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-)
+catch_discover_tests(tests)

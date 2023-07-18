@@ -57,7 +57,7 @@
 			"name": "ci",
 			"hidden": true,
 			"configuration": "Release",
-			"jobs": 8
+			"jobs": 2
 		}
 	],
 	"testPresets": [
@@ -77,7 +77,7 @@
 			},
 			"execution": {
 				"stopOnFailure": false,
-				"jobs": 8
+				"jobs": 2
 			}
 		}
 	]
