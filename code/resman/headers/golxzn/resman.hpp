@@ -410,6 +410,15 @@ public:
 	static void associate(const std::string_view protocol, const std::string_view prefix) noexcept;
 
 	/**
+	 * @brief Read whole binary file
+	 *
+	 * @warning This method throws an exception `std::invalid_argument` if the path has no protocol!
+	 * @param path Path to the file
+	 * @return std::vector<uint8_t> The data or an empty vector if there's an reading error.
+	 */
+	[[nodiscard]] static std::vector<uint8_t> read_binary(const std::string_view path);
+
+	/**
 	 * @brief Write binary data to a file
 	 *
 	 * @param path Path to the file

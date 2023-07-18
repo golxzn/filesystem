@@ -500,6 +500,10 @@ void resman::associate(const std::string_view protocol_view, const std::string_v
 	associate(to_wide(protocol_view), to_wide(prefix));
 }
 
+std::vector<uint8_t> resman::read_binary(const std::string_view path) {
+	return read_binary(to_wide(path));
+}
+
 resman::error resman::write_binary(const std::string_view path, const std::span<uint8_t> &data) {
 	return write_binary(to_wide(path), data);
 }
