@@ -1,4 +1,8 @@
 
+if(NOT GRM_BUILD_TEST)
+	return()
+endif()
+
 include(FetchContent)
 
 set(BUILD_SHARED_LIBS OFF)

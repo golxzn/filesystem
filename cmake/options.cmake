@@ -7,12 +7,12 @@ list(APPEND CMAKE_MODULE_PATH
 	${CMAKE_SOURCE_DIR}/cmake/tools
 )
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-	set(IS_TOPLEVEL_PROJECT TRUE)
+	set(GRM_IS_TOPLEVEL_PROJECT TRUE)
 else()
-	set(IS_TOPLEVEL_PROJECT FALSE)
+	set(GRM_IS_TOPLEVEL_PROJECT FALSE)
 endif()
 
-option(GRM_BUILD_TEST           "Build resman's tests" ${IS_TOPLEVEL_PROJECT})
+option(GRM_BUILD_TEST           "Build resman's tests" ${GRM_IS_TOPLEVEL_PROJECT})
 option(GRM_GENERATE_INFO_HEADER "Generate info header" OFF)
 
 include(GetSystemInfo)
@@ -34,6 +34,7 @@ endif()
 if(CMAKE_CXX_STANDARD LESS 20)
 	message(FATAL_ERROR "CMAKE_CXX_STANDARD must be at least 20")
 endif()
+
 if(GRM_BUILD_TEST)
 	enable_testing()
 endif()
@@ -46,4 +47,7 @@ message(STATUS "Compiler (ID):          ${CMAKE_CXX_COMPILER_ID} (${CMAKE_CXX_CO
 message(STATUS "Root directory:         ${GRM_ROOT}")
 message(STATUS "Build directory:        ${GRM_OUT}")
 message(STATUS "Code directory:         ${GRM_CODE_DIR}")
+message(STATUS "Top level:              ${GRM_IS_TOPLEVEL_PROJECT}")
+message(STATUS "Generate info header:   ${GRM_GENERATE_INFO_HEADER}")
+message(STATUS "Tests:                  ${GRM_BUILD_TEST}")
 message(STATUS "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
