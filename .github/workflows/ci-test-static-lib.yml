@@ -27,7 +27,7 @@ jobs:
         run: cmake "--preset=ci-${{ env.platform }}" --fresh
 
       - name: Build
-        run: cmake --build "--preset=${{ env.platform }}-build"
+        run: cmake --build "--preset=ci-${{ env.platform }}-build"
 
       - name: Install
         run: cmake --install "build/ci-${{ env.platform }}" --config ${{ env.BUILD_TYPE }} --prefix prefix
