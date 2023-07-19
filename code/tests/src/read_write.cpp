@@ -36,6 +36,20 @@ TEST_CASE("resman", "[resman][read_write]") {
 		// BENCHMARK("Read res://test.bin") { return gxzn::resman::read_binary(path); };
 	}
 
+	SECTION("Read res://test.txt") {
+		static constexpr std::string_view txt_expected{ "Hello, world!" };
+		static constexpr std::wstring_view path{ L"res://test.txt" };
+
+		const auto content{ gxzn::resman::read_text(path) };
+		INFO("Read content:     " << content);
+		INFO("Expected content: " << txt_expected);
+		REQUIRE_FALSE(content.empty());
+		REQUIRE(content.size() == txt_expected.size());
+		REQUIRE(content == txt_expected);
+
+		// BENCHMARK("Read res://test.txt") { return gxzn::resman::read_binary(path); };
+	}
+
 	SECTION("Write user://write.bin") {
 		static constexpr std::wstring_view path{ L"user://write.bin" };
 		const auto status{ gxzn::resman::write_binary(path, expected_content) };

@@ -140,6 +140,15 @@ public:
 	 */
 	[[nodiscard]] static std::vector<uint8_t> read_binary(const std::wstring_view path);
 
+	/**
+	 * @brief Read whole text file
+	 *
+	 * @warning This method throws an exception `std::invalid_argument` if the path has no protocol!
+	 * @param path Path to the file
+	 * @return std::string The data or an empty string if there's an reading error.
+	 */
+	[[nodiscard]] static std::string read_text(const std::wstring_view path);
+
 	/** @} */
 
 	/** @addtogroup Writing files
@@ -417,6 +426,15 @@ public:
 	 * @return std::vector<uint8_t> The data or an empty vector if there's an reading error.
 	 */
 	[[nodiscard]] static std::vector<uint8_t> read_binary(const std::string_view path);
+
+	/**
+	 * @brief Read whole text file
+	 *
+	 * @warning This method throws an exception `std::invalid_argument` if the path has no protocol!
+	 * @param path Path to the file
+	 * @return std::string The data or an empty string if there's an reading error.
+	 */
+	[[nodiscard]] static std::string read_text(const std::string_view path);
 
 	/**
 	 * @brief Write binary data to a file

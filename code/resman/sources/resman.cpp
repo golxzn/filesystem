@@ -135,6 +135,24 @@ std::vector<uint8_t> resman::read_binary(const std::wstring_view path) {
 	return {};
 }
 
+std::string resman::read_text(const std::wstring_view path) {
+	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+		throw std::invalid_argument{ std::format(
+			"[resman::read_text] Protocol prefix expected in the path: '{}'", to_narrow(path)
+		) };
+	}
+
+	const auto wide_path{ replace_association_prefix(path) };
+	if (std::ifstream file{ wide_path, std::ios::ate }; file.is_open()) [[likely]] {
+		std::string content(file.tellg(), '\0');
+		file.seekg(std::ios::beg);
+		file.read(content.data(), content.size());
+		return content;
+	}
+
+	return {};
+}
+
 resman::error resman::write_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
@@ -502,6 +520,10 @@ void resman::associate(const std::string_view protocol_view, const std::string_v
 
 std::vector<uint8_t> resman::read_binary(const std::string_view path) {
 	return read_binary(to_wide(path));
+}
+
+std::string resman::read_text(const std::string_view path) {
+	return read_text(to_wide(path));
 }
 
 resman::error resman::write_binary(const std::string_view path, const std::span<uint8_t> &data) {
