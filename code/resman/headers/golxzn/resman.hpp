@@ -150,32 +150,76 @@ public:
 	 */
 	[[nodiscard]] static std::string read_text(const std::wstring_view path);
 
-	// template<std::constructible_from<std::vector<uint8_t> &&> Custom>
-	// [[nodiscard]] static Custom read_binary(const std::wstring_view path) { return Custom{ read_binary(path) }; }
+	/**
+	 * @brief Construct @p Custom class by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a constructor with std::vector<uint8_t> argument
+	 * @param path Path to the file
+	 * @return Custom Constructed class
+	 */
+	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	[[nodiscard]] static Custom read_binary(const std::wstring_view path) {
+		return Custom{ read_binary(path) };
+	}
+	/**
+	 * @brief Construct @p Custom class by text data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a constructor with std::string argument
+	 * @param path Path to the file
+	 * @return Custom Constructed class
+	 */
+	template<std::constructible_from<std::string> Custom>
+	[[nodiscard]] static Custom read_text(const std::wstring_view path) {
+		return Custom{ read_text(path) };
+	}
 
-	// template<std::constructible_from<std::string &&> Custom>
-	// [[nodiscard]] static Custom read_text(const std::wstring_view path) { return Custom{ read_text(path) }; }
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<uint8_t> argument
+	 * @param path Path to the file
+	 * @return std::shared_ptr<Custom> Constructed shared class
+	 */
+	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::wstring_view path) {
+		return std::make_shared<Custom>(read_binary(path));
+	}
 
-	// template<std::constructible_from<std::string &&> Custom>
-	// [[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::wstring_view path) {
-	// 	return std::make_shared<Custom>(read_text(path));
-	// }
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::string argument
+	 * @param path Path to the file
+	 * @return std::shared_ptr<Custom> Constructed shared class
+	 */
+	template<std::constructible_from<std::string> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::wstring_view path) {
+		return std::make_shared<Custom>(read_text(path));
+	}
 
-	// template<std::constructible_from<std::vector<uint8_t> &&> Custom>
-	// [[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::wstring_view path) {
-	// 	return std::make_shared<Custom>(read_binary(path));
-	// }
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<uint8_t> argument
+	 * @param path Path to the file
+	 * @return std::unique_ptr<Custom> Constructed unique class
+	 */
+	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::wstring_view path) {
+		return std::make_unique<Custom>(read_binary(path));
+	}
 
-	// template<std::constructible_from<std::string &&> Custom>
-	// [[nodiscard]] static std::shared_ptr<Custom> read_unique_text(const std::wstring_view path) {
-	// 	return std::make_unique<Custom>(read_text(path));
-	// }
-
-	// template<std::constructible_from<std::vector<uint8_t> &&> Custom>
-	// [[nodiscard]] static std::shared_ptr<Custom> read_unique_binary(const std::wstring_view path) {
-	// 	return std::make_unique<Custom>(read_binary(path));
-	// }
-
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::string argument
+	 * @param path Path to the file
+	 * @return std::unique_ptr<Custom> Constructed unique class
+	 */
+	template<std::constructible_from<std::string> Custom>
+	[[nodiscard]] static std::unique_ptr<Custom> read_unique_text(const std::wstring_view path) {
+		return std::make_unique<Custom>(read_text(path));
+	}
 
 	/** @} */
 
@@ -499,6 +543,79 @@ public:
 	 * @return std::string The data or an empty string if there's an reading error.
 	 */
 	[[nodiscard]] static std::string read_text(const std::string_view path);
+
+	/**
+	 * @brief Construct @p Custom class by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a constructor with std::vector<uint8_t> argument
+	 * @param path Path to the file
+	 * @return Custom Constructed class
+	 */
+	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	[[nodiscard]] static Custom read_binary(const std::string_view path) {
+		return Custom{ read_binary(path) };
+	}
+	/**
+	 * @brief Construct @p Custom class by text data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a constructor with std::string argument
+	 * @param path Path to the file
+	 * @return Custom Constructed class
+	 */
+	template<std::constructible_from<std::string> Custom>
+	[[nodiscard]] static Custom read_text(const std::string_view path) {
+		return Custom{ read_text(path) };
+	}
+
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<uint8_t> argument
+	 * @param path Path to the file
+	 * @return std::shared_ptr<Custom> Constructed shared class
+	 */
+	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::string_view path) {
+		return std::make_shared<Custom>(read_binary(path));
+	}
+
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::string argument
+	 * @param path Path to the file
+	 * @return std::shared_ptr<Custom> Constructed shared class
+	 */
+	template<std::constructible_from<std::string> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::string_view path) {
+		return std::make_shared<Custom>(read_text(path));
+	}
+
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<uint8_t> argument
+	 * @param path Path to the file
+	 * @return std::unique_ptr<Custom> Constructed unique class
+	 */
+	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::string_view path) {
+		return std::make_unique<Custom>(read_binary(path));
+	}
+
+	/**
+	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
+	 *
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::string argument
+	 * @param path Path to the file
+	 * @return std::unique_ptr<Custom> Constructed unique class
+	 */
+	template<std::constructible_from<std::string> Custom>
+	[[nodiscard]] static std::unique_ptr<Custom> read_unique_text(const std::string_view path) {
+		return std::make_unique<Custom>(read_text(path));
+	}
+
+
 
 	/**
 	 * @brief Write binary data to a file

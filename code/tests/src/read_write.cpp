@@ -64,3 +64,63 @@ TEST_CASE("resman", "[resman][read_write]") {
 		// BENCHMARK("Write user://write.bin") { return gxzn::resman::write_binary(path, expected_content); };
 	}
 }
+
+struct CustomResource {
+	explicit CustomResource(std::string &&content) noexcept : text{ std::move(content) } {}
+	explicit CustomResource(std::vector<uint8_t> &&content) noexcept : data{ std::move(content) } {}
+
+	std::string text;
+	std::vector<uint8_t> data;
+};
+
+TEST_CASE("resman", "[resman][read_write custom]") {
+	static constexpr std::string_view expected_text{ "custom" };
+	static constexpr std::initializer_list<uint8_t> expected_data{ 'c', 'u', 's', 't', 'o', 'm' };
+
+	SECTION("Construct CustomResource by res://custom.bin") {
+		auto res{ golxzn::resman::read_binary<CustomResource>("res://custom.bin") };
+		INFO("Read content:     " << dump(res.data));
+		INFO("Expected content: " << dump(expected_data));
+		REQUIRE(res.data.size() == expected_data.size());
+		REQUIRE(std::equal(std::begin(res.data), std::end(res.data), std::begin(expected_data)));
+	}
+	SECTION("Construct CustomResource by res://custom.txt") {
+		auto res{ golxzn::resman::read_text<CustomResource>("res://custom.txt") };
+		INFO("Read content:     " << res.text);
+		INFO("Expected content: " << expected_text);
+		REQUIRE(res.text.size() == expected_text.size());
+		REQUIRE(res.text == expected_text);
+	}
+	SECTION("Construct std::shared_ptr<CustomResource> by res://custom.bin") {
+		auto res{ golxzn::resman::read_shared_binary<CustomResource>("res://custom.bin") };
+		REQUIRE(res != nullptr);
+		INFO("Read content:     " << dump(res->data));
+		INFO("Expected content: " << dump(expected_data));
+		REQUIRE(res->data.size() == expected_data.size());
+		REQUIRE(std::equal(std::begin(res->data), std::end(res->data), std::begin(expected_data)));
+	}
+	SECTION("Construct std::shared_ptr<CustomResource> by res://custom.txt") {
+		auto res{ golxzn::resman::read_shared_text<CustomResource>("res://custom.txt") };
+		REQUIRE(res != nullptr);
+		INFO("Read content:     " << res->text);
+		INFO("Expected content: " << expected_text);
+		REQUIRE(res->text.size() == expected_text.size());
+		REQUIRE(res->text == expected_text);
+	}
+	SECTION("Construct std::unique_ptr<CustomResource> by res://custom.bin") {
+		auto res{ golxzn::resman::read_unique_binary<CustomResource>("res://custom.bin") };
+		REQUIRE(res != nullptr);
+		INFO("Read content:     " << dump(res->data));
+		INFO("Expected content: " << dump(expected_data));
+		REQUIRE(res->data.size() == expected_data.size());
+		REQUIRE(std::equal(std::begin(res->data), std::end(res->data), std::begin(expected_data)));
+	}
+	SECTION("Construct std::unique_ptr<CustomResource> by res://custom.txt") {
+		auto res{ golxzn::resman::read_unique_text<CustomResource>("res://custom.txt") };
+		REQUIRE(res != nullptr);
+		INFO("Read content:     " << res->text);
+		INFO("Expected content: " << expected_text);
+		REQUIRE(res->text.size() == expected_text.size());
+		REQUIRE(res->text == expected_text);
+	}
+}
