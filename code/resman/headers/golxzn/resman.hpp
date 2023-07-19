@@ -2,6 +2,7 @@
 
 #include <span>
 #include <string>
+#include <memory>
 #include <string_view>
 #include <unordered_map>
 
@@ -148,6 +149,33 @@ public:
 	 * @return std::string The data or an empty string if there's an reading error.
 	 */
 	[[nodiscard]] static std::string read_text(const std::wstring_view path);
+
+	template<std::constructible_from<std::vector<uint8_t> &&> Custom>
+	[[nodiscard]] static Custom read_binary(const std::wstring_view path) { return Custom{ read_binary(path) }; }
+
+	template<std::constructible_from<std::string &&> Custom>
+	[[nodiscard]] static Custom read_text(const std::wstring_view path) { return Custom{ read_text(path) }; }
+
+	template<std::constructible_from<std::string &&> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::wstring_view path) {
+		return std::make_shared<Custom>(read_text(path));
+	}
+
+	template<std::constructible_from<std::vector<uint8_t> &&> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::wstring_view path) {
+		return std::make_shared<Custom>(read_binary(path));
+	}
+
+	template<std::constructible_from<std::string &&> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_unique_text(const std::wstring_view path) {
+		return std::make_unique<Custom>(read_text(path));
+	}
+
+	template<std::constructible_from<std::vector<uint8_t> &&> Custom>
+	[[nodiscard]] static std::shared_ptr<Custom> read_unique_binary(const std::wstring_view path) {
+		return std::make_unique<Custom>(read_binary(path));
+	}
+
 
 	/** @} */
 

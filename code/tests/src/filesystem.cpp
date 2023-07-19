@@ -67,6 +67,11 @@ TEST_CASE("resman", "[resman][filesystem]") {
 	SECTION("entries") {
 		const auto entries{ gxzn::resman::entries("res://") };
 		REQUIRE_FALSE(entries.empty());
+		for (const auto &entry : entries) {
+			INFO("Entry: " << entry);
+			REQUIRE(entry.starts_with("res://"));
+			REQUIRE(gxzn::resman::exists(entry));
+		}
 	}
 
 }

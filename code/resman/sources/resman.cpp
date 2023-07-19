@@ -543,8 +543,8 @@ std::vector<std::wstring> resman::entries(const std::wstring_view path) {
 	const auto association{ get_association(get_protocol(path)) };
 
 	auto paths{ details::ls(full_path) };
-	for (auto &path : paths) {
-		path = join(association, path);
+	for (auto &entry : paths) {
+		entry = join(path, entry);
 	}
 	return paths;
 }
@@ -720,11 +720,12 @@ std::vector<std::string> resman::entries(const std::string_view path) {
 	const auto full_path{ replace_association_prefix(wide_path) };
 	const auto association{ get_association(get_protocol(wide_path)) };
 
-	std::vector<std::string> result;
 	const auto paths{ details::ls(full_path) };
+
+	std::vector<std::string> result;
 	result.reserve(paths.size());
-	for (const auto &path : paths) {
-		result.emplace_back(to_narrow(join(association, path)));
+	for (const auto &entry : paths) {
+		result.emplace_back(join(path, to_narrow(entry)));
 	}
 	return result;
 }
