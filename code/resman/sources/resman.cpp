@@ -282,7 +282,7 @@ std::wstring resman::join(std::wstring_view left, std::wstring_view right) noexc
 
 void resman::parent_directory(std::wstring &path) noexcept {
 	if (const auto last_slash{ path.find_last_of(L"/\\") }; last_slash != std::string::npos) [[likely]] {
-		path.resize(last_slash + 1);
+		path.resize(last_slash);
 	} else {
 		path.clear();
 	}
