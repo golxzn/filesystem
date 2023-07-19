@@ -28,15 +28,17 @@ namespace details {
 using binary_ofstream = std::basic_ofstream<uint8_t>;
 using binary_ifstream = std::basic_ifstream<uint8_t>;
 
-resman::error write_binary_data(const std::wstring_view path,
-		const uint8_t *data, const size_t len,
+template<class T>
+resman::error write_data(const std::wstring_view path, const T *data, const size_t len,
 		const std::ios::openmode mode = std::ios::out) noexcept {
 
-	if (len == 0) [[unlikely]] { return resman::OK; }
+	if (len == 0 || data == nullptr) [[unlikely]] {
+		return resman::error{ L"Invalid empty parameters" };
+	}
 
 	try {
 
-		if (binary_ofstream file{ path.data(), mode | std::ios::binary }; file.is_open()) {
+		if (std::basic_ofstream<T> file{ path.data(), mode | std::ios::binary }; file.is_open()) {
 			file.write(data, len);
 			if (file.good()) [[likely]] {
 				return resman::OK;
@@ -167,7 +169,7 @@ resman::error resman::write_binary(const std::wstring_view path, const std::span
 		return status;
 	}
 
-	return details::write_binary_data(replace_association_prefix(path), data.data(), data.size());
+	return details::write_data(replace_association_prefix(path), data.data(), data.size());
 }
 
 resman::error resman::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
@@ -184,7 +186,7 @@ resman::error resman::write_binary(const std::wstring_view path, const std::init
 		return status;
 	}
 
-	return details::write_binary_data(replace_association_prefix(path), data.begin(), data.size());
+	return details::write_data(replace_association_prefix(path), data.begin(), data.size());
 }
 
 resman::error resman::append_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
@@ -201,8 +203,9 @@ resman::error resman::append_binary(const std::wstring_view path, const std::spa
 		return status;
 	}
 
-	return details::write_binary_data(replace_association_prefix(path), data.data(), data.size(),
-		std::ios::app);
+	return details::write_data(replace_association_prefix(path),
+		data.data(), data.size(), std::ios::app
+	);
 }
 
 resman::error resman::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
@@ -219,8 +222,79 @@ resman::error resman::append_binary(const std::wstring_view path, const std::ini
 		return status;
 	}
 
-	return details::write_binary_data(replace_association_prefix(path), data.begin(), data.size(),
-		std::ios::app);
+	return details::write_data(replace_association_prefix(path),
+		data.begin(), data.size(), std::ios::app
+	);
+}
+
+resman::error resman::write_text(const std::wstring_view path, const std::string_view text) {
+	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+		return error{
+			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		};
+	}
+
+	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
+		status.message += std::format(L" (During creating parent directory for writing file '{}')",
+			path
+		);
+		return status;
+	}
+
+	return details::write_data(replace_association_prefix(path), text.data(), text.size());
+}
+
+resman::error resman::append_text(const std::wstring_view path, const std::string_view text) {
+	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+		return error{
+			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		};
+	}
+
+	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
+		status.message += std::format(L" (During creating parent directory for writing file '{}')",
+			path
+		);
+		return status;
+	}
+
+	return details::write_data(replace_association_prefix(path),
+		text.data(), text.size(), std::ios::app);
+}
+
+resman::error resman::write_text(const std::wstring_view path, const std::wstring_view text) {
+	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+		return error{
+			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		};
+	}
+
+	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
+		status.message += std::format(L" (During creating parent directory for writing file '{}')",
+			path
+		);
+		return status;
+	}
+
+	return details::write_data(replace_association_prefix(path), text.data(), text.size());
+}
+
+resman::error resman::append_text(const std::wstring_view path, const std::wstring_view text) {
+	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+		return error{
+			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		};
+	}
+
+	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
+		status.message += std::format(L" (During creating parent directory for writing file '{}')",
+			path
+		);
+		return status;
+	}
+
+	return details::write_data(replace_association_prefix(path),
+		text.data(), text.size(), std::ios::app);
 }
 
 std::wstring_view resman::get_association(const std::wstring_view protocol) noexcept {
@@ -542,6 +616,21 @@ resman::error resman::append_binary(const std::string_view path, const std::init
 	return append_binary(to_wide(path), data);
 }
 
+resman::error resman::write_text(const std::string_view path, const std::string_view text) {
+	return write_text(to_wide(path), text);
+}
+
+resman::error resman::append_text(const std::string_view path, const std::string_view text) {
+	return append_text(to_wide(path), text);
+}
+
+resman::error resman::write_text(const std::string_view path, const std::wstring_view text) {
+	return write_text(to_wide(path), text);
+}
+
+resman::error resman::append_text(const std::string_view path, const std::wstring_view text) {
+	return append_text(to_wide(path), text);
+}
 
 std::wstring_view resman::get_association(const std::string_view protocol) noexcept {
 	return get_association(to_wide(protocol));

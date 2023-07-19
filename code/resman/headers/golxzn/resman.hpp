@@ -191,6 +191,42 @@ public:
 	 */
 	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data);
 
+	/**
+	 * @brief Write text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error write_text(const std::wstring_view path, const std::string_view text);
+
+	/**
+	 * @brief Append text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error append_text(const std::wstring_view path, const std::string_view text);
+
+	/**
+	 * @brief Write text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error write_text(const std::wstring_view path, const std::wstring_view text);
+
+	/**
+	 * @brief Append text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error append_text(const std::wstring_view path, const std::wstring_view text);
+
 	/** @} */
 
 	/**
@@ -471,6 +507,42 @@ public:
 	 * @return error The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error append_binary(const std::string_view path, const std::initializer_list<uint8_t> data);
+
+	/**
+	 * @brief Write text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error write_text(const std::string_view path, const std::string_view text);
+
+	/**
+	 * @brief Append text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error append_text(const std::string_view path, const std::string_view text);
+
+	/**
+	 * @brief Write text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error write_text(const std::string_view path, const std::wstring_view text);
+
+	/**
+	 * @brief Append text data to a file
+	 *
+	 * @param path Path to the file
+	 * @param text Text to write to the file
+	 * @return error The error message or an empty string if there's no error
+	 */
+	[[nodiscard]] static error append_text(const std::string_view path, const std::wstring_view text);
 
 	/**
 	 * @brief Get the association object
