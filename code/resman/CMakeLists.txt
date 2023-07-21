@@ -28,6 +28,5 @@ add_library(golxzn::resman ALIAS golxzn_resman)
 target_include_directories(golxzn_resman PUBLIC ${local_root}/headers)
 target_compile_definitions(golxzn_resman PUBLIC ${GRM_DEFINITIONS})
 set_target_properties(golxzn_resman PROPERTIES
-	CXX_EXTENSIONS OFF
 	FOLDER "golxzn"
 )

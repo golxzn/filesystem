@@ -13,8 +13,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-2022] # + ubuntu-latest, macos-latest] To implement those platforms
-                           # we need to create ci-<OS> presets for CMake.
+        os: [windows-2022, ubuntu-latest] # + macos-latest] To implement those platforms
+                                          # we need to create ci-<OS> presets for CMake.
 
     runs-on: ${{ matrix.os }}
 

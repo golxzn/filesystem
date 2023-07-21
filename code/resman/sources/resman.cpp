@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <numeric>
+#include <utility>
 #include <fstream>
 #include <algorithm>
 
@@ -29,7 +30,7 @@ using binary_ofstream = std::basic_ofstream<uint8_t>;
 using binary_ifstream = std::basic_ifstream<uint8_t>;
 
 template<class T>
-resman::error write_data(const std::wstring_view path, const T *data, const size_t len,
+resman::error write_data(const std::wstring_view wide_path, const T *data, const size_t len,
 		const std::ios::openmode mode = std::ios::out) noexcept {
 
 	if (len == 0 || data == nullptr) [[unlikely]] {
@@ -38,26 +39,32 @@ resman::error write_data(const std::wstring_view path, const T *data, const size
 
 	try {
 
+		#if defined(GRM_WINDOWS)
+			const auto path{ wide_path };
+		#elif defined(GRM_LINUX) || defined(GRM_MACOS)
+			const auto path{ resman::to_narrow(wide_path) };
+		#endif
+
 		if (std::basic_ofstream<T> file{ path.data(), mode | std::ios::binary }; file.is_open()) {
 			file.write(data, len);
 			if (file.good()) [[likely]] {
 				return resman::OK;
 			}
 
-			return resman::error{ std::format(L"Failed to write to file '{}'", path) };
+			return resman::error{ std::format(L"Failed to write to file '{}'", wide_path) };
 		}
 
 	} catch(const std::exception &ex) {
 		return resman::error{ std::format(L"Failed to write to file '{}' due to exception '{}'",
-			path, resman::to_wide(ex.what())
+			wide_path, resman::to_wide(ex.what())
 		) };
 	} catch(...) {
 		return resman::error{ std::format(L"Failed to write to file '{}' due to unknown exception",
-			path
+			wide_path
 		) };
 	}
 
-	return resman::error{ std::format(L"Failed to open file '{}' for writing", path) };
+	return resman::error{ std::format(L"Failed to open file '{}' for writing", wide_path) };
 }
 
 } // namespace details
@@ -117,17 +124,20 @@ void resman::associate(const std::wstring_view protocol_view, std::wstring &&pre
 	associations_map.insert_or_assign(std::move(protocol), std::move(prefix));
 }
 
-std::vector<uint8_t> resman::read_binary(const std::wstring_view path) {
-	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+std::vector<uint8_t> resman::read_binary(const std::wstring_view wide_path) {
+	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		throw std::invalid_argument{ std::format(
-			"[resman::read_binary] Protocol prefix expected in the path: '{}'", to_narrow(path)
+			"[resman::read_binary] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
 		) };
 	}
 
-	using bifstream = std::basic_ifstream<uint8_t, std::char_traits<uint8_t>>;
+#if defined(GRM_WINDOWS)
+	const auto path{ replace_association_prefix(wide_path) };
+#elif defined(GRM_LINUX) || defined(GRM_MACOS)
+	const auto path{ to_narrow(replace_association_prefix(wide_path)) };
+#endif
 
-	const auto wide_path{ replace_association_prefix(path) };
-	if (bifstream file{ wide_path, std::ios::binary | std::ios::ate }; file.is_open()) [[likely]] {
+	if (details::binary_ifstream file{ path, std::ios::binary | std::ios::ate }; file.is_open()) [[likely]] {
 		std::vector<uint8_t> content(file.tellg());
 		file.seekg(std::ios::beg);
 		file.read(content.data(), content.size());
@@ -137,15 +147,20 @@ std::vector<uint8_t> resman::read_binary(const std::wstring_view path) {
 	return {};
 }
 
-std::string resman::read_text(const std::wstring_view path) {
-	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
+std::string resman::read_text(const std::wstring_view wide_path) {
+	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		throw std::invalid_argument{ std::format(
-			"[resman::read_text] Protocol prefix expected in the path: '{}'", to_narrow(path)
+			"[resman::read_text] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
 		) };
 	}
 
-	const auto wide_path{ replace_association_prefix(path) };
-	if (std::ifstream file{ wide_path, std::ios::ate }; file.is_open()) [[likely]] {
+#if defined(GRM_WINDOWS)
+	const auto path{ replace_association_prefix(wide_path) };
+#elif defined(GRM_LINUX) || defined(GRM_MACOS)
+	const auto path{ to_narrow(replace_association_prefix(wide_path)) };
+#endif
+
+	if (std::ifstream file{ path, std::ios::ate }; file.is_open()) [[likely]] {
 		std::string content(file.tellg(), '\0');
 		file.seekg(std::ios::beg);
 		file.read(content.data(), content.size());

@@ -1,4 +1,6 @@
 
+#include <string>
+
 #include <pwd.h>
 #include <unistd.h>
 #include <dirent.h>
@@ -8,14 +10,13 @@
 namespace golxzn::details {
 
 std::wstring __unix_get_home() {
-	std::string res;
-	const int uid{ getuid() };
+	const uid_t uid{ getuid() };
 
 	if (const auto home{ std::getenv("HOME") }; uid != 0 && home != nullptr) {
-		return std::string{ home };
+		return resman::to_wide(home);
 	}
 
-	const sysconf_out{ sysconf(_SC_GETPW_R_SIZE_MAX) };
+	const auto sysconf_out{ sysconf(_SC_GETPW_R_SIZE_MAX) };
 	const size_t length{ sysconf_out > 0 ? static_cast<size_t>(sysconf_out) : 16384lu };
 
 	std::string buffer(length, '\0');
@@ -23,29 +24,30 @@ std::wstring __unix_get_home() {
 	struct passwd* pw = nullptr;
 	struct passwd pwd;
 	if (auto err{ getpwuid_r(uid, &pwd, buffer.data(), buffer.size(), &pw) }; err != 0) {
-		return "";
+		return L"";
 	}
 
 	if (const auto dir{ pw->pw_dir }; dir != nullptr) {
-		return std::string{ dir };
+		return resman::to_wide(dir);
 	}
-	return "";
+	return L"";
 }
 
-std::wstring current_directory() {
-	if (std::string path(MAX_PATH, '\0'); getcwd(path.data(), path.size()) != nullptr) {
+std::wstring cwd() {
+	static constexpr size_t max_path_length{ 256 };
+	if (std::string path(max_path_length, '\0'); getcwd(path.data(), path.size()) != nullptr) {
 		return std::wstring{ std::begin(path), std::end(path) };
 	}
-	return L"./"
+	return L"./";
 }
 
 bool exists(const std::wstring_view path) {
 	struct stat st;
-	return stat(to_narrow(path).c_str(), &st) == 0;
+	return stat(resman::to_narrow(path).c_str(), &st) == 0;
 }
 
 bool is_file(const std::wstring_view path) {
-	const auto narrow_path{ to_narrow(path) };
+	const auto narrow_path{ resman::to_narrow(path) };
 	if (struct stat st; stat(narrow_path.c_str(), &st) == 0) {
 		return S_ISREG(st.st_mode);
 	}
@@ -53,7 +55,7 @@ bool is_file(const std::wstring_view path) {
 }
 
 bool is_directory(const std::wstring_view path) {
-	const auto narrow_path{ to_narrow(path) };
+	const auto narrow_path{ resman::to_narrow(path) };
 	if (struct stat st; stat(narrow_path.c_str(), &st) == 0) {
 		return S_ISDIR(st.st_mode);
 	}
@@ -79,15 +81,15 @@ std::vector<std::wstring> ls(const std::wstring_view path) {
 }
 
 bool mkdir(const std::wstring_view path) {
-	return mkdir(resman::to_narrow(path).c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == 0;
+	return ::mkdir(resman::to_narrow(path).c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == 0;
 }
 
 bool rmdir(const std::wstring_view path) {
-	return rmdir(resman::to_narrow(path).c_str()) == 0;
+	return ::rmdir(resman::to_narrow(path).c_str()) == 0;
 }
 
 bool rmfile(const std::wstring_view path) {
-	return unlink(resman::to_narrow(path).c_str()) == 0;
+	return ::unlink(resman::to_narrow(path).c_str()) == 0;
 }
 
 } // namespace golxzn::details
