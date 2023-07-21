@@ -39,3 +39,28 @@ jobs:
       - name: Test
         shell: pwsh
         run: ctest "--preset=ci-${{ env.platform }}-test"
+
+  docs:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Doxygen
+      run: sudo apt-get update -q
+        && sudo apt-get install doxygen -q -y
+
+    - name: Configure project
+      run: cmake -B build/ubuntu_docs -DGRM_DEFINITIONS_INIT=GRM_LINUX -DCMAKE_BUILD_TYPE=Release .
+
+    - name: Generate documentation
+      working-directory: ./build/ubuntu_test
+      run: cmake --build build/ubuntu_docs --config Release --target generate_docs
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/html

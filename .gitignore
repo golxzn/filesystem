@@ -1,5 +1,8 @@
 # This file was taken from https://gist.github.com/Yousha/3830712334ac30a90eb6041b932b68d7#file-gitignore
 
+docs
+!docs/Doxyfile.in
+
 ##### Windows
 # Windows thumbnail cache files
 Thumbs.db
