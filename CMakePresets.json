@@ -65,7 +65,7 @@
 
 		{
 			"name": "ci-windows",
-			"inherits": "vs22_msvc_x64_release"
+			"inherits": "ninja_msvc_x64_release"
 		},
 		{
 			"name": "ci-ubuntu",
