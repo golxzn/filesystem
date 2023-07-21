@@ -69,7 +69,7 @@
 		},
 		{
 			"name": "ci-ubuntu",
-			"inherits": "ninja_unix_clang_x64_release"
+			"inherits": "ninja_unix_gcc_x64_release"
 		}
 
 	],
