@@ -24,10 +24,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install development tools
-        if: matrix.os == 'ubuntu-latest'
-        run: sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y -q
-          && sudo apt-get install clang-14 gcc-13 g++-13 ninja cppcheck -y -q
+      - name: Get GCC
+        if: matrix.os == ubuntu-latest
+        uses: egor-tensin/setup-gcc@v1.0
+        with:
+          version: 13
+
+      - name: Get Ninja
+        uses: turtlesec-no/get-ninja@1.11.0
 
       - name: Configure
         shell: pwsh
