@@ -24,6 +24,7 @@ target_link_libraries(tests PRIVATE
 	Catch2::Catch2WithMain
 	golxzn::resman
 )
+set_target_properties(tests PROPERTIES FOLDER "golxzn")
 
 include(CTest)
 include(Catch)
