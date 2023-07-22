@@ -16,21 +16,20 @@ FetchContent_Declare(Catch2
 FetchContent_MakeAvailable(Catch2)
 message(CHECK_PASS "Catch2 fetched")
 
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${GRM_TEST_DIR}/src/*.cpp")
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${GRM_TEST_DIR}/src/*.h")
 
-add_executable(tests ${sources} ${headers})
-target_link_libraries(tests PRIVATE
-	Catch2::Catch2WithMain
+add_executable(resman_tests ${sources} ${headers})
+target_link_libraries(resman_tests PRIVATE
 	golxzn::resman
+	Catch2::Catch2WithMain
+)
+set_target_properties(resman_tests PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY ${GRM_ROOT}/bin
 )
 set_target_properties(tests PROPERTIES FOLDER "golxzn")
 
 include(CTest)
 include(Catch)
 
-catch_discover_tests(tests
-	WORKING_DIRECTORY ${GRM_ROOT}/bin
-)
-
-install(TARGETS tests DESTINATION ${GRM_ROOT}/bin)
+add_test(NAME Tests COMMAND resman_tests WORKING_DIRECTORY ${GRM_ROOT}/bin)

@@ -2,9 +2,9 @@ name: CMake
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
 
 env:
   BUILD_TYPE: Release
@@ -13,8 +13,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-2022] # + ubuntu-latest, macos-latest] To implement those platforms
-                           # we need to create ci-<OS> presets for CMake.
+        os: [windows-2022, ubuntu-latest] # + macos-latest] To implement those platforms
+                                          # we need to create ci-<OS> presets for CMake.
 
     runs-on: ${{ matrix.os }}
 
@@ -23,6 +23,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Get GCC
+        if: matrix.os == 'ubuntu-latest'
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 13
+          platform: x64
+
+      - name: Get Ninja
+        uses: ashutoshvarma/setup-ninja@v1.1
+        with:
+          version: 1.10.0
 
       - name: Configure
         shell: pwsh
