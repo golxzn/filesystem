@@ -22,8 +22,8 @@ TEST_CASE("resman", "[resman][filesystem]") {
 		REQUIRE_FALSE(gxzn::resman::is_file("user://nonexisfile.txt"));
 		REQUIRE_FALSE(gxzn::resman::is_directory("user://nonexisdir"));
 
-		REQUIRE(gxzn::resman::is_file("res://test.bin"));
 		REQUIRE(gxzn::resman::is_directory("res://"));
+		REQUIRE(gxzn::resman::is_file("res://test.bin"));
 	}
 
 	SECTION("make_directory & remove_directory & remove_file") {
