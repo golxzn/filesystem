@@ -47,14 +47,23 @@ TEST_CASE("resman", "[resman][initialization]") {
 #endif // defined(GRM_WINDOWS)
 		};
 
-		REQUIRE_FALSE(gxzn::resman::initialize(L"resman_tests", absolute_res_dir).has_error());
+		if (const auto status{ gxzn::resman::initialize(L"resman_tests", absolute_res_dir) }; status) {
+			INFO("gxzn::resman::initialize(L\"resman_tests\", " \
+				<< gxzn::resman::to_narrow(absolute_res_dir) << "): " \
+				<< gxzn::resman::to_narrow(status.message));
+			REQUIRE_FALSE(status.has_error());
+		}
 		if (const auto resources_dir{ golxzn::resman::assets_directory() }; true) {
 			INFO("golxzn::resman::assets_directory (absolute): " << gxzn::resman::to_narrow(resources_dir));
 			REQUIRE_FALSE(resources_dir.empty());
 			REQUIRE(resources_dir == absolute_res_dir);
 		}
 
-		REQUIRE_FALSE(gxzn::resman::initialize(L"resman_tests", L"../../res").has_error());
+		if (const auto status{ gxzn::resman::initialize(L"resman_tests", L"../../res") }; status) {
+			INFO("gxzn::resman::initialize(L\"resman_tests\", L\"../../res\"): " \
+				<< gxzn::resman::to_narrow(status.message));
+			REQUIRE_FALSE(status.has_error());
+		}
 		if (const auto res_dir{ golxzn::resman::assets_directory() }; true) {
 			const auto expected_res_dir{ gxzn::resman::normalize(current_path + L"/../../res") };
 

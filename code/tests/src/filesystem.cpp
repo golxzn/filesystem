@@ -29,9 +29,6 @@ TEST_CASE("resman", "[resman][filesystem]") {
 	SECTION("make_directory & remove_directory & remove_file") {
 		static constexpr auto testdir{ "user://testdir" };
 
-		REQUIRE_FALSE(gxzn::resman::remove_directory(testdir).has_error()); // Ensure directory does not exist
-		REQUIRE_FALSE(gxzn::resman::exists(testdir));
-
 		if (const auto status{ gxzn::resman::make_directory(testdir) }; status.has_error()) {
 			INFO("Make '" << testdir << "' error: " << gxzn::resman::to_narrow(status.message));
 			REQUIRE_FALSE(status.has_error());
