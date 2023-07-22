@@ -26,8 +26,8 @@ target_link_libraries(resman_tests PRIVATE
 )
 set_target_properties(resman_tests PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${GRM_ROOT}/bin
+	FOLDER "golxzn"
 )
-set_target_properties(tests PROPERTIES FOLDER "golxzn")
 
 include(CTest)
 include(Catch)
