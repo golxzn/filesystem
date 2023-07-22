@@ -8,8 +8,17 @@
 		"version": "0.2.0",
 		"configurations": [
 			{
-				"name": "Launch tests",
+				"name": "[CPPVSDBG] Launch tests",
 				"type": "cppvsdbg",
+				"request": "launch",
+				"program": "${command:cmake.launchTargetPath}",
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}/bin",
+			},
+			{
+				"name": "[GDB] Launch tests",
+				"MIMode": "gdb",
+				"type": "cppdbg",
 				"request": "launch",
 				"program": "${command:cmake.launchTargetPath}",
 				"stopAtEntry": false,

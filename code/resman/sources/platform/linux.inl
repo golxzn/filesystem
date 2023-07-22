@@ -1,12 +1,12 @@
 
-#include "platform/unix.inl"
+#include "unix.inl"
 
 namespace golxzn::details {
 
 std::wstring appdata_directory() {
 	if (const auto home{ std::getenv("XDG_CONFIG_HOME") }; home != nullptr) {
-		return std::wstring{ std::begin(home), std::end(home) };
-	} else if (auto home{ __unix_get_home(error) }; !home.empty()) {
+		return resman::to_wide(home);
+	} else if (auto home{ __unix_get_home() }; !home.empty()) {
 		return std::format(L"{}/{}", std::move(home), L"/.config");
 	}
 	return L"~/.config";
