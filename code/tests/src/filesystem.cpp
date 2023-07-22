@@ -7,6 +7,10 @@
 TEST_CASE("resman", "[resman][filesystem]") {
 	REQUIRE_FALSE(gxzn::resman::initialize(L"resman_tests").has_error());
 
+	INFO("Current directory: " << gxzn::resman::to_narrow(gxzn::resman::current_directory()));
+	INFO("`user://` is " << gxzn::resman::to_narrow(gxzn::resman::get_association("user://")));
+	INFO("`res://` is " << gxzn::resman::to_narrow(gxzn::resman::get_association("res://")));
+
 	SECTION("exists") {
 		REQUIRE_FALSE(gxzn::resman::exists("user://nonexisfile.txt"));
 		REQUIRE_FALSE(gxzn::resman::exists("user://nonexisdir"));
@@ -15,10 +19,6 @@ TEST_CASE("resman", "[resman][filesystem]") {
 	}
 
 	SECTION("is_file and is_directory") {
-		INFO("Current directory: " << gxzn::resman::to_narrow(gxzn::resman::current_directory()));
-		INFO("`user://` is " << gxzn::resman::to_narrow(gxzn::resman::get_association("user://")));
-		INFO("`res://` is " << gxzn::resman::to_narrow(gxzn::resman::get_association("res://")));
-
 		REQUIRE_FALSE(gxzn::resman::is_file("user://nonexisfile.txt"));
 		REQUIRE_FALSE(gxzn::resman::is_directory("user://nonexisdir"));
 
