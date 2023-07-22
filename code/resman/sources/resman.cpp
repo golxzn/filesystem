@@ -91,13 +91,16 @@ resman::error resman::initialize(const std::wstring_view app_name, const std::ws
 	if (auto assets_dir{ setup_assets_directories(assets_path) }; !assets_dir.empty()) [[likely]] {
 		associate(L"res://", std::wstring{ assets_dir });
 		associate(L"assets://", std::move(assets_dir));
+		make_directory(L"res://");
 	} else {
 		err.message = L"Failed to setup assets directories";
 	}
 
 	if (auto user_dir{ setup_user_data_directory() }; !user_dir.empty()) [[likely]] {
+		associate(L"usr://", std::wstring{ user_dir });
 		associate(L"user://", std::wstring{ user_dir });
 		associate(L"temp://", std::move(user_dir) + L"/temp");
+		make_directory(L"user://");
 	} else {
 		err.message += std::format(L"{} '{}' {}",
 			(err.has_error() ? L" and" : L"Failed to setup"), appname, L"user data directory");
