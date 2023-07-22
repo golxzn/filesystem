@@ -45,8 +45,8 @@ resman::error write_data(const std::wstring_view wide_path, const T *data, const
 			const auto path{ resman::to_narrow(wide_path) };
 		#endif
 
-		if (std::basic_ofstream<T> file{ path.data(), mode | std::ios::binary }; file.is_open()) {
-			file.write(data, len);
+		if (std::ofstream file{ path.data(), mode | std::ios::binary }; file.is_open()) {
+			file.write(reinterpret_cast<const char *>(data), sizeof(T) * len);
 			if (file.good()) [[likely]] {
 				return resman::OK;
 			}
@@ -102,7 +102,7 @@ resman::error resman::initialize(const std::wstring_view app_name, const std::ws
 		associate(L"usr://", std::wstring{ user_dir });
 		associate(L"user://", std::wstring{ user_dir });
 		associate(L"temp://", std::move(user_dir) + L"/temp");
-		err = make_directory(L"user://");
+
 	} else {
 		err.message += std::format(L"{} '{}' {}",
 			(err.has_error() ? L" and" : L"Failed to setup"), appname, L"user data directory");
