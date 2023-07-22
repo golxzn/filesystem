@@ -1,5 +1,6 @@
 
 #include <string>
+#include <cstring>
 
 #include <pwd.h>
 #include <unistd.h>
@@ -36,7 +37,8 @@ std::wstring __unix_get_home() {
 std::wstring cwd() {
 	static constexpr size_t max_path_length{ 256 };
 	if (std::string path(max_path_length, '\0'); getcwd(path.data(), path.size()) != nullptr) {
-		return std::wstring{ std::begin(path), std::end(path) };
+		path.resize(std::strlen(path.data()));
+		return resman::to_wide(path);
 	}
 	return L"./";
 }

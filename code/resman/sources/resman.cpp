@@ -555,7 +555,6 @@ std::vector<std::wstring> resman::entries(const std::wstring_view path) {
 	if (!is_directory(path)) return {};
 
 	const auto full_path{ replace_association_prefix(path) };
-	const auto association{ get_association(get_protocol(path)) };
 
 	auto paths{ details::ls(full_path) };
 	for (auto &entry : paths) {
@@ -733,7 +732,6 @@ std::vector<std::string> resman::entries(const std::string_view path) {
 
 	const auto wide_path{ to_wide(path) };
 	const auto full_path{ replace_association_prefix(wide_path) };
-	const auto association{ get_association(get_protocol(wide_path)) };
 
 	const auto paths{ details::ls(full_path) };
 

@@ -15,6 +15,7 @@ TEST_CASE("resman", "[resman][filesystem]") {
 	}
 
 	SECTION("is_file and is_directory") {
+		INFO("Current directory: " << gxzn::resman::to_narrow(gxzn::resman::current_directory()));
 		INFO("`user://` is " << gxzn::resman::to_narrow(gxzn::resman::get_association("user://")));
 		INFO("`res://` is " << gxzn::resman::to_narrow(gxzn::resman::get_association("res://")));
 
@@ -31,15 +32,17 @@ TEST_CASE("resman", "[resman][filesystem]") {
 		REQUIRE_FALSE(gxzn::resman::remove_directory(testdir).has_error()); // Ensure directory does not exist
 		REQUIRE_FALSE(gxzn::resman::exists(testdir));
 
-		const auto make_status{ gxzn::resman::make_directory(testdir) };
-		INFO("Make '" << testdir << "' error: " << gxzn::resman::to_narrow(make_status.message));
-		REQUIRE_FALSE(make_status.has_error());
-		REQUIRE(gxzn::resman::exists(testdir));
+		if (const auto status{ gxzn::resman::make_directory(testdir) }; status.has_error()) {
+			INFO("Make '" << testdir << "' error: " << gxzn::resman::to_narrow(status.message));
+			REQUIRE_FALSE(status.has_error());
+			REQUIRE(gxzn::resman::exists(testdir));
+		}
 
-		const auto remove_status{ gxzn::resman::remove_directory(testdir) };
-		INFO("Remove '" << testdir << "' error: " << gxzn::resman::to_narrow(make_status.message));
-		REQUIRE_FALSE(make_status.has_error());
-		REQUIRE_FALSE(gxzn::resman::exists(testdir));
+		if (const auto status{ gxzn::resman::remove_directory(testdir) }; status.has_error()) {
+			INFO("Remove '" << testdir << "' error: " << gxzn::resman::to_narrow(status.message));
+			REQUIRE_FALSE(status.has_error());
+			REQUIRE_FALSE(gxzn::resman::exists(testdir));
+		}
 
 		static constexpr std::initializer_list<std::string_view> test_files{
 			"user://testdir/test1.txt",

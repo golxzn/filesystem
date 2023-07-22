@@ -53,12 +53,12 @@
 		},
 
 		{
-			"displayName": "[Ninja][Clang] Debug (x64)",
+			"displayName": "[Ninja][GCC] Debug (x64)",
 			"name": "ninja_unix_gcc_x64_debug",
 			"inherits": [ "ninja", "linux_gcc_13", "debug" ]
 		},
 		{
-			"displayName": "[Ninja][Clang] Release (x64)",
+			"displayName": "[Ninja][GCC] Release (x64)",
 			"name": "ninja_unix_gcc_x64_release",
 			"inherits": [ "ninja", "linux_gcc_13", "release" ]
 		},
