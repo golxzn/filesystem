@@ -26,9 +26,6 @@ namespace golxzn {
 
 namespace details {
 
-using binary_ofstream = std::basic_ofstream<uint8_t>;
-using binary_ifstream = std::basic_ifstream<uint8_t>;
-
 template<class T>
 resman::error write_data(const std::wstring_view wide_path, const T *data, const size_t len,
 		const std::ios::openmode mode = std::ios::out) noexcept {
@@ -142,10 +139,10 @@ std::vector<uint8_t> resman::read_binary(const std::wstring_view wide_path) {
 	const auto path{ to_narrow(replace_association_prefix(wide_path)) };
 #endif
 
-	if (details::binary_ifstream file{ path, std::ios::binary | std::ios::ate }; file.is_open()) [[likely]] {
+	if (std::ifstream file{ path, std::ios::binary | std::ios::ate }; file.is_open()) [[likely]] {
 		std::vector<uint8_t> content(file.tellg());
 		file.seekg(std::ios::beg);
-		file.read(content.data(), content.size());
+		file.read(reinterpret_cast<char *>(content.data()), content.size());
 		return content;
 	}
 

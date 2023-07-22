@@ -91,7 +91,7 @@ TEST_CASE("resman", "[resman][initialization]") {
 		REQUIRE(user_data_dir.ends_with(L"/AppData/Roaming/resman_tests"));
 #elif defined(GRM_LINUX)
 		REQUIRE(user_data_dir.starts_with(L"/home/"));
-		REQUIRE(user_data_dir.ends_with(L"/.local/resman_tests"));
+		REQUIRE(user_data_dir.ends_with(L"/.config/resman_tests"));
 #elif defined(GRM_MACOS)
 		REQUIRE(user_data_dir.starts_with(L"/Users/"));
 		REQUIRE(user_data_dir.ends_with(L"/Library/Application Support/resman_tests"));
