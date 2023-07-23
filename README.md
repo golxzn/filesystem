@@ -1,25 +1,30 @@
 <h1 align="center">golxzn::resman</h1>
+<div align="center">
+
+![Tests](https://github.com/golxzn/resman/actions/workflows/ci-test-static-lib.yml/badge.svg)
+
+</div>
 
 `golxzn::resman` is a simple resource manager which provides basic access to application resources
 and user directory.
 `golxzn::resman` is dependenceless. There's only STL usage and platform specific headers.
 
-## __Platform support__
+## Platform support
 
 ✅ __Windows__ (tested); <br>
-⚠️ __Linux__; <br>
-⚠️ __MacOS__; <br>
+✅️ __Linux__ (tested); <br>
+⚠️ __MacOS__ (in progress); <br>
 
 I'm planning to add support for __Android__ and __iOS__ in the future.
 
-## __How does it work?__
+## How does it work?
 
 When you initialize this library using `golxzn::resman::initialize` method, library does 2 thing:
 
  1. Looks for `assets` or `res` directory starting from current application directory;
  2. Creates application directory
 
-### Look for `assets` or `res`
+### Look for assets or res
 
 This library goes up to the root directory and checks `assets` or `res` directory to set read-only
 resources directory up
@@ -32,7 +37,7 @@ This library creates application directory for data which could be modified at:
 * For Windows: `%APPDATA%/your_app_name`;
 * For MacOS: `/Users/you/Library/Application Support/your_app_name`;
 
-## __CMake integration__
+## CMake integration
 
 ### 1. Clone this repository:
 
