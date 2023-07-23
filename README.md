@@ -11,11 +11,9 @@ and user directory.
 
 ## Platform support
 
-
-
 ✅ __Windows__ (tested); <br>
-⚠️ __Linux__; <br>
-⚠️ __MacOS__; <br>
+✅️ __Linux__ (tested); <br>
+⚠️ __MacOS__ (in progress); <br>
 
 I'm planning to add support for __Android__ and __iOS__ in the future.
 
