@@ -1,7 +1,7 @@
 <h1 align="center">golxzn::resman</h1>
 <div align="center">
 
-![Tests](https://github.com/golxzn/resman/actions/workflows/ci-test-static-lib.yml/badge.svg?branch=develop)
+![Tests](https://github.com/golxzn/resman/actions/workflows/ci-test-static-lib.yml/badge.svg)
 
 </div>
 
