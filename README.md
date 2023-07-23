@@ -1,10 +1,17 @@
 <h1 align="center">golxzn::resman</h1>
+<div align="center">
+
+![Tests](https://github.com/golxzn/resman/actions/workflows/ci-test-static-lib.yml/badge.svg?branch=develop)
+
+</div>
 
 `golxzn::resman` is a simple resource manager which provides basic access to application resources
 and user directory.
 `golxzn::resman` is dependenceless. There's only STL usage and platform specific headers.
 
 ## Platform support
+
+
 
 ✅ __Windows__ (tested); <br>
 ⚠️ __Linux__; <br>
