@@ -75,13 +75,13 @@
 	],
 	"buildPresets": [
 		{
-			"name": "ci-windows-build",
+			"name": "ci-windows",
 			"configurePreset": "ci-windows",
 			"inherits": "ci",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" }
 		},
 		{
-			"name": "ci-ubuntu-build",
+			"name": "ci-ubuntu",
 			"configurePreset": "ci-ubuntu",
 			"inherits": "ci",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" }
@@ -96,13 +96,13 @@
 	],
 	"testPresets": [
 		{
-			"name": "ci-windows-test",
+			"name": "ci-windows",
 			"configurePreset": "ci-windows",
 			"inherits": "ci",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" }
 		},
 		{
-			"name": "ci-ubuntu-test",
+			"name": "ci-ubuntu",
 			"configurePreset": "ci-ubuntu",
 			"inherits": "ci",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" }

@@ -17,6 +17,13 @@
 			  }
 		},
 		{
+			"name": "disable_docs",
+			"hidden": true,
+			"cacheVariables": {
+				"GRM_GENERATE_DOCS": "FALSE"
+			}
+		},
+		{
 			"name": "export_compile_commands",
 			"hidden": true,
 			"cacheVariables": {
@@ -43,7 +50,7 @@
 		{
 			"name": "misc",
 			"hidden": true,
-			"inherits": [ "export_compile_commands", "c_standard", "cpp_standard" ]
+			"inherits": [ "export_compile_commands", "disable_docs", "c_standard", "cpp_standard" ]
 		},
 
 		{

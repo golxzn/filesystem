@@ -42,15 +42,11 @@ jobs:
 
       - name: Build
         shell: pwsh
-        run: cmake --build "--preset=ci-${{ env.platform }}-build"
-
-      - name: Install
-        shell: pwsh
-        run: cmake --install "build/ci-${{ env.platform }}" --config ${{ env.BUILD_TYPE }} --prefix prefix
+        run: cmake --build "--preset=ci-${{ env.platform }}"
 
       - name: Test
         shell: pwsh
-        run: ctest "--preset=ci-${{ env.platform }}-test"
+        run: ctest "--preset=ci-${{ env.platform }}"
 
   docs:
     needs: build
@@ -61,15 +57,14 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install Doxygen
-      run: sudo apt-get update -q
-        && sudo apt-get install doxygen -q -y
+      uses: ssciwr/doxygen-install@v1.1.0
 
-    - name: Configure project
-      run: cmake -B build/ubuntu_docs -DGRM_DEFINITIONS_INIT=GRM_LINUX -DCMAKE_BUILD_TYPE=Release .
+    - name: Configure
+      run: cmake --preset=ci-ubuntu -DGRM_GENERATE_DOCS=ON --fresh
 
     - name: Generate documentation
       working-directory: ./build/ubuntu_test
-      run: cmake --build build/ubuntu_docs --config Release --target generate_docs
+      run: cmake --build --preset=ci-ubuntu-build --target generate_docs
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
