@@ -54,20 +54,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Install Doxygen
-      uses: ssciwr/doxygen-install@v1.1.0
+      - name: Get GCC
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 13
+          platform: x64
 
-    - name: Configure
-      run: cmake --preset=ci-ubuntu -DGRM_GENERATE_DOCS=ON --fresh
+      - name: Get Ninja
+        uses: ashutoshvarma/setup-ninja@v1.1
+        with:
+          version: 1.10.0
 
-    - name: Generate documentation
-      working-directory: ./build/ubuntu_test
-      run: cmake --build --preset=ci-ubuntu-build --target generate_docs
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/html
+      - name: Install Doxygen
+        uses: ssciwr/doxygen-install@v1.1.0
+
+      - name: Configure
+        run: cmake --preset=ci-ubuntu -DGRM_GENERATE_DOCS=ON --fresh
+
+      - name: Generate documentation
+        working-directory: ./build/ubuntu_test
+        run: cmake --build --preset=ci-ubuntu-build --target generate_docs
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/html
