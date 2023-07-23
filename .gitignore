@@ -1,5 +1,5 @@
 
-### IDE and Editor files
+
 .vs
 .vscode
 .idea
@@ -7,6 +7,9 @@
 kms.conf
 
 build/
+
+docs
+!docs/Doxyfile.in
 
 bin/*
 !bin/assets/

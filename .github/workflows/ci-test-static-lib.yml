@@ -42,12 +42,43 @@ jobs:
 
       - name: Build
         shell: pwsh
-        run: cmake --build "--preset=ci-${{ env.platform }}-build"
-
-      - name: Install
-        shell: pwsh
-        run: cmake --install "build/ci-${{ env.platform }}" --config ${{ env.BUILD_TYPE }} --prefix prefix
+        run: cmake --build "--preset=ci-${{ env.platform }}"
 
       - name: Test
         shell: pwsh
-        run: ctest "--preset=ci-${{ env.platform }}-test"
+        run: ctest "--preset=ci-${{ env.platform }}"
+
+  docs:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get GCC
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 13
+          platform: x64
+
+      - name: Get Ninja
+        uses: ashutoshvarma/setup-ninja@v1.1
+        with:
+          version: 1.10.0
+
+
+      - name: Install Doxygen
+        uses: ssciwr/doxygen-install@v1.1.0
+
+      - name: Configure
+        run: cmake --preset=ci-ubuntu -DGRM_GENERATE_DOCS=ON --fresh
+
+      - name: Generate documentation
+        run: cmake --build --preset=ci-ubuntu --target generate_docs
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/html
