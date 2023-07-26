@@ -1,4 +1,3 @@
-#include <format>
 #include <ranges>
 #include <algorithm>
 #include <filesystem>
@@ -30,7 +29,7 @@ TEST_CASE("resman", "[resman][initialization]") {
 	SECTION("Assets directory") {
 
 		if (const auto assets_dir{ golxzn::resman::assets_directory() }; true) {
-			const auto default_assets_dir{ std::format(L"{}/{}",
+			const auto default_assets_dir{ gxzn::resman::join(
 				current_path, gxzn::resman::default_assets_directory_name
 			) };
 

@@ -60,7 +60,7 @@ std::vector<std::wstring> ls(const std::wstring_view path) {
 
 	std::vector<std::wstring> entries;
 
-	const auto pattern{ std::format(L"{}\\*", path) };
+	const auto pattern{ std::wstring{ path } + L"\\*" };
 	WIN32_FIND_DATAW found;
 	HANDLE iterator{ FindFirstFileW(pattern.data(), &found) };
 

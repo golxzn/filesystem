@@ -26,7 +26,7 @@
 
 ## Release v1.6.1:
 
-- [ ] Remove std::format to support clang14 :harold: :facepalm:;
+- [x] Remove std::format to support clang14 :harold: :facepalm:;
 
 ## Release v1.5.0 - v1.6.0:
 

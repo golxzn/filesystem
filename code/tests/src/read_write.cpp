@@ -1,4 +1,5 @@
-#include <format>
+#include <sstream>
+#include <iomanip>
 #include <algorithm>
 
 #include <catch2/catch_test_macros.hpp>
@@ -7,12 +8,12 @@
 #include <golxzn/resman.hpp>
 
 std::string dump(const auto &content) {
-	std::string result;
+	std::stringstream out;
 	for (auto byte : content) {
-		result += std::format("{:02X} ", byte);
+		out << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(byte) << ' ';
 	}
 
-	return result;
+	return out.str();
 }
 
 TEST_CASE("resman", "[resman][read_write]") {

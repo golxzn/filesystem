@@ -1,5 +1,4 @@
 #include <deque>
-#include <format>
 #include <ranges>
 #include <vector>
 #include <cstdlib>
@@ -48,20 +47,20 @@ resman::error write_data(const std::wstring_view wide_path, const T *data, const
 				return resman::OK;
 			}
 
-			return resman::error{ std::format(L"Failed to write to file '{}'", wide_path) };
+			return resman::error{ L"Failed to write to file '" + std::wstring{ wide_path } + L'\'' };
 		}
 
 	} catch(const std::exception &ex) {
-		return resman::error{ std::format(L"Failed to write to file '{}' due to exception '{}'",
-			wide_path, resman::to_wide(ex.what())
-		) };
+		return resman::error{ L"Failed to write to file '" + std::wstring{ wide_path } +
+			L"' due to exception '" + resman::to_wide(ex.what()) + L'\''
+		};
 	} catch(...) {
-		return resman::error{ std::format(L"Failed to write to file '{}' due to unknown exception",
-			wide_path
-		) };
+		return resman::error{ L"Failed to write to file '{}' due to unknown exception" +
+			std::wstring{ wide_path }
+		};
 	}
 
-	return resman::error{ std::format(L"Failed to open file '{}' for writing", wide_path) };
+	return resman::error{ L"Failed to open file '" + std::wstring{ wide_path } + L"' for writing" };
 }
 
 } // namespace details
@@ -99,10 +98,10 @@ resman::error resman::initialize(const std::wstring_view app_name, const std::ws
 		associate(L"usr://", std::wstring{ user_dir });
 		associate(L"user://", std::wstring{ user_dir });
 		associate(L"temp://", std::move(user_dir) + L"/temp");
-
 	} else {
-		err.message += std::format(L"{} '{}' {}",
-			(err.has_error() ? L" and" : L"Failed to setup"), appname, L"user data directory");
+		err.message += (err.has_error() ? L" and '" : L"Failed to setup '");
+		err.message += appname;
+		err.message += L"' user data directory";
 	}
 
 	return err;
@@ -128,9 +127,10 @@ void resman::associate(const std::wstring_view protocol_view, std::wstring &&pre
 
 std::vector<uint8_t> resman::read_binary(const std::wstring_view wide_path) {
 	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		throw std::invalid_argument{ std::format(
-			"[resman::read_binary] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
-		) };
+		throw std::invalid_argument{
+			std::string{ "[resman::read_binary] Protocol prefix expected in the path: '" } +
+			to_narrow(wide_path) + "'"
+		};
 	}
 
 #if defined(GRM_WINDOWS)
@@ -151,9 +151,10 @@ std::vector<uint8_t> resman::read_binary(const std::wstring_view wide_path) {
 
 std::string resman::read_text(const std::wstring_view wide_path) {
 	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		throw std::invalid_argument{ std::format(
-			"[resman::read_text] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
-		) };
+		throw std::invalid_argument{
+			std::string{ "[resman::read_text] Protocol prefix expected in the path: '" } +
+			to_narrow(wide_path) + "'"
+		};
 	}
 
 #if defined(GRM_WINDOWS)
@@ -174,15 +175,14 @@ std::string resman::read_text(const std::wstring_view wide_path) {
 
 resman::error resman::write_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '",
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -191,15 +191,14 @@ resman::error resman::write_binary(const std::wstring_view path, const std::span
 
 resman::error resman::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '",
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -208,15 +207,14 @@ resman::error resman::write_binary(const std::wstring_view path, const std::init
 
 resman::error resman::append_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '";
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -227,15 +225,14 @@ resman::error resman::append_binary(const std::wstring_view path, const std::spa
 
 resman::error resman::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '";
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -246,15 +243,14 @@ resman::error resman::append_binary(const std::wstring_view path, const std::ini
 
 resman::error resman::write_text(const std::wstring_view path, const std::string_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '";
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -263,15 +259,14 @@ resman::error resman::write_text(const std::wstring_view path, const std::string
 
 resman::error resman::append_text(const std::wstring_view path, const std::string_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '";
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -281,15 +276,14 @@ resman::error resman::append_text(const std::wstring_view path, const std::strin
 
 resman::error resman::write_text(const std::wstring_view path, const std::wstring_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '";
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -298,15 +292,14 @@ resman::error resman::write_text(const std::wstring_view path, const std::wstrin
 
 resman::error resman::append_text(const std::wstring_view path, const std::wstring_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
-		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+		return error{ L"[resman::write_binary] Protocol prefix expected in the path: '" +
+			std::wstring{ path } + L'\''
 		};
 	}
 
 	if (auto status{ make_directory(parent_directory(path)) }; status.has_error()) {
-		status.message += std::format(L" (During creating parent directory for writing file '{}')",
-			path
-		);
+		status.message += L" (During creating parent directory for writing file '";
+		status.message += std::wstring{ path } + L"')";
 		return status;
 	}
 
@@ -368,7 +361,7 @@ std::wstring resman::join(std::wstring_view left, std::wstring_view right) noexc
 	if (left.back()   == separator || left.back()   == L'\\') left.remove_suffix(1);
 	if (right.front() == separator || right.front() == L'\\') right.remove_prefix(1);
 
-	return std::format(L"{}/{}", left, right);
+	return std::wstring{ left } + separator + right.data();
 }
 
 void resman::parent_directory(std::wstring &path) noexcept {
@@ -468,7 +461,7 @@ resman::error resman::make_directory(const std::wstring_view path) {
 	}
 	if (is_directory(path)) return OK;
 	if (is_file(path)) {
-		return error{ std::format(L"Path is a file: '{}'", path) };
+		return error{ L"Path is a file: '" + std::wstring{ path } + L'\'' };
 	}
 
 	const auto full_path{ replace_association_prefix(path) };
@@ -483,7 +476,7 @@ resman::error resman::make_directory(const std::wstring_view path) {
 
 	for (auto &&part : parts) {
 		if (join(root, part); !details::mkdir(root)) {
-			return error{ L"Cannot create directory: " + root };
+			return error{ L"Cannot create directory: " + std::wstring{ root } };
 		}
 	}
 
@@ -497,7 +490,7 @@ resman::error resman::remove_directory(const std::wstring_view path) {
 	if (!exists(path)) return OK;
 
 	if (!is_directory(path)) {
-		return error{ std::format(L"Not a directory: '{}'", path) };
+		return error{ L"Not a directory: '" + std::wstring{ path } + L'\'' };
 	}
 
 	const auto full_path{ replace_association_prefix(path) };
@@ -514,7 +507,7 @@ resman::error resman::remove_directory(const std::wstring_view path) {
 		if (status.has_error()) [[unlikely]] { return status; }
 	}
 	if (!details::rmdir(full_path)) {
-		return error{ std::format(L"Cannot remove directory: '{}'", path) };
+		return error{ L"Cannot remove directory: '" + std::wstring{ path } + L'\'' };
 	}
 
 	return OK;
@@ -529,7 +522,7 @@ resman::error resman::remove_file(const std::wstring_view path) {
 	const auto full_path{ replace_association_prefix(path) };
 
 	if (!details::rmfile(full_path)) {
-		return error{ std::format(L"Cannot remove file: '{}'", path) };
+		return error{ L"Cannot remove file: '" + std::wstring{ path } + L'\'' };
 	}
 
 	return OK;
@@ -679,7 +672,7 @@ std::string resman::join(std::string_view left, std::string_view right) noexcept
 	if (left.back()   == separator_narrow || left.back()   == '\\') left.remove_suffix(1);
 	if (right.front() == separator_narrow || right.front() == '\\') right.remove_prefix(1);
 
-	return std::format("{}/{}", left, right);
+	return std::string{ left } + separator_narrow + right.data();
 }
 
 void resman::parent_directory(std::string &path) noexcept {
