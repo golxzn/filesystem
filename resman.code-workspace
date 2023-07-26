@@ -17,13 +17,22 @@
 			},
 			{
 				"name": "[GDB] Launch tests",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${command:cmake.launchTargetPath}",
 				"MIMode": "gdb",
+				"stopAtEntry": false,
+				"cwd": "${workspaceFolder}/bin",
+			},
+			{
+				"name": "[LLDB] Launch tests",
 				"type": "cppdbg",
 				"request": "launch",
 				"program": "${command:cmake.launchTargetPath}",
 				"stopAtEntry": false,
 				"cwd": "${workspaceFolder}/bin",
-			}
+				"MIMode": "lldb",
+			  }
 		],
 	},
 	"settings": {
