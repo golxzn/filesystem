@@ -5,7 +5,8 @@ namespace golxzn::details {
 
 std::wstring appdata_directory() {
 	if (auto home{ __unix_get_home() }; !home.empty()) {
-		return std::format(L"{}{}", path, L"/Library/Application Support");
+		resman::join(home, L"/Library/Application Support");
+		return home;
 	}
 	return L"~/Library/Application Support";
 }
