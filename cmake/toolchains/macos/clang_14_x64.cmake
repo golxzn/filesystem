@@ -7,6 +7,7 @@ set(CMAKE_C_COMPILER clang)
 set(CMAKE_C_COMPILER_VERSION 14)
 set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_COMPILER_VERSION 14)
+set(CMAKE_CXX_FLAGS_INIT -fexperimental-library)
 
 find_program(ccache_program ccache)
 if (NOT ${ccache_program} MATCHES "NOTFOUND")

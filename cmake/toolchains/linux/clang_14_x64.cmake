@@ -5,6 +5,7 @@ set(CMAKE_HOST_SYSTEM_PROCESSOR x86_64 CACHE STRING "Host system processor")
 
 set(CMAKE_C_COMPILER clang-15)
 set(CMAKE_CXX_COMPILER clang++-15)
+set(CMAKE_CXX_FLAGS_INIT -fexperimental-library)
 
 find_program(ccache_program ccache)
 if (NOT ${ccache_program} MATCHES "NOTFOUND")
