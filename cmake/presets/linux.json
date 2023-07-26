@@ -11,16 +11,16 @@
 			}
 		},
 		{
-			"name": "linux_clang_14",
+			"name": "linux_clang_14_x64",
 			"hidden": true,
 			"inherits": [ "linux_default" ],
-			"toolchainFile": "${sourceDir}/cmake/toolchains/linux/clang_14.cmake"
+			"toolchainFile": "${sourceDir}/cmake/toolchains/linux/clang_14_x64.cmake"
 		},
 		{
-			"name": "linux_gcc_13",
+			"name": "linux_gcc_13_x64",
 			"hidden": true,
 			"inherits": [ "linux_default" ],
-			"toolchainFile": "${sourceDir}/cmake/toolchains/linux/gcc_13.cmake"
+			"toolchainFile": "${sourceDir}/cmake/toolchains/linux/gcc_13_x64.cmake"
 		}
 	]
 }

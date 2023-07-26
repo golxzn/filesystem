@@ -399,7 +399,8 @@ std::wstring resman::normalize(std::wstring_view str) {
 	}
 
 	std::vector<std::wstring_view> parts;
-	parts.reserve(std::ranges::count_if(str, [](const auto &c){ return slash.find(c) != std::wstring_view::npos; }) + 1lu);
+	parts.reserve(std::ranges::count_if(str,
+		[](const auto &c){ return slash.find(c) != std::wstring_view::npos; }) + 1lu);
 	size_t prev_slash{};
 	size_t curr_slash{};
 	size_t next_slash{};

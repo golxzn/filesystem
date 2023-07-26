@@ -21,7 +21,7 @@ function(get_system_info SYSTEM_NAME ARCHITECTURE)
 		_get_arch(${ARCHITECTURE} ${SYSTEM_NAME})
 
 	elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-		set(${SYSTEM_NAME} "macOS" PARENT_SCOPE)
+		set(${SYSTEM_NAME} "MacOS" PARENT_SCOPE)
 
 		execute_process(
 			COMMAND "sysctl" "-n" "machdep.cpu.brand_string"
