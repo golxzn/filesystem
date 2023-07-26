@@ -16,13 +16,17 @@
 
 ## Release v1.8.0:
 
-- [ ] Add `MacOS` platform support;
-- [ ] Implement tests for `MacOS` platform;
+- [ ] Implement `lock`/`unlick` and `is_locked`/`is_unlocked` methods;
+- [ ] Implement `format` support for `load`/`save` methods;
 
 ## Release v1.7.0 (current):
 
-- [ ] Implement `lock`/`unlick` and `is_locked`/`is_unlocked` methods;
-- [ ] Implement `format` support for `load`/`save` methods;
+- [ ] Add `MacOS` platform support;
+- [ ] Implement tests for `MacOS` platform;
+
+## Release v1.6.1:
+
+- [ ] Remove std::format to support clang14 :harold: :facepalm:;
 
 ## Release v1.5.0 - v1.6.0:
 
