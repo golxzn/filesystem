@@ -5,7 +5,8 @@
 		"cmake/presets/common.json",
 		"cmake/presets/generators.json",
 		"cmake/presets/windows.json",
-		"cmake/presets/linux.json"
+		"cmake/presets/linux.json",
+		"cmake/presets/macos.json"
 	],
 	"configurePresets": [
 		{
@@ -44,23 +45,34 @@
 		{
 			"displayName": "[Ninja][Clang] Debug (x64)",
 			"name": "ninja_unix_clang_x64_debug",
-			"inherits": [ "ninja", "linux_clang_14", "debug" ]
+			"inherits": [ "ninja", "linux_clang_14_x64", "debug" ]
 		},
 		{
 			"displayName": "[Ninja][Clang] Release (x64)",
 			"name": "ninja_unix_clang_x64_release",
-			"inherits": [ "ninja", "linux_clang_14", "release" ]
+			"inherits": [ "ninja", "linux_clang_14_x64", "release" ]
 		},
 
 		{
 			"displayName": "[Ninja][GCC] Debug (x64)",
 			"name": "ninja_unix_gcc_x64_debug",
-			"inherits": [ "ninja", "linux_gcc_13", "debug" ]
+			"inherits": [ "ninja", "linux_gcc_13_x64", "debug" ]
 		},
 		{
 			"displayName": "[Ninja][GCC] Release (x64)",
 			"name": "ninja_unix_gcc_x64_release",
-			"inherits": [ "ninja", "linux_gcc_13", "release" ]
+			"inherits": [ "ninja", "linux_gcc_13_x64", "release" ]
+		},
+
+		{
+			"displayName": "[Ninja][Clang] Debug (x64)",
+			"name": "ninja_macos_clang_x64_debug",
+			"inherits": [ "ninja", "macos_clang_14_x64", "debug" ]
+		},
+		{
+			"displayName": "[Ninja][Clang] Release (x64)",
+			"name": "ninja_macos_clang_x64_release",
+			"inherits": [ "ninja", "macos_clang_14_x64", "release" ]
 		},
 
 		{

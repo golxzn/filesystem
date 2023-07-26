@@ -26,5 +26,6 @@ add_library(golxzn::resman ALIAS golxzn_resman)
 target_include_directories(golxzn_resman PUBLIC ${GRM_CODE_DIR}/headers)
 target_compile_definitions(golxzn_resman PUBLIC ${GRM_DEFINITIONS})
 set_target_properties(golxzn_resman PROPERTIES
+	LIBCXX_ENABLE_INCOMPLETE_FEATURES ON
 	FOLDER "golxzn"
 )

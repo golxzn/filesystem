@@ -1,14 +1,11 @@
 
-#include "platform/unix.inl"
+#include "unix.inl"
 
 namespace golxzn::details {
 
 std::wstring appdata_directory() {
-	if (auto home{ __unix_get_home(error) }; !home.empty()) {
-		std::wstring path{ std::begin(home), std::end(home) };
-		return std::format(L"{}{}{}",
-			std::move(path), L"/Library/Application Support", appname
-		);
+	if (auto home{ __unix_get_home() }; !home.empty()) {
+		return std::format(L"{}{}", path, L"/Library/Application Support");
 	}
 	return L"~/Library/Application Support";
 }

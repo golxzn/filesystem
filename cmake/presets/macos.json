@@ -1,0 +1,20 @@
+{
+	"version": 5,
+	"configurePresets": [
+		{
+			"name": "macos_default",
+			"hidden": true,
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Darwin" },
+			"cacheVariables": {
+				"GRM_DEFINITIONS_INIT": "GRM_MACOS;GRM_UNIX"
+			}
+		},
+		{
+			"name": "macos_clang_14_x64",
+			"hidden": true,
+			"inherits": [ "macos_default" ],
+			"toolchainFile": "${sourceDir}/cmake/toolchains/macos/clang_14_x64.cmake"
+		}
+	]
+}
