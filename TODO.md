@@ -14,15 +14,15 @@
 - [ ] Add `Android` platform support;
 - [ ] Implement tests for `MacOS` platform;
 
-## Release v1.8.0:
+## Release v1.8.0 (in progress):
 
 - [ ] Implement `lock`/`unlick` and `is_locked`/`is_unlocked` methods;
 - [ ] Implement `format` support for `load`/`save` methods;
 
 ## Release v1.7.0 (current):
 
-- [ ] Add `MacOS` platform support;
-- [ ] Implement tests for `MacOS` platform;
+- [x] Add `MacOS` platform support;
+- [x] Implement tests for `MacOS` platform;
 
 ## Release v1.6.1:
 
