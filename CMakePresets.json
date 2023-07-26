@@ -77,11 +77,18 @@
 
 		{
 			"name": "ci-windows",
+			"hidden": true,
 			"inherits": "ninja_msvc_x64_release"
 		},
 		{
 			"name": "ci-ubuntu",
+			"hidden": true,
 			"inherits": "ninja_unix_gcc_x64_release"
+		},
+		{
+			"name": "ci-macos",
+			"hidden": true,
+			"inherits": "ninja_macos_clang_x64_release"
 		}
 
 	],
@@ -98,6 +105,13 @@
 			"inherits": "ci",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" }
 		},
+		{
+			"name": "ci-macos",
+			"configurePreset": "ci-macos",
+			"inherits": "ci",
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Darwin" }
+		},
+
 
 		{
 			"name": "ci",
@@ -119,8 +133,12 @@
 			"inherits": "ci",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" }
 		},
-
-
+		{
+			"name": "ci-macos",
+			"configurePreset": "ci-macos",
+			"inherits": "ci",
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Darwin" }
+		},
 
 		{
 			"name": "ci",
