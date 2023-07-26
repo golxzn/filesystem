@@ -77,17 +77,14 @@
 
 		{
 			"name": "ci-windows",
-			"hidden": true,
 			"inherits": "ninja_msvc_x64_release"
 		},
 		{
 			"name": "ci-ubuntu",
-			"hidden": true,
 			"inherits": "ninja_unix_gcc_x64_release"
 		},
 		{
 			"name": "ci-macos",
-			"hidden": true,
 			"inherits": "ninja_macos_clang_x64_release"
 		}
 
