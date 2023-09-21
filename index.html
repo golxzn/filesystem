@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">golxzn::resman<span id="projectnumber">&#160;1.6.1</span>
+   <div id="projectname">golxzn::resman<span id="projectnumber">&#160;1.6.0</span>
    </div>
    <div id="projectbrief">golxzn resource manager</div>
   </td>
@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></h1>
-<p><code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
+<div align="center"></div><div align="center"><img src="https://github.com/golxzn/resman/actions/workflows/ci-test-static-lib.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
 Platform support</h2>
 <p>✅ <b>Windows</b> (tested); <br  />
@@ -114,12 +114,34 @@ CMake integration</h2>
 3. Include header &amp; initialize:</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/resman.hpp&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>your {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Image {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keyword">explicit</span> YourImage(std::vector&lt;uint8_t&gt; &amp;&amp;raw_image) {</div>
+<div class="line">        <span class="comment">// Parse your image</span></div>
+<div class="line">    }</div>
+<div class="line">    ...</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Settings {</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="keyword">explicit</span> YourSettings(std::string &amp;&amp;content) {</div>
+<div class="line">        <span class="comment">// Parse your settings</span></div>
+<div class="line">    }</div>
+<div class="line">    ...</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">} <span class="comment">// namespace your</span></div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
 <div class="line">    <a class="code hl_function" href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623">golxzn::resman::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span> (<span class="keyword">auto</span> content{ gxzn::resman::load(<span class="stringliteral">&quot;res://config.bin&quot;</span>) }; !content.empty()) {</div>
-<div class="line">        SomeClass sc{ std::move(content) };</div>
-<div class="line">    }</div>
+<div class="line">    <span class="keyword">auto</span> app_settings{ gxzn::resman::load_text&lt;your::Settings&gt;(<span class="stringliteral">&quot;res://settings/application.ini&quot;</span>) };</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> splash_screen{ <span class="comment">///&lt; std::shared_ptr&lt;your::Image&gt;</span></div>
+<div class="line">        gxzn::resman::load_shared_binary&lt;your::Image&gt;(app_settings.get_splash_screen_path())</div>
+<div class="line">    };</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__initialization_html_gaf01bca046f36305e78ceee3101a8b623"><div class="ttname"><a href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623">golxzn::resman::initialize</a></div><div class="ttdeci">static error initialize(const std::wstring_view application_name, const std::wstring_view assets_path=default_assets_directory_name)</div><div class="ttdoc">Initialize the Resource Manager.</div></div>
 </div><!-- fragment --><p>You could use either a <code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> namespace or just <code>gxzn::resman</code> or <code>golxzn::resources::manager</code>:</p>
