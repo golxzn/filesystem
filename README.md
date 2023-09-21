@@ -58,12 +58,34 @@ target_link_libraries(YourProjectName PUBLIC golxzn::resman)
 ```cpp
 #include <golxzn/resman.hpp>
 
-int main() {
-	golxzn::resman::initialize("your_app_name");
+namespace your {
 
-	if (auto content{ gxzn::resman::load("res://config.bin") }; !content.empty()) {
-		SomeClass sc{ std::move(content) };
-	}
+class Image {
+public:
+    explicit YourImage(std::vector<uint8_t> &&raw_image) {
+        // Parse your image
+    }
+    ...
+};
+
+class Settings {
+public:
+    explicit YourSettings(std::string &&content) {
+        // Parse your settings
+    }
+    ...
+};
+
+} // namespace your
+
+int main() {
+    golxzn::resman::initialize("your_app_name");
+
+    auto app_settings{ gxzn::resman::load_text<your::Settings>("res://settings/application.ini") };
+
+    auto splash_screen{ ///< std::shared_ptr<your::Image>
+        gxzn::resman::load_shared_binary<your::Image>(app_settings.get_splash_screen_path())
+    };
 }
 
 ```
