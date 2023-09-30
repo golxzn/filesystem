@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></h1>
-<div align="center"></div><div align="center"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-test-static-lib.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code>golxzn::filesystem</code> is a simple resource manager which provides basic access to application resources and user directory. <code>golxzn::filesystem</code> is dependenceless. There's only STL usage and platform specific headers.</p>
+<div align="center"></div><div align="center"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-test-static-lib.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
 Platform support</h2>
 <p>✅ <b>Windows</b> (tested); <br  />
@@ -84,7 +84,7 @@ Platform support</h2>
 <p>I'm planning to add support for <b>Android</b> and <b>iOS</b> in the future.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 How does it work?</h2>
-<p>When you initialize this library using <code>golxzn::filesystem::initialize</code> method, library does 2 thing:</p>
+<p>When you initialize this library using <code><a class="el" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c" title="Initialize the Resource Manager.">golxzn::os::filesystem::initialize</a></code> method, library does 2 thing:</p>
 <ol type="1">
 <li>Looks for <code>assets</code> or <code>res</code> directory starting from current application directory;</li>
 <li>Creates application directory</li>
@@ -109,7 +109,7 @@ CMake integration</h2>
 2. Add subdirectory:</h3>
 <div class="fragment"><div class="line">add_subdirectory(filesystem)</div>
 <div class="line"> </div>
-<div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::filesystem)</div>
+<div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::os::filesystem)</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md7"></a>
 3. Include header &amp; initialize:</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/os/filesystem.hpp&gt;</span></div>
