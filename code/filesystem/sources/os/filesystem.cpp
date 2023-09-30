@@ -26,7 +26,7 @@ namespace golxzn::os {
 namespace details {
 
 template<class T>
-filesystem::error write_data(const std::wstring_view wide_path, const T *data, const size_t len,
+filesystem::error write_data(const std::wstring_view wide_path, const T *data, const size len,
 		const std::ios::openmode mode = std::ios::out) noexcept {
 
 	if (len == 0 || data == nullptr) [[unlikely]] {
@@ -125,7 +125,7 @@ void filesystem::associate(const std::wstring_view protocol_view, std::wstring &
 	associations_map.insert_or_assign(std::move(protocol), std::move(prefix));
 }
 
-std::vector<uint8_t> filesystem::read_binary(const std::wstring_view wide_path) {
+std::vector<byte> filesystem::read_binary(const std::wstring_view wide_path) {
 	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		throw std::invalid_argument{
 			std::string{ "[filesystem::read_binary] Protocol prefix expected in the path: '" } +
@@ -140,7 +140,7 @@ std::vector<uint8_t> filesystem::read_binary(const std::wstring_view wide_path) 
 #endif
 
 	if (std::ifstream file{ path, std::ios::binary | std::ios::ate }; file.is_open()) [[likely]] {
-		std::vector<uint8_t> content(file.tellg());
+		std::vector<byte> content(file.tellg());
 		file.seekg(std::ios::beg);
 		file.read(reinterpret_cast<char *>(content.data()), content.size());
 		return content;
@@ -173,7 +173,7 @@ std::string filesystem::read_text(const std::wstring_view wide_path) {
 	return {};
 }
 
-filesystem::error filesystem::write_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::write_binary(const std::wstring_view path, const std::span<byte> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{ L"[filesystem::write_binary] Protocol prefix expected in the path: '" +
 			std::wstring{ path } + L'\''
@@ -189,7 +189,7 @@ filesystem::error filesystem::write_binary(const std::wstring_view path, const s
 	return details::write_data(replace_association_prefix(path), data.data(), data.size());
 }
 
-filesystem::error filesystem::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::write_binary(const std::wstring_view path, const std::initializer_list<byte> data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{ L"[filesystem::write_binary] Protocol prefix expected in the path: '" +
 			std::wstring{ path } + L'\''
@@ -205,7 +205,7 @@ filesystem::error filesystem::write_binary(const std::wstring_view path, const s
 	return details::write_data(replace_association_prefix(path), data.begin(), data.size());
 }
 
-filesystem::error filesystem::append_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::append_binary(const std::wstring_view path, const std::span<byte> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{ L"[filesystem::write_binary] Protocol prefix expected in the path: '" +
 			std::wstring{ path } + L'\''
@@ -223,7 +223,7 @@ filesystem::error filesystem::append_binary(const std::wstring_view path, const 
 	);
 }
 
-filesystem::error filesystem::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::append_binary(const std::wstring_view path, const std::initializer_list<byte> data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{ L"[filesystem::write_binary] Protocol prefix expected in the path: '" +
 			std::wstring{ path } + L'\''
@@ -400,9 +400,9 @@ std::wstring filesystem::normalize(std::wstring_view str) {
 
 	std::vector<std::wstring_view> parts;
 	parts.reserve(std::ranges::count_if(str, [](const auto &c){ return slash.find(c) != std::wstring_view::npos; }) + 1lu);
-	size_t prev_slash{};
-	size_t curr_slash{};
-	size_t next_slash{};
+	size prev_slash{};
+	size curr_slash{};
+	size next_slash{};
 
 	for(; next_slash != std::wstring_view::npos; prev_slash = std::exchange(curr_slash, next_slash + 1)) {
 		next_slash = str.find_first_of(slash, curr_slash);
@@ -420,9 +420,9 @@ std::wstring filesystem::normalize(std::wstring_view str) {
 		parts.emplace_back(substr);
 	}
 
-	const size_t length{ std::accumulate(
-		std::begin(parts), std::end(parts), size_t{},
-		[](size_t accum, const auto &str) { return accum + 1 + str.size(); }
+	const size length{ std::accumulate(
+		std::begin(parts), std::end(parts), size{},
+		[](size accum, const auto &str) { return accum + 1 + str.size(); }
 	)};
 
 	std::wstring result{ std::move(prefix) };
@@ -563,8 +563,8 @@ std::wstring filesystem::to_wide(const std::string_view str) noexcept {
 }
 
 std::string filesystem::to_narrow(const std::wstring_view str) noexcept {
-	static constexpr uint16_t bits_per_char{ 8 };
-	static constexpr size_t difference{
+	static constexpr u16 bits_per_char{ 8 };
+	static constexpr size difference{
 		sizeof(std::wstring_view::value_type) / sizeof(std::string::value_type)
 	};
 
@@ -572,11 +572,11 @@ std::string filesystem::to_narrow(const std::wstring_view str) noexcept {
 	result.reserve(str.size() * difference);
 
 	for (const auto c : str) {
-		const auto int_c{ static_cast<uint16_t>(c) };
+		const auto int_c{ static_cast<u16>(c) };
 		const char left_part{ static_cast<char>(int_c >> bits_per_char) };
 		const char right_part{ static_cast<char>(int_c & 0x00FFu) };
 
-		if (left_part != uint16_t{}) [[unlikely]] {
+		if (left_part != u16{}) [[unlikely]] {
 			result += left_part;
 		}
 
@@ -601,7 +601,7 @@ void filesystem::associate(const std::string_view protocol_view, const std::stri
 	associate(to_wide(protocol_view), to_wide(prefix));
 }
 
-std::vector<uint8_t> filesystem::read_binary(const std::string_view path) {
+std::vector<byte> filesystem::read_binary(const std::string_view path) {
 	return read_binary(to_wide(path));
 }
 
@@ -609,19 +609,19 @@ std::string filesystem::read_text(const std::string_view path) {
 	return read_text(to_wide(path));
 }
 
-filesystem::error filesystem::write_binary(const std::string_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::write_binary(const std::string_view path, const std::span<byte> &data) {
 	return write_binary(to_wide(path), data);
 }
 
-filesystem::error filesystem::write_binary(const std::string_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::write_binary(const std::string_view path, const std::initializer_list<byte> data) {
 	return write_binary(to_wide(path), data);
 }
 
-filesystem::error filesystem::append_binary(const std::string_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::append_binary(const std::string_view path, const std::span<byte> &data) {
 	return append_binary(to_wide(path), data);
 }
 
-filesystem::error filesystem::append_binary(const std::string_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::append_binary(const std::string_view path, const std::initializer_list<byte> data) {
 	return append_binary(to_wide(path), data);
 }
 

@@ -57,7 +57,7 @@ namespace your {
 
 class Image {
 public:
-    explicit YourImage(std::vector<uint8_t> &&raw_image) {
+    explicit YourImage(std::vector<gxzn::os::byte> &&raw_image) {
         // Parse your image
     }
     ...

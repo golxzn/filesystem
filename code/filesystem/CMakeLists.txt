@@ -28,3 +28,7 @@ target_compile_definitions(golxzn_os_filesystem PUBLIC ${GXZN_OS_FS_DEFINITIONS}
 set_target_properties(golxzn_os_filesystem PROPERTIES
 	FOLDER "golxzn/os"
 )
+
+if(TARGET golxzn::os::aliases)
+	target_link_libraries(golxzn_os_filesystem PUBLIC golxzn::os::aliases)
+endif()
