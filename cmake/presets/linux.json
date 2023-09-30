@@ -7,7 +7,7 @@
 			"binaryDir": "${sourceDir}/build/${presetName}",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" },
 			"cacheVariables": {
-				"GRM_DEFINITIONS_INIT": "GRM_LINUX;GRM_UNIX"
+				"GXZN_OS_FS_DEFINITIONS_INIT": "GXZN_OS_FS_LINUX;GXZN_OS_FS_UNIX"
 			}
 		},
 		{

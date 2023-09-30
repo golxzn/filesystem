@@ -3,32 +3,33 @@ set(USE_FOLDERS ON)
 set(CMAKE_REQUIRED_QUIET ON)
 
 list(APPEND CMAKE_MODULE_PATH
-	${CMAKE_SOURCE_DIR}/cmake
-	${CMAKE_SOURCE_DIR}/cmake/tools
+	${GXZN_OS_FS_ROOT}/cmake
+	${GXZN_OS_FS_ROOT}/cmake/tools
 )
+
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-	set(GRM_IS_TOPLEVEL_PROJECT TRUE)
+	set(GXZN_OS_FS_IS_TOPLEVEL_PROJECT TRUE)
 else()
-	set(GRM_IS_TOPLEVEL_PROJECT FALSE)
+	set(GXZN_OS_FS_IS_TOPLEVEL_PROJECT FALSE)
 endif()
 
-option(GRM_BUILD_TEST           "Build filesystem's tests" ${GRM_IS_TOPLEVEL_PROJECT})
-option(GRM_DEV_MODE             "Developer mode" ${GRM_IS_TOPLEVEL_PROJECT})
-option(GRM_GENERATE_INFO_HEADER "Generate info header" OFF)
-option(GRM_GENERATE_DOCS        "Generate MCSS documentation" ${GRM_IS_TOPLEVEL_PROJECT})
-mark_as_advanced(GRM_DEV_MODE GRM_GENERATE_INFO_HEADER GRM_GENERATE_DOCS)
+option(GXZN_OS_FS_BUILD_TEST           "Build filesystem's tests" ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
+option(GXZN_OS_FS_DEV_MODE             "Developer mode" ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
+option(GXZN_OS_FS_GENERATE_INFO_HEADER "Generate info header" OFF)
+option(GXZN_OS_FS_GENERATE_DOCS        "Generate MCSS documentation" ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
+mark_as_advanced(GXZN_OS_FS_DEV_MODE GXZN_OS_FS_GENERATE_INFO_HEADER GXZN_OS_FS_GENERATE_DOCS)
 
 include(GetSystemInfo)
 
-get_system_info(GRM_SYSTEM GRM_ARCH)
+get_system_info(GXZN_OS_FS_SYSTEM GXZN_OS_FS_ARCH)
 
-set(GRM_OUT ${CMAKE_BINARY_DIR})
-set(GRM_CODE_DIR ${GRM_ROOT}/code/filesystem CACHE PATH "Code directory")
-set(GRM_TEST_DIR ${GRM_ROOT}/code/tests      CACHE PATH "Tests directory")
-set(GRM_DOCS_DIR ${GRM_ROOT}/docs            CACHE PATH "Documentation directory")
+set(GXZN_OS_FS_OUT ${CMAKE_BINARY_DIR})
+set(GXZN_OS_FS_CODE_DIR ${GXZN_OS_FS_ROOT}/code/filesystem CACHE PATH "Code directory")
+set(GXZN_OS_FS_TEST_DIR ${GXZN_OS_FS_ROOT}/code/tests      CACHE PATH "Tests directory")
+set(GXZN_OS_FS_DOCS_DIR ${GXZN_OS_FS_ROOT}/docs            CACHE PATH "Documentation directory")
 
 # App info
-set(GRM_APP_AUTHOR         "Ruslan Golovinskii")
+set(GXZN_OS_FS_APP_AUTHOR         "Ruslan Golovinskii")
 
 if (NOT CMAKE_CXX_STANDARD)
 	set(CMAKE_CXX_STANDARD 20)
@@ -39,20 +40,20 @@ if(CMAKE_CXX_STANDARD LESS 20)
 endif()
 
 message(STATUS "-- -- -- -- -- -- -- filesystem configuration -- -- -- -- -- -- -- --")
-message(STATUS "System:                 ${GRM_SYSTEM} (${GRM_ARCH})")
+message(STATUS "System:                 ${GXZN_OS_FS_SYSTEM} (${GXZN_OS_FS_ARCH})")
 message(STATUS "C++ Standard:           ${CMAKE_CXX_STANDARD}")
 message(STATUS "C Standard:             ${CMAKE_C_STANDARD}")
 message(STATUS "Compiler (ID):          ${CMAKE_CXX_COMPILER_ID} (${CMAKE_CXX_COMPILER_ID})")
-message(STATUS "Root directory:         ${GRM_ROOT}")
-message(STATUS "Build directory:        ${GRM_OUT}")
-message(STATUS "Code directory:         ${GRM_CODE_DIR}")
-message(STATUS "Top level:              ${GRM_IS_TOPLEVEL_PROJECT}")
+message(STATUS "Root directory:         ${GXZN_OS_FS_ROOT}")
+message(STATUS "Build directory:        ${GXZN_OS_FS_OUT}")
+message(STATUS "Code directory:         ${GXZN_OS_FS_CODE_DIR}")
+message(STATUS "Top level:              ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT}")
 
-if(GRM_DEV_MODE)
-	message(STATUS "Tests:                  ${GRM_BUILD_TEST}")
-	message(STATUS "Generate info header:   ${GRM_GENERATE_INFO_HEADER}")
-	message(STATUS "Generate documentation: ${GRM_GENERATE_DOCS}")
-	message(STATUS "Documentation directory:${GRM_DOCS_DIR}")
+if(GXZN_OS_FS_DEV_MODE)
+	message(STATUS "Tests:                  ${GXZN_OS_FS_BUILD_TEST}")
+	message(STATUS "Generate info header:   ${GXZN_OS_FS_GENERATE_INFO_HEADER}")
+	message(STATUS "Generate documentation: ${GXZN_OS_FS_GENERATE_DOCS}")
+	message(STATUS "Documentation directory:${GXZN_OS_FS_DOCS_DIR}")
 endif()
 
 message(STATUS "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")

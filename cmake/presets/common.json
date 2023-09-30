@@ -20,7 +20,7 @@
 			"name": "disable_docs",
 			"hidden": true,
 			"cacheVariables": {
-				"GRM_GENERATE_DOCS": "FALSE"
+				"GXZN_OS_FS_GENERATE_DOCS": "FALSE"
 			}
 		},
 		{
@@ -59,7 +59,7 @@
 			"inherits": [ "misc", "pedantic" ],
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Release",
-				"GRM_DEFINITIONS_RELEASE": "NDEBUG;GRM_RELEASE"
+				"GXZN_OS_FS_DEFINITIONS_RELEASE": "NDEBUG;GXZN_OS_FS_RELEASE"
 			}
 		},
 		{
@@ -68,7 +68,7 @@
 			"inherits": [ "misc", "pedantic" ],
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Debug",
-				"GRM_DEFINITIONS_DEBUG": "GRM_DEBUG"
+				"GXZN_OS_FS_DEFINITIONS_DEBUG": "GXZN_OS_FS_DEBUG"
 			}
 		}
 	]

@@ -11,15 +11,15 @@
 #include "golxzn/os/filesystem.hpp"
 
 
-#if defined(GRM_WINDOWS)
+#if defined(GXZN_OS_FS_WINDOWS)
 # include "platform/win.inl"
-#elif defined(GRM_LINUX)
+#elif defined(GXZN_OS_FS_LINUX)
 # include "platform/linux.inl"
-#elif defined(GRM_MACOS)
+#elif defined(GXZN_OS_FS_MACOS)
 # include "platform/macos.inl"
 #else
 # error "Unsupported platform"
-#endif // defined(GRM_WINDOWS)
+#endif // defined(GXZN_OS_FS_WINDOWS)
 
 
 namespace golxzn::os {
@@ -36,9 +36,9 @@ filesystem::error write_data(const std::wstring_view wide_path, const T *data, c
 
 	try {
 
-		#if defined(GRM_WINDOWS)
+		#if defined(GXZN_OS_FS_WINDOWS)
 			const auto path{ wide_path };
-		#elif defined(GRM_LINUX) || defined(GRM_MACOS)
+		#elif defined(GXZN_OS_FS_LINUX) || defined(GXZN_OS_FS_MACOS)
 			const auto path{ filesystem::to_narrow(wide_path) };
 		#endif
 
@@ -133,9 +133,9 @@ std::vector<uint8_t> filesystem::read_binary(const std::wstring_view wide_path) 
 		) };
 	}
 
-#if defined(GRM_WINDOWS)
+#if defined(GXZN_OS_FS_WINDOWS)
 	const auto path{ replace_association_prefix(wide_path) };
-#elif defined(GRM_LINUX) || defined(GRM_MACOS)
+#elif defined(GXZN_OS_FS_LINUX) || defined(GXZN_OS_FS_MACOS)
 	const auto path{ to_narrow(replace_association_prefix(wide_path)) };
 #endif
 
@@ -156,9 +156,9 @@ std::string filesystem::read_text(const std::wstring_view wide_path) {
 		) };
 	}
 
-#if defined(GRM_WINDOWS)
+#if defined(GXZN_OS_FS_WINDOWS)
 	const auto path{ replace_association_prefix(wide_path) };
-#elif defined(GRM_LINUX) || defined(GRM_MACOS)
+#elif defined(GXZN_OS_FS_LINUX) || defined(GXZN_OS_FS_MACOS)
 	const auto path{ to_narrow(replace_association_prefix(wide_path)) };
 #endif
 

@@ -40,11 +40,11 @@ TEST_CASE("filesystem", "[filesystem][initialization]") {
 		}
 
 		static constexpr std::wstring_view absolute_res_dir{
-#if defined(GRM_WINDOWS)
+#if defined(GXZN_OS_FS_WINDOWS)
 			L"G:/resources"
-#else // defined(GRM_WINDOWS)
+#else // defined(GXZN_OS_FS_WINDOWS)
 			L"/resources"
-#endif // defined(GRM_WINDOWS)
+#endif // defined(GXZN_OS_FS_WINDOWS)
 		};
 
 		if (const auto status{ gxzn::os::fs::initialize(L"filesystem_tests", absolute_res_dir) }; status) {
@@ -86,13 +86,13 @@ TEST_CASE("filesystem", "[filesystem][initialization]") {
 		const auto user_data_dir{ gxzn::os::fs::user_data_directory() };
 		INFO("gxzn::os::fs::user_data_directory: " << gxzn::os::fs::to_narrow(user_data_dir));
 		REQUIRE_FALSE(user_data_dir.empty());
-#if defined(GRM_WINDOWS)
+#if defined(GXZN_OS_FS_WINDOWS)
 		REQUIRE(user_data_dir.starts_with(L"C:/Users/"));
 		REQUIRE(user_data_dir.ends_with(L"/AppData/Roaming/filesystem_tests"));
-#elif defined(GRM_LINUX)
+#elif defined(GXZN_OS_FS_LINUX)
 		REQUIRE(user_data_dir.starts_with(L"/home/"));
 		REQUIRE(user_data_dir.ends_with(L"/.config/filesystem_tests"));
-#elif defined(GRM_MACOS)
+#elif defined(GXZN_OS_FS_MACOS)
 		REQUIRE(user_data_dir.starts_with(L"/Users/"));
 		REQUIRE(user_data_dir.ends_with(L"/Library/Application Support/filesystem_tests"));
 #endif
