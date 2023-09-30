@@ -1,12 +1,27 @@
 #pragma once
 
+#if !defined(GOLXZN_OS_FILESYSTEM)
+#define GOLXZN_OS_FILESYSTEM
+#endif // !defined(GOLXZN_OS_FILESYSTEM)
+
 #include <span>
 #include <string>
 #include <memory>
 #include <string_view>
 #include <unordered_map>
 
+#if defined(GOLXZN_OS_ALIASES)
+#include <golxzn/os/aliases.hpp>
+#endif // defined(GOLXZN_OS_ALIASES)
+
 namespace golxzn::os {
+
+#if !defined(GOLXZN_OS_ALIASES)
+
+using byte = std::byte;
+using size = std::size_t;
+
+#endif // defined(GOLXZN_OS_ALIASES)
 
 namespace details {
 
@@ -15,7 +30,7 @@ struct transparent_hash {
 	using hash_type = std::hash<T>;
 	using is_transparent = void;
 
-	std::size_t operator()(const T &v) const noexcept { return hash_type{}(v); }
+	size operator()(const T &v) const noexcept { return hash_type{}(v); }
 };
 
 template<>
@@ -24,9 +39,9 @@ struct transparent_hash<std::wstring> {
 	using hash_type = std::hash<std::wstring_view>;
 	using is_transparent = void;
 
-	std::size_t operator()(const std::wstring &v)      const noexcept { return hash_type{}(v); }
-	std::size_t operator()(const std::wstring_view &v) const noexcept { return hash_type{}(v); }
-	std::size_t operator()(const char_type *const v)   const noexcept { return hash_type{}(v); }
+	size operator()(const std::wstring &v)      const noexcept { return hash_type{}(v); }
+	size operator()(const std::wstring_view &v) const noexcept { return hash_type{}(v); }
+	size operator()(const char_type *const v)   const noexcept { return hash_type{}(v); }
 };
 
 } // namespace
@@ -130,9 +145,9 @@ public:
 	 *
 	 * @warning This method throws an exception `std::invalid_argument` if the path has no protocol!
 	 * @param path Path to the file
-	 * @return `std::vector<uint8_t>` - The data or an empty vector if there's an reading error.
+	 * @return `std::vector<byte>` - The data or an empty vector if there's an reading error.
 	 */
-	[[nodiscard]] static std::vector<uint8_t> read_binary(const std::wstring_view path);
+	[[nodiscard]] static std::vector<byte> read_binary(const std::wstring_view path);
 
 	/**
 	 * @brief Read whole text file
@@ -146,11 +161,11 @@ public:
 	/**
 	 * @brief Construct @p Custom class by binary data from file
 	 *
-	 * @tparam Custom Class to construct. Has to have a constructor with std::vector<uint8_t> argument
+	 * @tparam Custom Class to construct. Has to have a constructor with std::vector<byte> argument
 	 * @param path Path to the file
 	 * @return `Custom` - Constructed class
 	 */
-	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	template<std::constructible_from<std::vector<byte>> Custom>
 	[[nodiscard]] static Custom read_binary(const std::wstring_view path);
 
 	/**
@@ -166,11 +181,11 @@ public:
 	/**
 	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
 	 *
-	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<uint8_t> argument
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<byte> argument
 	 * @param path Path to the file
 	 * @return `std::shared_ptr<Custom>` - Constructed shared class
 	 */
-	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	template<std::constructible_from<std::vector<byte>> Custom>
 	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::wstring_view path);
 
 	/**
@@ -186,11 +201,11 @@ public:
 	/**
 	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
 	 *
-	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<uint8_t> argument
+	 * @tparam Custom Class to construct. Has to have a public constructor with std::vector<byte> argument
 	 * @param path Path to the file
 	 * @return `std::unique_ptr<Custom>` - Constructed unique class
 	 */
-	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	template<std::constructible_from<std::vector<byte>> Custom>
 	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::wstring_view path);
 
 	/**
@@ -216,7 +231,7 @@ public:
 	 * @param data Data to write to the file
 	 * @return golxzn::os::filesystem::error - The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::span<uint8_t> &data);
+	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::span<byte> &data);
 
 	/**
 	 * @brief Write binary data to a file
@@ -225,7 +240,7 @@ public:
 	 * @param data Data to write to the file
 	 * @return golxzn::os::filesystem::error - The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data);
+	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::initializer_list<byte> data);
 
 	/**
 	 * @brief Append binary data to a file
@@ -234,7 +249,7 @@ public:
 	 * @param data Data to write to the file
 	 * @return golxzn::os::filesystem::error - The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::span<uint8_t> &data);
+	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::span<byte> &data);
 
 	/**
 	 * @brief Append binary data to a file
@@ -243,7 +258,7 @@ public:
 	 * @param data Data to write to the file
 	 * @return golxzn::os::filesystem::error - The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data);
+	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::initializer_list<byte> data);
 
 	/**
 	 * @brief Write text data to a file
@@ -480,13 +495,13 @@ public:
 	static void associate(const std::string_view protocol, const std::string_view prefix) noexcept;
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_binary(const std::wstring_view path)
-	[[nodiscard]] static std::vector<uint8_t> read_binary(const std::string_view path);
+	[[nodiscard]] static std::vector<byte> read_binary(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_text(const std::wstring_view path)
 	[[nodiscard]] static std::string read_text(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_binary(const std::wstring_view path)
-	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	template<std::constructible_from<std::vector<byte>> Custom>
 	[[nodiscard]] static Custom read_binary(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_text(const std::wstring_view path)
@@ -494,7 +509,7 @@ public:
 	[[nodiscard]] static Custom read_text(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_shared_binary(const std::wstring_view path)
-	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	template<std::constructible_from<std::vector<byte>> Custom>
 	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_shared_text(const std::wstring_view path)
@@ -502,24 +517,24 @@ public:
 	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_unique_binary(const std::wstring_view path)
-	template<std::constructible_from<std::vector<uint8_t>> Custom>
+	template<std::constructible_from<std::vector<byte>> Custom>
 	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_unique_text(const std::wstring_view path)
 	template<std::constructible_from<std::string> Custom>
 	[[nodiscard]] static std::unique_ptr<Custom> read_unique_text(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const std::span<uint8_t> &data)
-	[[nodiscard]] static error write_binary(const std::string_view path, const std::span<uint8_t> &data);
+	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const std::span<byte> &data)
+	[[nodiscard]] static error write_binary(const std::string_view path, const std::span<byte> &data);
 
-	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data)
-	[[nodiscard]] static error write_binary(const std::string_view path, const std::initializer_list<uint8_t> data);
+	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const std::initializer_list<byte> data)
+	[[nodiscard]] static error write_binary(const std::string_view path, const std::initializer_list<byte> data);
 
-	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const std::span<uint8_t> &data)
-	[[nodiscard]] static error append_binary(const std::string_view path, const std::span<uint8_t> &data);
+	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const std::span<byte> &data)
+	[[nodiscard]] static error append_binary(const std::string_view path, const std::span<byte> &data);
 
-	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data)
-	[[nodiscard]] static error append_binary(const std::string_view path, const std::initializer_list<uint8_t> data);
+	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const std::initializer_list<byte> data)
+	[[nodiscard]] static error append_binary(const std::string_view path, const std::initializer_list<byte> data);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::write_text(const std::wstring_view path, const std::string_view text)
 	[[nodiscard]] static error write_text(const std::string_view path, const std::string_view text);
@@ -593,7 +608,7 @@ using fs = filesystem;
 //======================================== Implementation ========================================//
 
 
-template<std::constructible_from<std::vector<uint8_t>> Custom>
+template<std::constructible_from<std::vector<byte>> Custom>
 Custom filesystem::read_binary(const std::wstring_view path) {
 	return Custom{ read_binary(path) };
 }
@@ -602,7 +617,7 @@ Custom filesystem::read_text(const std::wstring_view path) {
 	return Custom{ read_text(path) };
 }
 
-template<std::constructible_from<std::vector<uint8_t>> Custom>
+template<std::constructible_from<std::vector<byte>> Custom>
 std::shared_ptr<Custom> filesystem::read_shared_binary(const std::wstring_view path) {
 	return std::make_shared<Custom>(read_binary(path));
 }
@@ -612,7 +627,7 @@ std::shared_ptr<Custom> filesystem::read_shared_text(const std::wstring_view pat
 	return std::make_shared<Custom>(read_text(path));
 }
 
-template<std::constructible_from<std::vector<uint8_t>> Custom>
+template<std::constructible_from<std::vector<byte>> Custom>
 std::unique_ptr<Custom> filesystem::read_unique_binary(const std::wstring_view path) {
 	return std::make_unique<Custom>(read_binary(path));
 }
@@ -623,7 +638,7 @@ std::unique_ptr<Custom> filesystem::read_unique_text(const std::wstring_view pat
 }
 
 
-template<std::constructible_from<std::vector<uint8_t>> Custom>
+template<std::constructible_from<std::vector<byte>> Custom>
 Custom filesystem::read_binary(const std::string_view path) {
 	return Custom{ read_binary(path) };
 }
@@ -633,7 +648,7 @@ Custom filesystem::read_text(const std::string_view path) {
 	return Custom{ read_text(path) };
 }
 
-template<std::constructible_from<std::vector<uint8_t>> Custom>
+template<std::constructible_from<std::vector<byte>> Custom>
 std::shared_ptr<Custom> filesystem::read_shared_binary(const std::string_view path) {
 	return std::make_shared<Custom>(read_binary(path));
 }
@@ -643,7 +658,7 @@ std::shared_ptr<Custom> filesystem::read_shared_text(const std::string_view path
 	return std::make_shared<Custom>(read_text(path));
 }
 
-template<std::constructible_from<std::vector<uint8_t>> Custom>
+template<std::constructible_from<std::vector<byte>> Custom>
 std::unique_ptr<Custom> filesystem::read_unique_binary(const std::string_view path) {
 	return std::make_unique<Custom>(read_binary(path));
 }
