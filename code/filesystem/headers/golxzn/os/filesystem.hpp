@@ -18,6 +18,7 @@ namespace golxzn::os {
 
 #if !defined(GOLXZN_OS_ALIASES)
 
+using u16 = uint16_t;
 using byte = std::byte;
 using size = std::size_t;
 

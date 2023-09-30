@@ -24,12 +24,6 @@
 
 namespace golxzn::os {
 
-#if !defined(GOLXZN_OS_ALIASES)
-
-using u16 = std::uint16_t;
-
-#endif // defined(GOLXZN_OS_ALIASES)
-
 namespace details {
 
 template<class T>
