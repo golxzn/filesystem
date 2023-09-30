@@ -6,10 +6,12 @@
 
 #include <golxzn/os/filesystem.hpp>
 
+#define b(x) static_cast<gxzn::os::byte>(x)
+
 std::string dump(const auto &content) {
 	std::string result;
-	for (auto byte : content) {
-		result += std::format("{:02X} ", byte);
+	for (auto byte_value : content) {
+		result += std::format("{:02X} ", static_cast<std::uint8_t>(byte_value));
 	}
 
 	return result;
@@ -18,8 +20,8 @@ std::string dump(const auto &content) {
 TEST_CASE("filesystem", "[filesystem][read_write]") {
 	REQUIRE_FALSE(gxzn::os::fs::initialize(L"filesystem_tests").has_error());
 
-	static constexpr std::initializer_list<uint8_t> expected_content{
-		0x29, 0x60, 0x30, 0xA0, 0x22, 0xAB, 0x4C, 0x88, 0xBB, 0xE9
+	static constexpr std::initializer_list<gxzn::os::byte> expected_content{
+		b(0x29), b(0x60), b(0x30), b(0xA0), b(0x22), b(0xAB), b(0x4C), b(0x88), b(0xBB), b(0xE9)
 	};
 
 
@@ -67,15 +69,17 @@ TEST_CASE("filesystem", "[filesystem][read_write]") {
 
 struct CustomResource {
 	explicit CustomResource(std::string &&content) noexcept : text{ std::move(content) } {}
-	explicit CustomResource(std::vector<uint8_t> &&content) noexcept : data{ std::move(content) } {}
+	explicit CustomResource(std::vector<gxzn::os::byte> &&content) noexcept : data{ std::move(content) } {}
 
 	std::string text;
-	std::vector<uint8_t> data;
+	std::vector<gxzn::os::byte> data;
 };
 
 TEST_CASE("filesystem", "[filesystem][read_write custom]") {
 	static constexpr std::string_view expected_text{ "custom" };
-	static constexpr std::initializer_list<uint8_t> expected_data{ 'c', 'u', 's', 't', 'o', 'm' };
+	static constexpr std::initializer_list<gxzn::os::byte> expected_data{
+		b('c'), b('u'), b('s'), b('t'), b('o'), b('m')
+	};
 
 	SECTION("Construct CustomResource by res://custom.bin") {
 		auto res{ gxzn::os::fs::read_binary<CustomResource>("res://custom.bin") };

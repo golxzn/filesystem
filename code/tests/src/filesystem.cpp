@@ -4,6 +4,8 @@
 
 #include <golxzn/os/filesystem.hpp>
 
+#define b(x) static_cast<gxzn::os::byte>(x)
+
 TEST_CASE("filesystem", "[filesystem][filesystem]") {
 	REQUIRE_FALSE(gxzn::os::fs::initialize(L"filesystem_tests").has_error());
 
@@ -50,8 +52,8 @@ TEST_CASE("filesystem", "[filesystem][filesystem]") {
 			"user://testdir/WATA/test11.txt",
 		};
 
-		static constexpr std::initializer_list<uint8_t> content{
-			0xDE, 0xAD, 0xBE, 0xEF, 0xDE, 0xAD, 0xBE, 0xEF,
+		static constexpr std::initializer_list<gxzn::os::byte> content{
+			b(0xDE), b(0xAD), b(0xBE), b(0xEF), b(0xDE), b(0xAD), b(0xBE), b(0xEF),
 		};
 		for (const auto &file : test_files) {
 			const auto status{ gxzn::os::fs::write_binary(file, content) };
