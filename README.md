@@ -5,9 +5,9 @@
 
 </div>
 
-`golxzn::filesystem` is a simple resource manager which provides basic access to application resources
+`golxzn::os::filesystem` is a simple resource manager which provides basic access to application resources
 and user directory.
-`golxzn::filesystem` is dependenceless. There's only STL usage and platform specific headers.
+`golxzn::os::filesystem` is dependenceless. There's only STL usage and platform specific headers.
 
 ## Platform support
 
@@ -19,7 +19,7 @@ I'm planning to add support for __Android__ and __iOS__ in the future.
 
 ## How does it work?
 
-When you initialize this library using `golxzn::filesystem::initialize` method, library does 2 thing:
+When you initialize this library using `golxzn::os::filesystem::initialize` method, library does 2 thing:
 
  1. Looks for `assets` or `res` directory starting from current application directory;
  2. Creates application directory
@@ -50,7 +50,7 @@ git clone https://github.com/golxzn/filesystem.git
 ```cmake
 add_subdirectory(filesystem)
 
-target_link_libraries(YourProjectName PUBLIC golxzn::filesystem)
+target_link_libraries(YourProjectName PUBLIC golxzn::os::filesystem)
 ```
 
 ### 3. Include header & initialize:
