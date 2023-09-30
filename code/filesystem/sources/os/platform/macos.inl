@@ -1,7 +1,7 @@
 
 #include "platform/unix.inl"
 
-namespace golxzn::details {
+namespace golxzn::os::details {
 
 std::wstring appdata_directory() {
 	if (auto home{ __unix_get_home() }; !home.empty()) {
@@ -17,4 +17,4 @@ std::wstring appdata_directory() {
 // Implemented in platform/unix.inl
 // bool is_directory(const std::wstring_view path) {}
 
-} // namespace golxzn::details
+} // namespace golxzn::os::details

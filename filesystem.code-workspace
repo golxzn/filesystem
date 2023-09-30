@@ -42,7 +42,7 @@
 		"cmake.parallelJobs": 16,
 
 		// Extension: streetsidesoftware.code-spell-checker
-		"cSpell.words": [ "resman" ],
+		"cSpell.words": [ "filesystem", "fs", "filesys" ],
 	},
 	"extensions": {
 		"recommendations": [

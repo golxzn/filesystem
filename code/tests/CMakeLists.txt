@@ -1,5 +1,5 @@
 
-if(NOT GRM_BUILD_TEST)
+if(NOT GXZN_OS_FS_BUILD_TEST)
 	return()
 endif()
 
@@ -16,20 +16,20 @@ FetchContent_Declare(Catch2
 FetchContent_MakeAvailable(Catch2)
 message(CHECK_PASS "Catch2 fetched")
 
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${GRM_TEST_DIR}/src/*.cpp")
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${GRM_TEST_DIR}/src/*.h")
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${GXZN_OS_FS_TEST_DIR}/src/*.cpp")
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${GXZN_OS_FS_TEST_DIR}/src/*.h")
 
-add_executable(resman_tests ${sources} ${headers})
-target_link_libraries(resman_tests PRIVATE
-	golxzn::resman
+add_executable(filesystem_tests ${sources} ${headers})
+target_link_libraries(filesystem_tests PRIVATE
+	golxzn::os::filesystem
 	Catch2::Catch2WithMain
 )
-set_target_properties(resman_tests PROPERTIES
-	RUNTIME_OUTPUT_DIRECTORY ${GRM_ROOT}/bin
+set_target_properties(filesystem_tests PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY ${GXZN_OS_FS_ROOT}/bin
 	FOLDER "golxzn"
 )
 
 include(CTest)
 include(Catch)
 
-add_test(NAME Tests COMMAND resman_tests WORKING_DIRECTORY ${GRM_ROOT}/bin)
+add_test(NAME Tests COMMAND filesystem_tests WORKING_DIRECTORY ${GXZN_OS_FS_ROOT}/bin)
