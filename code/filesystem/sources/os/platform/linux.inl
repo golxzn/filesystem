@@ -1,11 +1,11 @@
 
 #include "unix.inl"
 
-namespace golxzn::details {
+namespace golxzn::os::details {
 
 std::wstring appdata_directory() {
 	if (const auto home{ std::getenv("XDG_CONFIG_HOME") }; home != nullptr) {
-		return resman::to_wide(home);
+		return filesystem::to_wide(home);
 	} else if (auto home{ __unix_get_home() }; !home.empty()) {
 		return std::format(L"{}/{}", std::move(home), L"/.config");
 	}
@@ -18,4 +18,4 @@ std::wstring appdata_directory() {
 // Implemented in platform/unix.inl
 // bool is_directory(const std::wstring_view path) {}
 
-} // namespace golxzn::details
+} // namespace golxzn::os::details

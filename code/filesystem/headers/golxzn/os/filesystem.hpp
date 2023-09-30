@@ -6,7 +6,7 @@
 #include <string_view>
 #include <unordered_map>
 
-namespace golxzn {
+namespace golxzn::os {
 
 namespace details {
 
@@ -36,7 +36,7 @@ struct transparent_hash<std::wstring> {
  * @details Use this class to load resources from the program's directory.
  * @warning Every methods with string arguments instead of wstring cause a memory allocation.
  */
-class resman final {
+class filesystem final {
 public:
 	/** @brief Map of the protocol extensions and their prefixes */
 	using associations_type = std::unordered_map<
@@ -49,11 +49,11 @@ public:
 	static constexpr std::wstring_view default_assets_directory_name{ L"assets" }; ///< Default assets directory name
 	static constexpr std::wstring_view protocol_separator{ L"://" }; ///< Protocol separator
 
-	static constexpr std::string_view none_narrow{ "" }; ///< Narrow version of golxzn::resman::none
-	static constexpr std::string::value_type separator_narrow{ '/' }; ///< Narrow version of golxzn::resman::separator
-	static constexpr std::string_view default_application_name_narrow{ "unknown_application" }; ///< Narrow version of golxzn::resman::default_application_name
-	static constexpr std::string_view default_assets_directory_name_narrow{ "assets" }; ///< Narrow version of golxzn::resman::default_assets_directory_name
-	static constexpr std::string_view protocol_separator_narrow{ "://" }; ///< Narrow version of golxzn::resman::protocol_separator
+	static constexpr std::string_view none_narrow{ "" }; ///< Narrow version of golxzn::filesystem::none
+	static constexpr std::string::value_type separator_narrow{ '/' }; ///< Narrow version of golxzn::filesystem::separator
+	static constexpr std::string_view default_application_name_narrow{ "unknown_application" }; ///< Narrow version of golxzn::filesystem::default_application_name
+	static constexpr std::string_view default_assets_directory_name_narrow{ "assets" }; ///< Narrow version of golxzn::filesystem::default_assets_directory_name
+	static constexpr std::string_view protocol_separator_narrow{ "://" }; ///< Narrow version of golxzn::filesystem::protocol_separator
 
 
 
@@ -62,7 +62,7 @@ public:
 	 * @warning This struct has unexplicit conversion to bool! Use carefully!
 	 */
 	struct error {
-		std::wstring message; ///< Error message. If it's golxzn::resman::none, everything is OK.
+		std::wstring message; ///< Error message. If it's golxzn::filesystem::none, everything is OK.
 
 		/**
 		 * @brief Checks if there's an error
@@ -82,7 +82,7 @@ public:
 	};
 	static inline const error OK{ std::wstring{ none } }; ///< OK struct
 
-	resman() = delete;
+	filesystem() = delete;
 
 	/** @addtogroup initialization Initialization and setting up
 	 * @{
@@ -95,7 +95,7 @@ public:
 	 * @param assets_path The name of the assets directory or the full path to the directory.
 	 * If there's [LETTER]:/ or / at the beginning of the string, the path will be used as it is.
 	 * Otherwise the path is relative to the program's directory.
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error initialize(const std::wstring_view application_name,
 		const std::wstring_view assets_path = default_assets_directory_name);
@@ -214,7 +214,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param data Data to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::span<uint8_t> &data);
 
@@ -223,7 +223,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param data Data to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data);
 
@@ -232,7 +232,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param data Data to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::span<uint8_t> &data);
 
@@ -241,7 +241,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param data Data to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data);
 
@@ -250,7 +250,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param text Text to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error write_text(const std::wstring_view path, const std::string_view text);
 
@@ -259,7 +259,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param text Text to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error append_text(const std::wstring_view path, const std::string_view text);
 
@@ -268,7 +268,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param text Text to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error write_text(const std::wstring_view path, const std::wstring_view text);
 
@@ -277,7 +277,7 @@ public:
 	 *
 	 * @param path Path to the file
 	 * @param text Text to write to the file
-	 * @return golxzn::resman::error - The error message or an empty string if there's no error
+	 * @return golxzn::filesystem::error - The error message or an empty string if there's no error
 	 */
 	[[nodiscard]] static error append_text(const std::wstring_view path, const std::wstring_view text);
 
@@ -287,8 +287,8 @@ public:
 	 * @brief Get the association object
 	 *
 	 * @param protocol The protocol. Has to end with "://". If the prefix is not set, it returns an
-	 * golxzn::resman::none
-	 * @return `std::wstring_view` - Prefix or golxzn::resman::none
+	 * golxzn::filesystem::none
+	 * @return `std::wstring_view` - Prefix or golxzn::filesystem::none
 	 */
 	[[nodiscard]] static std::wstring_view get_association(const std::wstring_view protocol) noexcept;
 
@@ -301,21 +301,21 @@ public:
 
 	/**
 	 * @brief Get the user data directory object
-	 * @details Same as golxzn::resman::get_association(L"user://")
+	 * @details Same as golxzn::filesystem::get_association(L"user://")
 	 * Gets the full path of the user data directory:
 	 *  - __Windows__: `%USERPROFILE%/AppData/Roaming/<application name>`
 	 *  - __MacOS__: `$HOME/Library/Application Support/<application name>`
 	 *  - __Linux__: `$XDG_CONFIG_HOME/<application name>` or `$HOME/.config/<application name>`
 	 *
-	 * @return User directory or golxzn::resman::none if it's not set
+	 * @return User directory or golxzn::filesystem::none if it's not set
 	 */
 	[[nodiscard]] static std::wstring_view user_data_directory() noexcept;
 
 	/**
 	 * @brief Get the assets directories
-	 * @details Same as golxzn::resman::get_association(L"res://")
+	 * @details Same as golxzn::filesystem::get_association(L"res://")
 	 *
-	 * @return assets directory or golxzn::resman::none if it's not set
+	 * @return assets directory or golxzn::filesystem::none if it's not set
 	 */
 	[[nodiscard]] static std::wstring_view assets_directory() noexcept;
 
@@ -398,7 +398,7 @@ public:
 	 * @brief Create a directory (recursively).
 	 *
 	 * @param path path to the directory
-	 * @return golxzn::resman::error - resman::OK or the error message
+	 * @return golxzn::filesystem::error - filesystem::OK or the error message
 	 */
 	[[nodiscard]] static error make_directory(const std::wstring_view path);
 
@@ -406,7 +406,7 @@ public:
 	 * @brief Remove a directory (recursively).
 	 *
 	 * @param path path to the directory
-	 * @return golxzn::resman::error - resman::OK or the error message
+	 * @return golxzn::filesystem::error - filesystem::OK or the error message
 	 */
 	[[nodiscard]] static error remove_directory(const std::wstring_view path);
 
@@ -414,7 +414,7 @@ public:
 	 * @brief Remove a file.
 	 *
 	 * @param path path to the file
-	 * @return golxzn::resman::error - resman::OK or the error message
+	 * @return golxzn::filesystem::error - filesystem::OK or the error message
 	 */
 	[[nodiscard]] static error remove_file(const std::wstring_view path);
 
@@ -422,7 +422,7 @@ public:
 	 * @brief List an entry (file or directory).
 	 *
 	 * @param path path to the entry
-	 * @return golxzn::resman::error - resman::OK or the error message
+	 * @return golxzn::filesystem::error - filesystem::OK or the error message
 	 */
 	[[nodiscard]] static error remove(const std::wstring_view path);
 
@@ -469,110 +469,110 @@ public:
 	 * @{
 	 */
 
-	/// @brief Narrow string alias for golxzn::resman::initialize(const std::wstring_view, const std::wstring_view)
+	/// @brief Narrow string alias for golxzn::filesystem::initialize(const std::wstring_view, const std::wstring_view)
 	[[nodiscard]] static error initialize(const std::string_view application_name,
 		const std::string_view assets_path = default_assets_directory_name_narrow);
 
-	/// @brief Narrow string alias for golxzn::resman::set_application_name(const std::wstring_view)
+	/// @brief Narrow string alias for golxzn::filesystem::set_application_name(const std::wstring_view)
 	static void set_application_name(const std::string_view application_name) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::associate(const std::wstring_view, const std::wstring_view)
+	/// @brief Narrow string alias for golxzn::filesystem::associate(const std::wstring_view, const std::wstring_view)
 	static void associate(const std::string_view protocol, const std::string_view prefix) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::read_binary(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_binary(const std::wstring_view path)
 	[[nodiscard]] static std::vector<uint8_t> read_binary(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_text(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_text(const std::wstring_view path)
 	[[nodiscard]] static std::string read_text(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_binary(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_binary(const std::wstring_view path)
 	template<std::constructible_from<std::vector<uint8_t>> Custom>
 	[[nodiscard]] static Custom read_binary(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_text(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_text(const std::wstring_view path)
 	template<std::constructible_from<std::string> Custom>
 	[[nodiscard]] static Custom read_text(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_shared_binary(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_shared_binary(const std::wstring_view path)
 	template<std::constructible_from<std::vector<uint8_t>> Custom>
 	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_shared_text(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_shared_text(const std::wstring_view path)
 	template<std::constructible_from<std::string> Custom>
 	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_unique_binary(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_unique_binary(const std::wstring_view path)
 	template<std::constructible_from<std::vector<uint8_t>> Custom>
 	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::read_unique_text(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::read_unique_text(const std::wstring_view path)
 	template<std::constructible_from<std::string> Custom>
 	[[nodiscard]] static std::unique_ptr<Custom> read_unique_text(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::write_binary(const std::wstring_view path, const std::span<uint8_t> &data)
+	/// @brief Narrow string alias for golxzn::filesystem::write_binary(const std::wstring_view path, const std::span<uint8_t> &data)
 	[[nodiscard]] static error write_binary(const std::string_view path, const std::span<uint8_t> &data);
 
-	/// @brief Narrow string alias for golxzn::resman::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data)
+	/// @brief Narrow string alias for golxzn::filesystem::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data)
 	[[nodiscard]] static error write_binary(const std::string_view path, const std::initializer_list<uint8_t> data);
 
-	/// @brief Narrow string alias for golxzn::resman::append_binary(const std::wstring_view path, const std::span<uint8_t> &data)
+	/// @brief Narrow string alias for golxzn::filesystem::append_binary(const std::wstring_view path, const std::span<uint8_t> &data)
 	[[nodiscard]] static error append_binary(const std::string_view path, const std::span<uint8_t> &data);
 
-	/// @brief Narrow string alias for golxzn::resman::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data)
+	/// @brief Narrow string alias for golxzn::filesystem::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data)
 	[[nodiscard]] static error append_binary(const std::string_view path, const std::initializer_list<uint8_t> data);
 
-	/// @brief Narrow string alias for golxzn::resman::write_text(const std::wstring_view path, const std::string_view text)
+	/// @brief Narrow string alias for golxzn::filesystem::write_text(const std::wstring_view path, const std::string_view text)
 	[[nodiscard]] static error write_text(const std::string_view path, const std::string_view text);
 
-	/// @brief Narrow string alias for golxzn::resman::append_text(const std::wstring_view path, const std::string_view text)
+	/// @brief Narrow string alias for golxzn::filesystem::append_text(const std::wstring_view path, const std::string_view text)
 	[[nodiscard]] static error append_text(const std::string_view path, const std::string_view text);
 
-	/// @brief Narrow string alias for golxzn::resman::write_text(const std::wstring_view path, const std::wstring_view text)
+	/// @brief Narrow string alias for golxzn::filesystem::write_text(const std::wstring_view path, const std::wstring_view text)
 	[[nodiscard]] static error write_text(const std::string_view path, const std::wstring_view text);
 
-	/// @brief Narrow string alias for golxzn::resman::append_text(const std::wstring_view path, const std::wstring_view text)
+	/// @brief Narrow string alias for golxzn::filesystem::append_text(const std::wstring_view path, const std::wstring_view text)
 	[[nodiscard]] static error append_text(const std::string_view path, const std::wstring_view text);
 
-	/// @brief Narrow string alias for golxzn::resman::get_association(const std::wstring_view protocol)
+	/// @brief Narrow string alias for golxzn::filesystem::get_association(const std::wstring_view protocol)
 	[[nodiscard]] static std::wstring_view get_association(const std::string_view protocol) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::join(std::wstring &left, std::wstring_view right)
+	/// @brief Narrow string alias for golxzn::filesystem::join(std::wstring &left, std::wstring_view right)
 	static void join(std::string &left, std::string_view right) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::join(std::wstring_view left, std::wstring_view right)
+	/// @brief Narrow string alias for golxzn::filesystem::join(std::wstring_view left, std::wstring_view right)
 	[[nodiscard]] static std::string join(std::string_view left, std::string_view right) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::parent_directory(std::wstring &path)
+	/// @brief Narrow string alias for golxzn::filesystem::parent_directory(std::wstring &path)
 	static void parent_directory(std::string &path) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::parent_directory(std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::parent_directory(std::wstring_view path)
 	[[nodiscard]] static std::string parent_directory(std::string_view path) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::normalize(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::normalize(const std::wstring_view path)
 	[[nodiscard]] static std::wstring normalize(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::exists(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::exists(const std::wstring_view path)
 	[[nodiscard]] static bool exists(const std::string_view path) noexcept;
 
-	/// @brief Narrow string alias for golxzn::resman::is_file(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::is_file(const std::wstring_view path)
 	[[nodiscard]] static bool is_file(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::is_directory(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::is_directory(const std::wstring_view path)
 	[[nodiscard]] static bool is_directory(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::make_directory(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::make_directory(const std::wstring_view path)
 	[[nodiscard]] static error make_directory(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::remove_directory(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::remove_directory(const std::wstring_view path)
 	[[nodiscard]] static error remove_directory(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::remove_file(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::remove_file(const std::wstring_view path)
 	[[nodiscard]] static error remove_file(const std::string_view path);
 
-	/// @brief Narrow string alias for golxzn::resman::remove(const std::wstring_view path)
+	/// @brief Narrow string alias for golxzn::filesystem::remove(const std::wstring_view path)
 	[[nodiscard]] static error remove(const std::string_view path);
 
-	/// @brief Narrow stirng alias for golxzn::resman::entries(const std::wstring_view path)
+	/// @brief Narrow stirng alias for golxzn::filesystem::entries(const std::wstring_view path)
 	[[nodiscard]] static std::vector<std::string> entries(const std::string_view path);
 
 
@@ -588,71 +588,71 @@ private:
 	static std::wstring setup_user_data_directory();
 };
 
-namespace resources { using manager = resman; }
+using fs = filesystem;
 
 //======================================== Implementation ========================================//
 
 
 template<std::constructible_from<std::vector<uint8_t>> Custom>
-Custom resman::read_binary(const std::wstring_view path) {
+Custom filesystem::read_binary(const std::wstring_view path) {
 	return Custom{ read_binary(path) };
 }
 template<std::constructible_from<std::string> Custom>
-Custom resman::read_text(const std::wstring_view path) {
+Custom filesystem::read_text(const std::wstring_view path) {
 	return Custom{ read_text(path) };
 }
 
 template<std::constructible_from<std::vector<uint8_t>> Custom>
-std::shared_ptr<Custom> resman::read_shared_binary(const std::wstring_view path) {
+std::shared_ptr<Custom> filesystem::read_shared_binary(const std::wstring_view path) {
 	return std::make_shared<Custom>(read_binary(path));
 }
 
 template<std::constructible_from<std::string> Custom>
-std::shared_ptr<Custom> resman::read_shared_text(const std::wstring_view path) {
+std::shared_ptr<Custom> filesystem::read_shared_text(const std::wstring_view path) {
 	return std::make_shared<Custom>(read_text(path));
 }
 
 template<std::constructible_from<std::vector<uint8_t>> Custom>
-std::unique_ptr<Custom> resman::read_unique_binary(const std::wstring_view path) {
+std::unique_ptr<Custom> filesystem::read_unique_binary(const std::wstring_view path) {
 	return std::make_unique<Custom>(read_binary(path));
 }
 
 template<std::constructible_from<std::string> Custom>
-std::unique_ptr<Custom> resman::read_unique_text(const std::wstring_view path) {
+std::unique_ptr<Custom> filesystem::read_unique_text(const std::wstring_view path) {
 	return std::make_unique<Custom>(read_text(path));
 }
 
 
 template<std::constructible_from<std::vector<uint8_t>> Custom>
-Custom resman::read_binary(const std::string_view path) {
+Custom filesystem::read_binary(const std::string_view path) {
 	return Custom{ read_binary(path) };
 }
 
 template<std::constructible_from<std::string> Custom>
-Custom resman::read_text(const std::string_view path) {
+Custom filesystem::read_text(const std::string_view path) {
 	return Custom{ read_text(path) };
 }
 
 template<std::constructible_from<std::vector<uint8_t>> Custom>
-std::shared_ptr<Custom> resman::read_shared_binary(const std::string_view path) {
+std::shared_ptr<Custom> filesystem::read_shared_binary(const std::string_view path) {
 	return std::make_shared<Custom>(read_binary(path));
 }
 
 template<std::constructible_from<std::string> Custom>
-std::shared_ptr<Custom> resman::read_shared_text(const std::string_view path) {
+std::shared_ptr<Custom> filesystem::read_shared_text(const std::string_view path) {
 	return std::make_shared<Custom>(read_text(path));
 }
 
 template<std::constructible_from<std::vector<uint8_t>> Custom>
-std::unique_ptr<Custom> resman::read_unique_binary(const std::string_view path) {
+std::unique_ptr<Custom> filesystem::read_unique_binary(const std::string_view path) {
 	return std::make_unique<Custom>(read_binary(path));
 }
 
 template<std::constructible_from<std::string> Custom>
-std::unique_ptr<Custom> resman::read_unique_text(const std::string_view path) {
+std::unique_ptr<Custom> filesystem::read_unique_text(const std::string_view path) {
 	return std::make_unique<Custom>(read_text(path));
 }
 
-} // namespace golxzn
+} // namespace golxzn::os
 
 namespace gxzn = golxzn;
