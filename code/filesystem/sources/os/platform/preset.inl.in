@@ -1,7 +1,7 @@
 
 // includes
 
-namespace golxzn::details {
+namespace golxzn::os::details {
 
 std::wstring appdata_directory() {
 }
@@ -12,5 +12,5 @@ std::wstring cwd() {
 bool is_directory(const std::wstring_view path) {
 }
 
-} // namespace golxzn::details
+} // namespace golxzn::os::details
 

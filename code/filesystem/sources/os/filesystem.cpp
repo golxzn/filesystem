@@ -8,7 +8,7 @@
 #include <fstream>
 #include <algorithm>
 
-#include "golxzn/resman.hpp"
+#include "golxzn/os/filesystem.hpp"
 
 
 #if defined(GRM_WINDOWS)
@@ -22,16 +22,16 @@
 #endif // defined(GRM_WINDOWS)
 
 
-namespace golxzn {
+namespace golxzn::os {
 
 namespace details {
 
 template<class T>
-resman::error write_data(const std::wstring_view wide_path, const T *data, const size_t len,
+filesystem::error write_data(const std::wstring_view wide_path, const T *data, const size_t len,
 		const std::ios::openmode mode = std::ios::out) noexcept {
 
 	if (len == 0 || data == nullptr) [[unlikely]] {
-		return resman::error{ L"Invalid empty parameters" };
+		return filesystem::error{ L"Invalid empty parameters" };
 	}
 
 	try {
@@ -39,49 +39,49 @@ resman::error write_data(const std::wstring_view wide_path, const T *data, const
 		#if defined(GRM_WINDOWS)
 			const auto path{ wide_path };
 		#elif defined(GRM_LINUX) || defined(GRM_MACOS)
-			const auto path{ resman::to_narrow(wide_path) };
+			const auto path{ filesystem::to_narrow(wide_path) };
 		#endif
 
 		if (std::ofstream file{ path.data(), mode | std::ios::binary }; file.is_open()) {
 			file.write(reinterpret_cast<const char *>(data), sizeof(T) * len);
 			if (file.good()) [[likely]] {
-				return resman::OK;
+				return filesystem::OK;
 			}
 
-			return resman::error{ std::format(L"Failed to write to file '{}'", wide_path) };
+			return filesystem::error{ std::format(L"Failed to write to file '{}'", wide_path) };
 		}
 
 	} catch(const std::exception &ex) {
-		return resman::error{ std::format(L"Failed to write to file '{}' due to exception '{}'",
-			wide_path, resman::to_wide(ex.what())
+		return filesystem::error{ std::format(L"Failed to write to file '{}' due to exception '{}'",
+			wide_path, filesystem::to_wide(ex.what())
 		) };
 	} catch(...) {
-		return resman::error{ std::format(L"Failed to write to file '{}' due to unknown exception",
+		return filesystem::error{ std::format(L"Failed to write to file '{}' due to unknown exception",
 			wide_path
 		) };
 	}
 
-	return resman::error{ std::format(L"Failed to open file '{}' for writing", wide_path) };
+	return filesystem::error{ std::format(L"Failed to open file '{}' for writing", wide_path) };
 }
 
 } // namespace details
 
-resman::associations_type resman::associations_map{};
-std::wstring resman::appname{ resman::default_application_name };
+filesystem::associations_type filesystem::associations_map{};
+std::wstring filesystem::appname{ filesystem::default_application_name };
 
 
-//========================================= resman::error ========================================//
+//========================================= filesystem::error ========================================//
 
 
-bool resman::error::has_error() const noexcept { return !message.empty(); }
+bool filesystem::error::has_error() const noexcept { return !message.empty(); }
 
-resman::error::operator bool() const noexcept { return !has_error(); }
-
-
-//======================================== resman::public ========================================//
+filesystem::error::operator bool() const noexcept { return !has_error(); }
 
 
-resman::error resman::initialize(const std::wstring_view app_name, const std::wstring_view assets_path) {
+//======================================== filesystem::public ========================================//
+
+
+filesystem::error filesystem::initialize(const std::wstring_view app_name, const std::wstring_view assets_path) {
 	set_application_name(app_name);
 
 	error err{ OK };
@@ -108,14 +108,14 @@ resman::error resman::initialize(const std::wstring_view app_name, const std::ws
 	return err;
 }
 
-void resman::set_application_name(const std::wstring_view application_name) noexcept {
+void filesystem::set_application_name(const std::wstring_view application_name) noexcept {
 	appname = application_name;
 	if (appname.empty()) [[unlikely]] {
 		appname = default_application_name;
 	}
 }
 
-void resman::associate(const std::wstring_view protocol_view, std::wstring &&prefix) noexcept {
+void filesystem::associate(const std::wstring_view protocol_view, std::wstring &&prefix) noexcept {
 	if (protocol_view.empty()) [[unlikely]] return;
 
 	std::wstring protocol{ protocol_view };
@@ -126,10 +126,10 @@ void resman::associate(const std::wstring_view protocol_view, std::wstring &&pre
 	associations_map.insert_or_assign(std::move(protocol), std::move(prefix));
 }
 
-std::vector<uint8_t> resman::read_binary(const std::wstring_view wide_path) {
+std::vector<uint8_t> filesystem::read_binary(const std::wstring_view wide_path) {
 	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		throw std::invalid_argument{ std::format(
-			"[resman::read_binary] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
+			"[filesystem::read_binary] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
 		) };
 	}
 
@@ -149,10 +149,10 @@ std::vector<uint8_t> resman::read_binary(const std::wstring_view wide_path) {
 	return {};
 }
 
-std::string resman::read_text(const std::wstring_view wide_path) {
+std::string filesystem::read_text(const std::wstring_view wide_path) {
 	if (wide_path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		throw std::invalid_argument{ std::format(
-			"[resman::read_text] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
+			"[filesystem::read_text] Protocol prefix expected in the path: '{}'", to_narrow(wide_path)
 		) };
 	}
 
@@ -172,10 +172,10 @@ std::string resman::read_text(const std::wstring_view wide_path) {
 	return {};
 }
 
-resman::error resman::write_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::write_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -189,10 +189,10 @@ resman::error resman::write_binary(const std::wstring_view path, const std::span
 	return details::write_data(replace_association_prefix(path), data.data(), data.size());
 }
 
-resman::error resman::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::write_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -206,10 +206,10 @@ resman::error resman::write_binary(const std::wstring_view path, const std::init
 	return details::write_data(replace_association_prefix(path), data.begin(), data.size());
 }
 
-resman::error resman::append_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::append_binary(const std::wstring_view path, const std::span<uint8_t> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -225,10 +225,10 @@ resman::error resman::append_binary(const std::wstring_view path, const std::spa
 	);
 }
 
-resman::error resman::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::append_binary(const std::wstring_view path, const std::initializer_list<uint8_t> data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -244,10 +244,10 @@ resman::error resman::append_binary(const std::wstring_view path, const std::ini
 	);
 }
 
-resman::error resman::write_text(const std::wstring_view path, const std::string_view text) {
+filesystem::error filesystem::write_text(const std::wstring_view path, const std::string_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -261,10 +261,10 @@ resman::error resman::write_text(const std::wstring_view path, const std::string
 	return details::write_data(replace_association_prefix(path), text.data(), text.size());
 }
 
-resman::error resman::append_text(const std::wstring_view path, const std::string_view text) {
+filesystem::error filesystem::append_text(const std::wstring_view path, const std::string_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -279,10 +279,10 @@ resman::error resman::append_text(const std::wstring_view path, const std::strin
 		text.data(), text.size(), std::ios::app);
 }
 
-resman::error resman::write_text(const std::wstring_view path, const std::wstring_view text) {
+filesystem::error filesystem::write_text(const std::wstring_view path, const std::wstring_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -296,10 +296,10 @@ resman::error resman::write_text(const std::wstring_view path, const std::wstrin
 	return details::write_data(replace_association_prefix(path), text.data(), text.size());
 }
 
-resman::error resman::append_text(const std::wstring_view path, const std::wstring_view text) {
+filesystem::error filesystem::append_text(const std::wstring_view path, const std::wstring_view text) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{
-			std::format(L"[resman::write_binary] Protocol prefix expected in the path: '{}'", path)
+			std::format(L"[filesystem::write_binary] Protocol prefix expected in the path: '{}'", path)
 		};
 	}
 
@@ -314,7 +314,7 @@ resman::error resman::append_text(const std::wstring_view path, const std::wstri
 		text.data(), text.size(), std::ios::app);
 }
 
-std::wstring_view resman::get_association(const std::wstring_view protocol) noexcept {
+std::wstring_view filesystem::get_association(const std::wstring_view protocol) noexcept {
 	if (protocol.empty()) [[unlikely]] return none;
 
 	if (const auto found{ associations_map.find(protocol) };
@@ -324,23 +324,23 @@ std::wstring_view resman::get_association(const std::wstring_view protocol) noex
 	return none;
 }
 
-std::wstring_view resman::application_name() noexcept {
+std::wstring_view filesystem::application_name() noexcept {
 	return appname;
 }
 
-std::wstring_view resman::user_data_directory() noexcept {
+std::wstring_view filesystem::user_data_directory() noexcept {
 	return get_association("user://");
 }
 
-std::wstring_view resman::assets_directory() noexcept {
+std::wstring_view filesystem::assets_directory() noexcept {
 	return get_association("res://");
 }
 
-const resman::associations_type &resman::associations() noexcept {
+const filesystem::associations_type &filesystem::associations() noexcept {
 	return associations_map;
 }
 
-void resman::join(std::wstring &left, std::wstring_view right) noexcept {
+void filesystem::join(std::wstring &left, std::wstring_view right) noexcept {
 	if (left.empty() || right.empty()) [[unlikely]] return;
 	if (const auto last{ left.back() }; last != separator || last == L'\\') {
 		if (last == L'\\') [[unlikely]] left.pop_back();
@@ -356,7 +356,7 @@ void resman::join(std::wstring &left, std::wstring_view right) noexcept {
 	left += right;
 }
 
-std::wstring resman::join(std::wstring_view left, std::wstring_view right) noexcept {
+std::wstring filesystem::join(std::wstring_view left, std::wstring_view right) noexcept {
 	static const auto is_separator = [](const auto c) noexcept {
 		if (c.size() > 1) return false;
 		return c.front() == separator || c.front() == L'\\';
@@ -371,7 +371,7 @@ std::wstring resman::join(std::wstring_view left, std::wstring_view right) noexc
 	return std::format(L"{}/{}", left, right);
 }
 
-void resman::parent_directory(std::wstring &path) noexcept {
+void filesystem::parent_directory(std::wstring &path) noexcept {
 	if (const auto last_slash{ path.find_last_of(L"/\\") }; last_slash != std::string::npos) [[likely]] {
 		path.resize(last_slash);
 	} else {
@@ -379,14 +379,14 @@ void resman::parent_directory(std::wstring &path) noexcept {
 	}
 }
 
-std::wstring resman::parent_directory(const std::wstring_view path) noexcept {
+std::wstring filesystem::parent_directory(const std::wstring_view path) noexcept {
 	if (const auto last_slash{ path.find_last_of(L"/\\") }; last_slash != std::wstring::npos) {
 		return std::wstring{ path.substr(0, last_slash + 1) };
 	}
 	return std::wstring{};
 }
 
-std::wstring resman::normalize(std::wstring_view str) {
+std::wstring filesystem::normalize(std::wstring_view str) {
 	while(!str.empty() && str.front() == L' ') str.remove_prefix(1);
 	while(!str.empty() && str.back() == L' ') str.remove_suffix(1);
 	if (str.empty()) [[unlikely]] return L"";
@@ -444,25 +444,25 @@ std::wstring resman::normalize(std::wstring_view str) {
 	return result;
 }
 
-bool resman::exists(const std::wstring_view path) noexcept {
+bool filesystem::exists(const std::wstring_view path) noexcept {
 	if (path.empty()) return false;
 
 	return details::exists(replace_association_prefix(path));
 }
 
-bool resman::is_file(const std::wstring_view path) {
+bool filesystem::is_file(const std::wstring_view path) {
 	if (path.empty()) return false;
 
 	return details::is_file(replace_association_prefix(path));
 }
 
-bool resman::is_directory(const std::wstring_view path) {
+bool filesystem::is_directory(const std::wstring_view path) {
 	if (path.empty()) return false;
 
 	return details::is_directory(replace_association_prefix(path));
 }
 
-resman::error resman::make_directory(const std::wstring_view path) {
+filesystem::error filesystem::make_directory(const std::wstring_view path) {
 	if (path.empty()) {
 		return error{ L"Empty path" };
 	}
@@ -490,7 +490,7 @@ resman::error resman::make_directory(const std::wstring_view path) {
 	return OK;
 }
 
-resman::error resman::remove_directory(const std::wstring_view path) {
+filesystem::error filesystem::remove_directory(const std::wstring_view path) {
 	if (path.empty()) {
 		return error{ L"Empty path" };
 	}
@@ -520,7 +520,7 @@ resman::error resman::remove_directory(const std::wstring_view path) {
 	return OK;
 }
 
-resman::error resman::remove_file(const std::wstring_view path) {
+filesystem::error filesystem::remove_file(const std::wstring_view path) {
 	if (path.empty()) {
 		return error{ L"Empty path" };
 	}
@@ -535,7 +535,7 @@ resman::error resman::remove_file(const std::wstring_view path) {
 	return OK;
 }
 
-resman::error resman::remove(const std::wstring_view path) {
+filesystem::error filesystem::remove(const std::wstring_view path) {
 	if (path.empty()) {
 		return error{ L"Empty path" };
 	}
@@ -549,11 +549,11 @@ resman::error resman::remove(const std::wstring_view path) {
 	return remove_file(path);
 }
 
-std::wstring resman::current_directory() {
+std::wstring filesystem::current_directory() {
 	return normalize(details::cwd());
 };
 
-std::vector<std::wstring> resman::entries(const std::wstring_view path) {
+std::vector<std::wstring> filesystem::entries(const std::wstring_view path) {
 	if (!is_directory(path)) return {};
 
 	const auto full_path{ replace_association_prefix(path) };
@@ -565,11 +565,11 @@ std::vector<std::wstring> resman::entries(const std::wstring_view path) {
 	return paths;
 }
 
-std::wstring resman::to_wide(const std::string_view str) noexcept {
+std::wstring filesystem::to_wide(const std::string_view str) noexcept {
 	return std::wstring{ std::begin(str), std::end(str) };
 }
 
-std::string resman::to_narrow(const std::wstring_view str) noexcept {
+std::string filesystem::to_narrow(const std::wstring_view str) noexcept {
 	static constexpr uint16_t bits_per_char{ 8 };
 	static constexpr size_t difference{
 		sizeof(std::wstring_view::value_type) / sizeof(std::string::value_type)
@@ -593,66 +593,66 @@ std::string resman::to_narrow(const std::wstring_view str) noexcept {
 }
 
 
-//======================================== resman::aliases =======================================//
+//======================================== filesystem::aliases =======================================//
 
 
-resman::error resman::initialize(const std::string_view app, const std::string_view asset) {
+filesystem::error filesystem::initialize(const std::string_view app, const std::string_view asset) {
 	return initialize(to_wide(app), to_wide(asset));
 }
 
-void resman::set_application_name(const std::string_view application_name) noexcept {
+void filesystem::set_application_name(const std::string_view application_name) noexcept {
 	set_application_name(to_wide(application_name));
 }
 
-void resman::associate(const std::string_view protocol_view, const std::string_view prefix) noexcept {
+void filesystem::associate(const std::string_view protocol_view, const std::string_view prefix) noexcept {
 	associate(to_wide(protocol_view), to_wide(prefix));
 }
 
-std::vector<uint8_t> resman::read_binary(const std::string_view path) {
+std::vector<uint8_t> filesystem::read_binary(const std::string_view path) {
 	return read_binary(to_wide(path));
 }
 
-std::string resman::read_text(const std::string_view path) {
+std::string filesystem::read_text(const std::string_view path) {
 	return read_text(to_wide(path));
 }
 
-resman::error resman::write_binary(const std::string_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::write_binary(const std::string_view path, const std::span<uint8_t> &data) {
 	return write_binary(to_wide(path), data);
 }
 
-resman::error resman::write_binary(const std::string_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::write_binary(const std::string_view path, const std::initializer_list<uint8_t> data) {
 	return write_binary(to_wide(path), data);
 }
 
-resman::error resman::append_binary(const std::string_view path, const std::span<uint8_t> &data) {
+filesystem::error filesystem::append_binary(const std::string_view path, const std::span<uint8_t> &data) {
 	return append_binary(to_wide(path), data);
 }
 
-resman::error resman::append_binary(const std::string_view path, const std::initializer_list<uint8_t> data) {
+filesystem::error filesystem::append_binary(const std::string_view path, const std::initializer_list<uint8_t> data) {
 	return append_binary(to_wide(path), data);
 }
 
-resman::error resman::write_text(const std::string_view path, const std::string_view text) {
+filesystem::error filesystem::write_text(const std::string_view path, const std::string_view text) {
 	return write_text(to_wide(path), text);
 }
 
-resman::error resman::append_text(const std::string_view path, const std::string_view text) {
+filesystem::error filesystem::append_text(const std::string_view path, const std::string_view text) {
 	return append_text(to_wide(path), text);
 }
 
-resman::error resman::write_text(const std::string_view path, const std::wstring_view text) {
+filesystem::error filesystem::write_text(const std::string_view path, const std::wstring_view text) {
 	return write_text(to_wide(path), text);
 }
 
-resman::error resman::append_text(const std::string_view path, const std::wstring_view text) {
+filesystem::error filesystem::append_text(const std::string_view path, const std::wstring_view text) {
 	return append_text(to_wide(path), text);
 }
 
-std::wstring_view resman::get_association(const std::string_view protocol) noexcept {
+std::wstring_view filesystem::get_association(const std::string_view protocol) noexcept {
 	return get_association(to_wide(protocol));
 }
 
-void resman::join(std::string &left, std::string_view right) noexcept {
+void filesystem::join(std::string &left, std::string_view right) noexcept {
 	if (const auto last{ left.back() }; last != '/' || last == '\\') {
 		if (last == '\\') [[unlikely]] left.pop_back();
 		left += '/';
@@ -667,7 +667,7 @@ void resman::join(std::string &left, std::string_view right) noexcept {
 	left += right;
 }
 
-std::string resman::join(std::string_view left, std::string_view right) noexcept {
+std::string filesystem::join(std::string_view left, std::string_view right) noexcept {
 	static const auto is_separator = [](const auto c) noexcept {
 		if (c.size() > 1) return false;
 		return c.front() == separator_narrow || c.front() == '\\';
@@ -682,7 +682,7 @@ std::string resman::join(std::string_view left, std::string_view right) noexcept
 	return std::format("{}/{}", left, right);
 }
 
-void resman::parent_directory(std::string &path) noexcept {
+void filesystem::parent_directory(std::string &path) noexcept {
 	if (const auto last_slash{ path.find_last_of("/\\") }; last_slash != std::string::npos) [[likely]] {
 		path.resize(last_slash);
 	} else {
@@ -690,46 +690,46 @@ void resman::parent_directory(std::string &path) noexcept {
 	}
 }
 
-std::string resman::parent_directory(const std::string_view path) noexcept {
+std::string filesystem::parent_directory(const std::string_view path) noexcept {
 	if (const auto last_slash{ path.find_last_of("/\\") }; last_slash != std::string::npos) [[likely]] {
 		return std::string{ path.substr(0, last_slash) };
 	}
 	return std::string{};
 }
 
-std::wstring resman::normalize(const std::string_view str) {
+std::wstring filesystem::normalize(const std::string_view str) {
 	return normalize(to_wide(str));
 }
 
-bool resman::exists(const std::string_view path) noexcept {
+bool filesystem::exists(const std::string_view path) noexcept {
 	return exists(to_wide(path));
 }
 
-bool resman::is_file(const std::string_view path) {
+bool filesystem::is_file(const std::string_view path) {
 	return is_file(to_wide(path));
 }
 
-bool resman::is_directory(const std::string_view path) {
+bool filesystem::is_directory(const std::string_view path) {
 	return is_directory(to_wide(path));
 }
 
-resman::error resman::make_directory(const std::string_view path) {
+filesystem::error filesystem::make_directory(const std::string_view path) {
 	return make_directory(to_wide(path));
 }
 
-resman::error resman::remove_directory(const std::string_view path) {
+filesystem::error filesystem::remove_directory(const std::string_view path) {
 	return remove_directory(to_wide(path));
 }
 
-resman::error resman::remove_file(const std::string_view path) {
+filesystem::error filesystem::remove_file(const std::string_view path) {
 	return remove_file(to_wide(path));
 }
 
-resman::error resman::remove(const std::string_view path) {
+filesystem::error filesystem::remove(const std::string_view path) {
 	return remove(to_wide(path));
 }
 
-std::vector<std::string> resman::entries(const std::string_view path) {
+std::vector<std::string> filesystem::entries(const std::string_view path) {
 	if (!is_directory(path)) return {};
 
 	const auto wide_path{ to_wide(path) };
@@ -746,17 +746,17 @@ std::vector<std::string> resman::entries(const std::string_view path) {
 }
 
 
-//======================================== resman::private =======================================//
+//======================================== filesystem::private =======================================//
 
 
-std::wstring_view resman::get_protocol(const std::wstring_view path) noexcept {
+std::wstring_view filesystem::get_protocol(const std::wstring_view path) noexcept {
 	if (auto found{ path.find(protocol_separator) }; found != std::wstring_view::npos) {
 		return path.substr(0, found + protocol_separator.size());
 	}
 	return L"";
 }
 
-std::wstring resman::replace_association_prefix(std::wstring_view path) noexcept {
+std::wstring filesystem::replace_association_prefix(std::wstring_view path) noexcept {
 	if (const auto protocol{ get_protocol(path) }; !protocol.empty()) {
 		if (protocol == path) return std::wstring{ get_association(protocol) };
 
@@ -769,7 +769,7 @@ std::wstring resman::replace_association_prefix(std::wstring_view path) noexcept
 	return normalize(path);
 }
 
-std::wstring resman::setup_assets_directories(const std::wstring_view assets_path) {
+std::wstring filesystem::setup_assets_directories(const std::wstring_view assets_path) {
 	if (assets_path.starts_with(separator) || assets_path.find(L":") == 1) {
 		return normalize(assets_path);
 	}
@@ -778,7 +778,7 @@ std::wstring resman::setup_assets_directories(const std::wstring_view assets_pat
 	return normalize(join(cwd, assets_path));
 }
 
-std::wstring resman::setup_user_data_directory() {
+std::wstring filesystem::setup_user_data_directory() {
 	if (auto dir{ details::appdata_directory() }; !dir.empty()) {
 		return normalize(join(std::wstring_view{ dir }, application_name()));
 	}
@@ -786,4 +786,4 @@ std::wstring resman::setup_user_data_directory() {
 }
 
 
-} // namespace golxzn
+} // namespace golxzn::os

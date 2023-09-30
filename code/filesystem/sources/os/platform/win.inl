@@ -8,7 +8,7 @@
 #include <stringapiset.h>
 #include <shlobj.h>
 
-namespace golxzn::details {
+namespace golxzn::os::details {
 
 std::wstring appdata_directory() {
 	struct clean_path final {
@@ -91,4 +91,4 @@ bool rmfile(const std::wstring_view path) {
 	return DeleteFileW(path.data()) != FALSE;
 }
 
-} // namespace golxzn::details
+} // namespace golxzn::os::details
