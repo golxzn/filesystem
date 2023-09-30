@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>golxzn::resman: Files and directories manipulation</title>
+<title>golxzn::golxzn::os::filesystem: Files and directories manipulation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">golxzn::resman<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">golxzn::golxzn::os::filesystem<span id="projectnumber">&#160;1.6.0</span>
    </div>
-   <div id="projectbrief">golxzn resource manager</div>
+   <div id="projectbrief">golxzn filesystem submodule</div>
   </td>
  </tr>
  </tbody>
@@ -78,32 +78,32 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:gaaea5e79aefa47d51f5b1d8182348a92e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#gaaea5e79aefa47d51f5b1d8182348a92e">golxzn::resman::exists</a> (const std::wstring_view path) noexcept</td></tr>
-<tr class="memdesc:gaaea5e79aefa47d51f5b1d8182348a92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an entry exists.  <br /></td></tr>
-<tr class="separator:gaaea5e79aefa47d51f5b1d8182348a92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae104ac0d9adab9f016484c85c4668b1a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#gae104ac0d9adab9f016484c85c4668b1a">golxzn::resman::is_file</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:gae104ac0d9adab9f016484c85c4668b1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an entry is a file.  <br /></td></tr>
-<tr class="separator:gae104ac0d9adab9f016484c85c4668b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga65c0e5449668f058b8f9a998855bb17d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga65c0e5449668f058b8f9a998855bb17d">golxzn::resman::is_directory</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga65c0e5449668f058b8f9a998855bb17d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an entry is a directory.  <br /></td></tr>
-<tr class="separator:ga65c0e5449668f058b8f9a998855bb17d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0129af48d5da51469377c4b2cb9262c8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga0129af48d5da51469377c4b2cb9262c8">golxzn::resman::make_directory</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga0129af48d5da51469377c4b2cb9262c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a directory (recursively).  <br /></td></tr>
-<tr class="separator:ga0129af48d5da51469377c4b2cb9262c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7f7c5d1a52e54ea5b187a0b0c5af749c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga7f7c5d1a52e54ea5b187a0b0c5af749c">golxzn::resman::remove_directory</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga7f7c5d1a52e54ea5b187a0b0c5af749c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a directory (recursively).  <br /></td></tr>
-<tr class="separator:ga7f7c5d1a52e54ea5b187a0b0c5af749c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga878b21ad06a07f9a852209957151c141"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga878b21ad06a07f9a852209957151c141">golxzn::resman::remove_file</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga878b21ad06a07f9a852209957151c141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a file.  <br /></td></tr>
-<tr class="separator:ga878b21ad06a07f9a852209957151c141"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab689c1663b5e58f5da5b6e078fec5599"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#gab689c1663b5e58f5da5b6e078fec5599">golxzn::resman::remove</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:gab689c1663b5e58f5da5b6e078fec5599"><td class="mdescLeft">&#160;</td><td class="mdescRight">List an entry (file or directory).  <br /></td></tr>
-<tr class="separator:gab689c1663b5e58f5da5b6e078fec5599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf265bd61748d6bd57433be0f2892d81d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#gaf265bd61748d6bd57433be0f2892d81d">golxzn::os::filesystem::exists</a> (const std::wstring_view path) noexcept</td></tr>
+<tr class="memdesc:gaf265bd61748d6bd57433be0f2892d81d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an entry exists.  <br /></td></tr>
+<tr class="separator:gaf265bd61748d6bd57433be0f2892d81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga04a106ede365624d4e0028d4bbce961b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga04a106ede365624d4e0028d4bbce961b">golxzn::os::filesystem::is_file</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga04a106ede365624d4e0028d4bbce961b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an entry is a file.  <br /></td></tr>
+<tr class="separator:ga04a106ede365624d4e0028d4bbce961b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5dee1681f7e4be3ae156bd3e60f893ad"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga5dee1681f7e4be3ae156bd3e60f893ad">golxzn::os::filesystem::is_directory</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga5dee1681f7e4be3ae156bd3e60f893ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if an entry is a directory.  <br /></td></tr>
+<tr class="separator:ga5dee1681f7e4be3ae156bd3e60f893ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabeed37c11a46db7e2118ff28ff706400"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#gabeed37c11a46db7e2118ff28ff706400">golxzn::os::filesystem::make_directory</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:gabeed37c11a46db7e2118ff28ff706400"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a directory (recursively).  <br /></td></tr>
+<tr class="separator:gabeed37c11a46db7e2118ff28ff706400"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaaf9fc427c46fbd6b921f08b1797eab21"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#gaaf9fc427c46fbd6b921f08b1797eab21">golxzn::os::filesystem::remove_directory</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:gaaf9fc427c46fbd6b921f08b1797eab21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a directory (recursively).  <br /></td></tr>
+<tr class="separator:gaaf9fc427c46fbd6b921f08b1797eab21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0d40f88b8c0e14effac439b479081008"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga0d40f88b8c0e14effac439b479081008">golxzn::os::filesystem::remove_file</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga0d40f88b8c0e14effac439b479081008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a file.  <br /></td></tr>
+<tr class="separator:ga0d40f88b8c0e14effac439b479081008"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga50a398c0056d0b4fa31946062b5fc736"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__fdmanip.html#ga50a398c0056d0b4fa31946062b5fc736">golxzn::os::filesystem::remove</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga50a398c0056d0b4fa31946062b5fc736"><td class="mdescLeft">&#160;</td><td class="mdescRight">List an entry (file or directory).  <br /></td></tr>
+<tr class="separator:ga50a398c0056d0b4fa31946062b5fc736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="gaaea5e79aefa47d51f5b1d8182348a92e" name="gaaea5e79aefa47d51f5b1d8182348a92e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaea5e79aefa47d51f5b1d8182348a92e">&#9670;&#160;</a></span>exists()</h2>
+<a id="gaf265bd61748d6bd57433be0f2892d81d" name="gaf265bd61748d6bd57433be0f2892d81d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf265bd61748d6bd57433be0f2892d81d">&#9670;&#160;</a></span>exists()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -112,7 +112,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool golxzn::resman::exists </td>
+          <td class="memname">static bool golxzn::os::filesystem::exists </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -137,8 +137,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga65c0e5449668f058b8f9a998855bb17d" name="ga65c0e5449668f058b8f9a998855bb17d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga65c0e5449668f058b8f9a998855bb17d">&#9670;&#160;</a></span>is_directory()</h2>
+<a id="ga5dee1681f7e4be3ae156bd3e60f893ad" name="ga5dee1681f7e4be3ae156bd3e60f893ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5dee1681f7e4be3ae156bd3e60f893ad">&#9670;&#160;</a></span>is_directory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,7 +147,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool golxzn::resman::is_directory </td>
+          <td class="memname">static bool golxzn::os::filesystem::is_directory </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -172,8 +172,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gae104ac0d9adab9f016484c85c4668b1a" name="gae104ac0d9adab9f016484c85c4668b1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae104ac0d9adab9f016484c85c4668b1a">&#9670;&#160;</a></span>is_file()</h2>
+<a id="ga04a106ede365624d4e0028d4bbce961b" name="ga04a106ede365624d4e0028d4bbce961b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga04a106ede365624d4e0028d4bbce961b">&#9670;&#160;</a></span>is_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +182,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static bool golxzn::resman::is_file </td>
+          <td class="memname">static bool golxzn::os::filesystem::is_file </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -207,8 +207,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ga0129af48d5da51469377c4b2cb9262c8" name="ga0129af48d5da51469377c4b2cb9262c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0129af48d5da51469377c4b2cb9262c8">&#9670;&#160;</a></span>make_directory()</h2>
+<a id="gabeed37c11a46db7e2118ff28ff706400" name="gabeed37c11a46db7e2118ff28ff706400"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabeed37c11a46db7e2118ff28ff706400">&#9670;&#160;</a></span>make_directory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -217,7 +217,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a> golxzn::resman::make_directory </td>
+          <td class="memname">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a> golxzn::os::filesystem::make_directory </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -238,12 +238,12 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structgolxzn_1_1resman_1_1error.html" title="Struct returned by some methods to tell if there&#39;s an error.">golxzn::resman::error</a> - <a class="el" href="classgolxzn_1_1resman.html#a63b3edced812bc83e94c27fafb81bfc4" title="OK struct.">resman::OK</a> or the error message </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>golxzn::filesystem::error - <a class="el" href="classgolxzn_1_1os_1_1filesystem.html#ab6b0962606e4cae1c4434a4b64e95662" title="OK struct.">filesystem::OK</a> or the error message </dd></dl>
 
 </div>
 </div>
-<a id="gab689c1663b5e58f5da5b6e078fec5599" name="gab689c1663b5e58f5da5b6e078fec5599"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab689c1663b5e58f5da5b6e078fec5599">&#9670;&#160;</a></span>remove()</h2>
+<a id="ga50a398c0056d0b4fa31946062b5fc736" name="ga50a398c0056d0b4fa31946062b5fc736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga50a398c0056d0b4fa31946062b5fc736">&#9670;&#160;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +252,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a> golxzn::resman::remove </td>
+          <td class="memname">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a> golxzn::os::filesystem::remove </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -273,12 +273,12 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structgolxzn_1_1resman_1_1error.html" title="Struct returned by some methods to tell if there&#39;s an error.">golxzn::resman::error</a> - <a class="el" href="classgolxzn_1_1resman.html#a63b3edced812bc83e94c27fafb81bfc4" title="OK struct.">resman::OK</a> or the error message </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>golxzn::filesystem::error - <a class="el" href="classgolxzn_1_1os_1_1filesystem.html#ab6b0962606e4cae1c4434a4b64e95662" title="OK struct.">filesystem::OK</a> or the error message </dd></dl>
 
 </div>
 </div>
-<a id="ga7f7c5d1a52e54ea5b187a0b0c5af749c" name="ga7f7c5d1a52e54ea5b187a0b0c5af749c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7f7c5d1a52e54ea5b187a0b0c5af749c">&#9670;&#160;</a></span>remove_directory()</h2>
+<a id="gaaf9fc427c46fbd6b921f08b1797eab21" name="gaaf9fc427c46fbd6b921f08b1797eab21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaf9fc427c46fbd6b921f08b1797eab21">&#9670;&#160;</a></span>remove_directory()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -287,7 +287,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a> golxzn::resman::remove_directory </td>
+          <td class="memname">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a> golxzn::os::filesystem::remove_directory </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -308,12 +308,12 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structgolxzn_1_1resman_1_1error.html" title="Struct returned by some methods to tell if there&#39;s an error.">golxzn::resman::error</a> - <a class="el" href="classgolxzn_1_1resman.html#a63b3edced812bc83e94c27fafb81bfc4" title="OK struct.">resman::OK</a> or the error message </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>golxzn::filesystem::error - <a class="el" href="classgolxzn_1_1os_1_1filesystem.html#ab6b0962606e4cae1c4434a4b64e95662" title="OK struct.">filesystem::OK</a> or the error message </dd></dl>
 
 </div>
 </div>
-<a id="ga878b21ad06a07f9a852209957151c141" name="ga878b21ad06a07f9a852209957151c141"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga878b21ad06a07f9a852209957151c141">&#9670;&#160;</a></span>remove_file()</h2>
+<a id="ga0d40f88b8c0e14effac439b479081008" name="ga0d40f88b8c0e14effac439b479081008"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0d40f88b8c0e14effac439b479081008">&#9670;&#160;</a></span>remove_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,7 +322,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a> golxzn::resman::remove_file </td>
+          <td class="memname">static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a> golxzn::os::filesystem::remove_file </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -343,7 +343,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structgolxzn_1_1resman_1_1error.html" title="Struct returned by some methods to tell if there&#39;s an error.">golxzn::resman::error</a> - <a class="el" href="classgolxzn_1_1resman.html#a63b3edced812bc83e94c27fafb81bfc4" title="OK struct.">resman::OK</a> or the error message </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>golxzn::filesystem::error - <a class="el" href="classgolxzn_1_1os_1_1filesystem.html#ab6b0962606e4cae1c4434a4b64e95662" title="OK struct.">filesystem::OK</a> or the error message </dd></dl>
 
 </div>
 </div>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ok_0',['OK',['../classgolxzn_1_1resman.html#a63b3edced812bc83e94c27fafb81bfc4',1,'golxzn::resman']]],
-  ['operator_20bool_1',['operator bool',['../structgolxzn_1_1resman_1_1error.html#ade44a71c3581afc623fa8d7d8c223bc5',1,'golxzn::resman::error']]]
+  ['ok_0',['OK',['../classgolxzn_1_1os_1_1filesystem.html#ab6b0962606e4cae1c4434a4b64e95662',1,'golxzn::os::filesystem']]],
+  ['operator_20bool_1',['operator bool',['../structgolxzn_1_1os_1_1filesystem_1_1error.html#afec8f58f0f399126a6c53334711ac190',1,'golxzn::os::filesystem::error']]]
 ];

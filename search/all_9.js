@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['make_5fdirectory_0',['make_directory',['../group__fdmanip.html#ga0129af48d5da51469377c4b2cb9262c8',1,'golxzn::resman::make_directory(const std::wstring_view path)'],['../group__aliases.html#ga756dfe651b540569e14bed97d5e3181c',1,'golxzn::resman::make_directory(const std::string_view path)']]],
-  ['message_1',['message',['../structgolxzn_1_1resman_1_1error.html#a22be26e83e353dea365d33c49ba72fc3',1,'golxzn::resman::error']]]
+  ['make_5fdirectory_0',['make_directory',['../group__fdmanip.html#gabeed37c11a46db7e2118ff28ff706400',1,'golxzn::os::filesystem::make_directory(const std::wstring_view path)'],['../group__aliases.html#ga39fff7bb76ee54eb2acbf96fc60c76e1',1,'golxzn::os::filesystem::make_directory(const std::string_view path)']]],
+  ['message_1',['message',['../structgolxzn_1_1os_1_1filesystem_1_1error.html#af7098cfd51d93b07dc1db8ab2db122a0',1,'golxzn::os::filesystem::error']]]
 ];

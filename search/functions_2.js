@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['entries_0',['entries',['../classgolxzn_1_1resman.html#a91679f4c5baf483d607a98f6ac1b5d4b',1,'golxzn::resman::entries(const std::wstring_view path)'],['../group__aliases.html#ga2762a9bb2f436d26f79a76a2bd3e9291',1,'golxzn::resman::entries(const std::string_view path)']]],
-  ['exists_1',['exists',['../group__fdmanip.html#gaaea5e79aefa47d51f5b1d8182348a92e',1,'golxzn::resman::exists(const std::wstring_view path) noexcept'],['../group__aliases.html#ga04f2e8784a033f517338d52926f24c51',1,'golxzn::resman::exists(const std::string_view path) noexcept']]]
+  ['entries_0',['entries',['../classgolxzn_1_1os_1_1filesystem.html#aa5c53f64c6610fc231c9256fc395c5f0',1,'golxzn::os::filesystem::entries(const std::wstring_view path)'],['../group__aliases.html#gae29b976c9d5ef6bebb56b0a89580aa57',1,'golxzn::os::filesystem::entries(const std::string_view path)']]],
+  ['exists_1',['exists',['../group__fdmanip.html#gaf265bd61748d6bd57433be0f2892d81d',1,'golxzn::os::filesystem::exists(const std::wstring_view path) noexcept'],['../group__aliases.html#gad5c06741ec544146ce55e3d5dad65124',1,'golxzn::os::filesystem::exists(const std::string_view path) noexcept']]]
 ];

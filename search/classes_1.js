@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['resman_0',['resman',['../classgolxzn_1_1resman.html',1,'golxzn']]]
+  ['filesystem_0',['filesystem',['../classgolxzn_1_1os_1_1filesystem.html',1,'golxzn::os']]]
 ];

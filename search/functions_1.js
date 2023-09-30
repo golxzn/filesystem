@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['current_5fdirectory_0',['current_directory',['../classgolxzn_1_1resman.html#a3742f257c6f7ebbae120af5db90c74f8',1,'golxzn::resman']]]
+  ['current_5fdirectory_0',['current_directory',['../classgolxzn_1_1os_1_1filesystem.html#aa85d0ed092b225aa0fc43fb06d41df97',1,'golxzn::os::filesystem']]]
 ];

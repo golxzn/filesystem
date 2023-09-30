@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['separator_0',['separator',['../classgolxzn_1_1resman.html#a72c69f01cf45265c232a1b862bd7ca7c',1,'golxzn::resman']]],
-  ['separator_5fnarrow_1',['separator_narrow',['../classgolxzn_1_1resman.html#aa42f5ce9a5e429314b242c9f9fa93fca',1,'golxzn::resman']]],
-  ['set_5fapplication_5fname_2',['set_application_name',['../group__initialization.html#ga61374883d882ccec81edd4e83bc3553b',1,'golxzn::resman::set_application_name(const std::wstring_view application_name) noexcept'],['../group__aliases.html#ga58e8a4752e79f80bde4898ffe3c687ca',1,'golxzn::resman::set_application_name(const std::string_view application_name) noexcept']]]
+  ['separator_0',['separator',['../classgolxzn_1_1os_1_1filesystem.html#a400aa820b5bbe1d03b9c25f6d5546fa2',1,'golxzn::os::filesystem']]],
+  ['separator_5fnarrow_1',['separator_narrow',['../classgolxzn_1_1os_1_1filesystem.html#a4b3f0ab0628dd29938afb539e9f67cd3',1,'golxzn::os::filesystem']]],
+  ['set_5fapplication_5fname_2',['set_application_name',['../group__initialization.html#gaf7e717bd504276348c27e6d3351e2614',1,'golxzn::os::filesystem::set_application_name(const std::wstring_view application_name) noexcept'],['../group__aliases.html#ga1e2f8fe653edd1a371380057f54f5cfb',1,'golxzn::os::filesystem::set_application_name(const std::string_view application_name) noexcept']]]
 ];

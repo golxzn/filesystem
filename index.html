@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>golxzn::resman: golxzn::resman</title>
+<title>golxzn::golxzn::os::filesystem: golxzn::golxzn::os::filesystem</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">golxzn::resman<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">golxzn::golxzn::os::filesystem<span id="projectnumber">&#160;1.6.0</span>
    </div>
-   <div id="projectbrief">golxzn resource manager</div>
+   <div id="projectbrief">golxzn filesystem submodule</div>
   </td>
  </tr>
  </tbody>
@@ -70,11 +70,11 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title"><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a> </div></div>
+  <div class="headertitle"><div class="title">golxzn::golxzn::os::filesystem </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></h1>
-<div align="center"></div><div align="center"><img src="https://github.com/golxzn/resman/actions/workflows/ci-test-static-lib.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></h1>
+<div align="center"></div><div align="center"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-test-static-lib.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code>golxzn::filesystem</code> is a simple resource manager which provides basic access to application resources and user directory. <code>golxzn::filesystem</code> is dependenceless. There's only STL usage and platform specific headers.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
 Platform support</h2>
 <p>✅ <b>Windows</b> (tested); <br  />
@@ -84,7 +84,7 @@ Platform support</h2>
 <p>I'm planning to add support for <b>Android</b> and <b>iOS</b> in the future.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 How does it work?</h2>
-<p>When you initialize this library using <code><a class="el" href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623" title="Initialize the Resource Manager.">golxzn::resman::initialize</a></code> method, library does 2 thing:</p>
+<p>When you initialize this library using <code>golxzn::filesystem::initialize</code> method, library does 2 thing:</p>
 <ol type="1">
 <li>Looks for <code>assets</code> or <code>res</code> directory starting from current application directory;</li>
 <li>Creates application directory</li>
@@ -104,15 +104,15 @@ Creates application directory</h3>
 CMake integration</h2>
 <h3><a class="anchor" id="autotoc_md5"></a>
 1. Clone this repository:</h3>
-<div class="fragment"><div class="line">git clone https://github.com/golxzn/resman.git</div>
+<div class="fragment"><div class="line">git clone https://github.com/golxzn/filesystem.git</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
 2. Add subdirectory:</h3>
-<div class="fragment"><div class="line">add_subdirectory(resman)</div>
+<div class="fragment"><div class="line">add_subdirectory(filesystem)</div>
 <div class="line"> </div>
-<div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::resman)</div>
+<div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::filesystem)</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md7"></a>
 3. Include header &amp; initialize:</h3>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/resman.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/os/filesystem.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>your {</div>
 <div class="line"> </div>
@@ -135,18 +135,18 @@ CMake integration</h2>
 <div class="line">} <span class="comment">// namespace your</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
-<div class="line">    <a class="code hl_function" href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623">golxzn::resman::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
+<div class="line">    <a class="code hl_function" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c">golxzn::os::filesystem::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> app_settings{ gxzn::resman::load_text&lt;your::Settings&gt;(<span class="stringliteral">&quot;res://settings/application.ini&quot;</span>) };</div>
+<div class="line">    <span class="keyword">auto</span> app_settings{ gxzn::os::fs::load_text&lt;your::Settings&gt;(<span class="stringliteral">&quot;res://settings/application.ini&quot;</span>) };</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> splash_screen{ <span class="comment">///&lt; std::shared_ptr&lt;your::Image&gt;</span></div>
-<div class="line">        gxzn::resman::load_shared_binary&lt;your::Image&gt;(app_settings.get_splash_screen_path())</div>
+<div class="line">        gxzn::os::fs::load_shared_binary&lt;your::Image&gt;(app_settings.get_splash_screen_path())</div>
 <div class="line">    };</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__initialization_html_gaf01bca046f36305e78ceee3101a8b623"><div class="ttname"><a href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623">golxzn::resman::initialize</a></div><div class="ttdeci">static error initialize(const std::wstring_view application_name, const std::wstring_view assets_path=default_assets_directory_name)</div><div class="ttdoc">Initialize the Resource Manager.</div></div>
-</div><!-- fragment --><p>You could use either a <code><a class="el" href="classgolxzn_1_1resman.html" title="Golxzn Resource Manager.">golxzn::resman</a></code> namespace or just <code>gxzn::resman</code> or <code>golxzn::resources::manager</code>:</p>
-<div class="fragment"><div class="line"><a class="code hl_function" href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623">golxzn::resources::manager::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
-<div class="line">gxzn::resman::initialize(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
+<div class="ttc" id="agroup__initialization_html_ga4aa7571d9f453c440ffd3e27d00e600c"><div class="ttname"><a href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c">golxzn::os::filesystem::initialize</a></div><div class="ttdeci">static error initialize(const std::wstring_view application_name, const std::wstring_view assets_path=default_assets_directory_name)</div><div class="ttdoc">Initialize the Resource Manager.</div></div>
+</div><!-- fragment --><p>You could use either a <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> namespace or just <code>gxzn::os::fs</code>:</p>
+<div class="fragment"><div class="line"><a class="code hl_function" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c">golxzn::os::filesystem::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
+<div class="line">gxzn::os::fs::initialize(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>golxzn::resman: Narrow string aliases</title>
+<title>golxzn::golxzn::os::filesystem: Narrow string aliases</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">golxzn::resman<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">golxzn::golxzn::os::filesystem<span id="projectnumber">&#160;1.6.0</span>
    </div>
-   <div id="projectbrief">golxzn resource manager</div>
+   <div id="projectbrief">golxzn filesystem submodule</div>
   </td>
  </tr>
  </tbody>
@@ -78,144 +78,144 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga63695d2a38114cf85484c25cae7ca77d"><td class="memItemLeft" align="right" valign="top"><a id="ga63695d2a38114cf85484c25cae7ca77d" name="ga63695d2a38114cf85484c25cae7ca77d"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::initialize</b> (const std::string_view <a class="el" href="classgolxzn_1_1resman.html#a50b91528a3143f73529800fc23d25d3b">application_name</a>, const std::string_view assets_path=<a class="el" href="classgolxzn_1_1resman.html#a3970038498634fc3e35669b8fb76a4f1">default_assets_directory_name_narrow</a>)</td></tr>
-<tr class="memdesc:ga63695d2a38114cf85484c25cae7ca77d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__initialization.html#gaf01bca046f36305e78ceee3101a8b623" title="Initialize the Resource Manager.">golxzn::resman::initialize(const std::wstring_view, const std::wstring_view)</a> <br /></td></tr>
-<tr class="separator:ga63695d2a38114cf85484c25cae7ca77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga58e8a4752e79f80bde4898ffe3c687ca"><td class="memItemLeft" align="right" valign="top"><a id="ga58e8a4752e79f80bde4898ffe3c687ca" name="ga58e8a4752e79f80bde4898ffe3c687ca"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::set_application_name</b> (const std::string_view <a class="el" href="classgolxzn_1_1resman.html#a50b91528a3143f73529800fc23d25d3b">application_name</a>) noexcept</td></tr>
-<tr class="memdesc:ga58e8a4752e79f80bde4898ffe3c687ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__initialization.html#ga61374883d882ccec81edd4e83bc3553b" title="Sets the application name object.">golxzn::resman::set_application_name(const std::wstring_view)</a> <br /></td></tr>
-<tr class="separator:ga58e8a4752e79f80bde4898ffe3c687ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaff9f03f0513abd8dfae13b94bfa7b60a"><td class="memItemLeft" align="right" valign="top"><a id="gaff9f03f0513abd8dfae13b94bfa7b60a" name="gaff9f03f0513abd8dfae13b94bfa7b60a"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::associate</b> (const std::string_view protocol, const std::string_view prefix) noexcept</td></tr>
-<tr class="memdesc:gaff9f03f0513abd8dfae13b94bfa7b60a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::resman::associate(const std::wstring_view, const std::wstring_view) <br /></td></tr>
-<tr class="separator:gaff9f03f0513abd8dfae13b94bfa7b60a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9c5fc47e9db3a52e2663f5ff5c106422"><td class="memItemLeft" align="right" valign="top"><a id="ga9c5fc47e9db3a52e2663f5ff5c106422" name="ga9c5fc47e9db3a52e2663f5ff5c106422"></a>
-static std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::read_binary</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga9c5fc47e9db3a52e2663f5ff5c106422"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#ga07d480d8d694b35ef2f9a78e8980351f" title="Read whole binary file.">golxzn::resman::read_binary(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga9c5fc47e9db3a52e2663f5ff5c106422"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7c8e6122c95813d866cd5639fb240514"><td class="memItemLeft" align="right" valign="top"><a id="ga7c8e6122c95813d866cd5639fb240514" name="ga7c8e6122c95813d866cd5639fb240514"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::read_text</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga7c8e6122c95813d866cd5639fb240514"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#ga6b7e3611b28d574b13ad36340c59e06e" title="Read whole text file.">golxzn::resman::read_text(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga7c8e6122c95813d866cd5639fb240514"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacb6656f4a3fd75a3b6a14d951fbee271"><td class="memTemplParams" colspan="2"><a id="gacb6656f4a3fd75a3b6a14d951fbee271" name="gacb6656f4a3fd75a3b6a14d951fbee271"></a>
+<tr class="memitem:ga390087c678759372f2d8c1e754f4c7ae"><td class="memItemLeft" align="right" valign="top"><a id="ga390087c678759372f2d8c1e754f4c7ae" name="ga390087c678759372f2d8c1e754f4c7ae"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::initialize</b> (const std::string_view <a class="el" href="classgolxzn_1_1os_1_1filesystem.html#a7e70a10146a47427f7b8118a581bb915">application_name</a>, const std::string_view assets_path=<a class="el" href="classgolxzn_1_1os_1_1filesystem.html#ac27359d3729beab2a942a82b2554b494">default_assets_directory_name_narrow</a>)</td></tr>
+<tr class="memdesc:ga390087c678759372f2d8c1e754f4c7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::initialize(const std::wstring_view, const std::wstring_view) <br /></td></tr>
+<tr class="separator:ga390087c678759372f2d8c1e754f4c7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1e2f8fe653edd1a371380057f54f5cfb"><td class="memItemLeft" align="right" valign="top"><a id="ga1e2f8fe653edd1a371380057f54f5cfb" name="ga1e2f8fe653edd1a371380057f54f5cfb"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::set_application_name</b> (const std::string_view <a class="el" href="classgolxzn_1_1os_1_1filesystem.html#a7e70a10146a47427f7b8118a581bb915">application_name</a>) noexcept</td></tr>
+<tr class="memdesc:ga1e2f8fe653edd1a371380057f54f5cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::set_application_name(const std::wstring_view) <br /></td></tr>
+<tr class="separator:ga1e2f8fe653edd1a371380057f54f5cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f25bb7c7564fcaa1ebfb6152aeae18e"><td class="memItemLeft" align="right" valign="top"><a id="ga2f25bb7c7564fcaa1ebfb6152aeae18e" name="ga2f25bb7c7564fcaa1ebfb6152aeae18e"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::associate</b> (const std::string_view protocol, const std::string_view prefix) noexcept</td></tr>
+<tr class="memdesc:ga2f25bb7c7564fcaa1ebfb6152aeae18e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::associate(const std::wstring_view, const std::wstring_view) <br /></td></tr>
+<tr class="separator:ga2f25bb7c7564fcaa1ebfb6152aeae18e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga865e2e5c970fd9c5547dd404f83ad2be"><td class="memItemLeft" align="right" valign="top"><a id="ga865e2e5c970fd9c5547dd404f83ad2be" name="ga865e2e5c970fd9c5547dd404f83ad2be"></a>
+static std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::read_binary</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga865e2e5c970fd9c5547dd404f83ad2be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_binary(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga865e2e5c970fd9c5547dd404f83ad2be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0989755313dd267188854956a033cac1"><td class="memItemLeft" align="right" valign="top"><a id="ga0989755313dd267188854956a033cac1" name="ga0989755313dd267188854956a033cac1"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::read_text</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga0989755313dd267188854956a033cac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_text(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga0989755313dd267188854956a033cac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa30480812e16fc2e00a1b7dfb5b3e9f1"><td class="memTemplParams" colspan="2"><a id="gaa30480812e16fc2e00a1b7dfb5b3e9f1" name="gaa30480812e16fc2e00a1b7dfb5b3e9f1"></a>
 template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
-<tr class="memitem:gacb6656f4a3fd75a3b6a14d951fbee271"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::resman::read_binary</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:gacb6656f4a3fd75a3b6a14d951fbee271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#ga07d480d8d694b35ef2f9a78e8980351f" title="Read whole binary file.">golxzn::resman::read_binary(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gacb6656f4a3fd75a3b6a14d951fbee271"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga57e085ee09966fbf02cfa3eb8279c819"><td class="memTemplParams" colspan="2"><a id="ga57e085ee09966fbf02cfa3eb8279c819" name="ga57e085ee09966fbf02cfa3eb8279c819"></a>
+<tr class="memitem:gaa30480812e16fc2e00a1b7dfb5b3e9f1"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::os::filesystem::read_binary</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:gaa30480812e16fc2e00a1b7dfb5b3e9f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_binary(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:gaa30480812e16fc2e00a1b7dfb5b3e9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae3f84e83f0bbd4c51a23d2807dfef266"><td class="memTemplParams" colspan="2"><a id="gae3f84e83f0bbd4c51a23d2807dfef266" name="gae3f84e83f0bbd4c51a23d2807dfef266"></a>
 template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
-<tr class="memitem:ga57e085ee09966fbf02cfa3eb8279c819"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::resman::read_text</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga57e085ee09966fbf02cfa3eb8279c819"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#ga6b7e3611b28d574b13ad36340c59e06e" title="Read whole text file.">golxzn::resman::read_text(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga57e085ee09966fbf02cfa3eb8279c819"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga49223582d6de032ccba0fd5988afa357"><td class="memTemplParams" colspan="2"><a id="ga49223582d6de032ccba0fd5988afa357" name="ga49223582d6de032ccba0fd5988afa357"></a>
+<tr class="memitem:gae3f84e83f0bbd4c51a23d2807dfef266"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::os::filesystem::read_text</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:gae3f84e83f0bbd4c51a23d2807dfef266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_text(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:gae3f84e83f0bbd4c51a23d2807dfef266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga50740eee8da56176bcd99a773da01040"><td class="memTemplParams" colspan="2"><a id="ga50740eee8da56176bcd99a773da01040" name="ga50740eee8da56176bcd99a773da01040"></a>
 template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
-<tr class="memitem:ga49223582d6de032ccba0fd5988afa357"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::resman::read_shared_binary</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga49223582d6de032ccba0fd5988afa357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#ga38ff7c6741053887f7dc31719986bd29" title="Construct std::shared_ptr&lt;Custom&gt; by binary data from file.">golxzn::resman::read_shared_binary(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga49223582d6de032ccba0fd5988afa357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaab87d9823a98317bdd8ebbd07103ecdd"><td class="memTemplParams" colspan="2"><a id="gaab87d9823a98317bdd8ebbd07103ecdd" name="gaab87d9823a98317bdd8ebbd07103ecdd"></a>
+<tr class="memitem:ga50740eee8da56176bcd99a773da01040"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::os::filesystem::read_shared_binary</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga50740eee8da56176bcd99a773da01040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_shared_binary(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga50740eee8da56176bcd99a773da01040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga88a639127b437e62e195f850fd5a974b"><td class="memTemplParams" colspan="2"><a id="ga88a639127b437e62e195f850fd5a974b" name="ga88a639127b437e62e195f850fd5a974b"></a>
 template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
-<tr class="memitem:gaab87d9823a98317bdd8ebbd07103ecdd"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::resman::read_shared_text</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:gaab87d9823a98317bdd8ebbd07103ecdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#gac1d3c600224801cfaa5444e3fb7b45dd" title="Construct std::shared_ptr&lt;Custom&gt; by binary data from file.">golxzn::resman::read_shared_text(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gaab87d9823a98317bdd8ebbd07103ecdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1cb21f72b6d3a3dbcc6b391f1f9d499e"><td class="memTemplParams" colspan="2"><a id="ga1cb21f72b6d3a3dbcc6b391f1f9d499e" name="ga1cb21f72b6d3a3dbcc6b391f1f9d499e"></a>
+<tr class="memitem:ga88a639127b437e62e195f850fd5a974b"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::os::filesystem::read_shared_text</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga88a639127b437e62e195f850fd5a974b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_shared_text(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga88a639127b437e62e195f850fd5a974b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9e81faaabf93d100c565871d217bc1cb"><td class="memTemplParams" colspan="2"><a id="ga9e81faaabf93d100c565871d217bc1cb" name="ga9e81faaabf93d100c565871d217bc1cb"></a>
 template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
-<tr class="memitem:ga1cb21f72b6d3a3dbcc6b391f1f9d499e"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::resman::read_unique_binary</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga1cb21f72b6d3a3dbcc6b391f1f9d499e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#gaefaa88043e0a91cd573137993d448739" title="Construct std::shared_ptr&lt;Custom&gt; by binary data from file.">golxzn::resman::read_unique_binary(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga1cb21f72b6d3a3dbcc6b391f1f9d499e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5abc7a599e10c4c71be19b1ebb4dffab"><td class="memTemplParams" colspan="2"><a id="ga5abc7a599e10c4c71be19b1ebb4dffab" name="ga5abc7a599e10c4c71be19b1ebb4dffab"></a>
+<tr class="memitem:ga9e81faaabf93d100c565871d217bc1cb"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::os::filesystem::read_unique_binary</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga9e81faaabf93d100c565871d217bc1cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_unique_binary(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga9e81faaabf93d100c565871d217bc1cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0e69072e83a553620a452a4dc2f63c74"><td class="memTemplParams" colspan="2"><a id="ga0e69072e83a553620a452a4dc2f63c74" name="ga0e69072e83a553620a452a4dc2f63c74"></a>
 template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
-<tr class="memitem:ga5abc7a599e10c4c71be19b1ebb4dffab"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::resman::read_unique_text</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga5abc7a599e10c4c71be19b1ebb4dffab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__read.html#gab6979c5ff11b43170cd78c35768a3ff1" title="Construct std::shared_ptr&lt;Custom&gt; by binary data from file.">golxzn::resman::read_unique_text(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga5abc7a599e10c4c71be19b1ebb4dffab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3641b5e522eb237042cfd99649179e7f"><td class="memItemLeft" align="right" valign="top"><a id="ga3641b5e522eb237042cfd99649179e7f" name="ga3641b5e522eb237042cfd99649179e7f"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::write_binary</b> (const std::string_view path, const std::span&lt; uint8_t &gt; &amp;data)</td></tr>
-<tr class="memdesc:ga3641b5e522eb237042cfd99649179e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#gad7496bc9e3d88244bf80d534fb9bcdba" title="Write binary data to a file.">golxzn::resman::write_binary(const std::wstring_view path, const std::span&lt;uint8_t&gt; &amp;data)</a> <br /></td></tr>
-<tr class="separator:ga3641b5e522eb237042cfd99649179e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga70f9786b3c0cb9fa968692f2e4b2116e"><td class="memItemLeft" align="right" valign="top"><a id="ga70f9786b3c0cb9fa968692f2e4b2116e" name="ga70f9786b3c0cb9fa968692f2e4b2116e"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::write_binary</b> (const std::string_view path, const std::initializer_list&lt; uint8_t &gt; data)</td></tr>
-<tr class="memdesc:ga70f9786b3c0cb9fa968692f2e4b2116e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#ga8783dfe018c2b4da5bc78c42e26b8d68" title="Write binary data to a file.">golxzn::resman::write_binary(const std::wstring_view path, const std::initializer_list&lt;uint8_t&gt; data)</a> <br /></td></tr>
-<tr class="separator:ga70f9786b3c0cb9fa968692f2e4b2116e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gadb71273c38c827f3c35895d997851cab"><td class="memItemLeft" align="right" valign="top"><a id="gadb71273c38c827f3c35895d997851cab" name="gadb71273c38c827f3c35895d997851cab"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::append_binary</b> (const std::string_view path, const std::span&lt; uint8_t &gt; &amp;data)</td></tr>
-<tr class="memdesc:gadb71273c38c827f3c35895d997851cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#ga94b1b8f9c0887083e586880a644c47d0" title="Append binary data to a file.">golxzn::resman::append_binary(const std::wstring_view path, const std::span&lt;uint8_t&gt; &amp;data)</a> <br /></td></tr>
-<tr class="separator:gadb71273c38c827f3c35895d997851cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2227ab8ef08c83dd70125449633f27f6"><td class="memItemLeft" align="right" valign="top"><a id="ga2227ab8ef08c83dd70125449633f27f6" name="ga2227ab8ef08c83dd70125449633f27f6"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::append_binary</b> (const std::string_view path, const std::initializer_list&lt; uint8_t &gt; data)</td></tr>
-<tr class="memdesc:ga2227ab8ef08c83dd70125449633f27f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#gab686520930035473a56a31e7d5b6b018" title="Append binary data to a file.">golxzn::resman::append_binary(const std::wstring_view path, const std::initializer_list&lt;uint8_t&gt; data)</a> <br /></td></tr>
-<tr class="separator:ga2227ab8ef08c83dd70125449633f27f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga86008643eeab6747885b912de89c35b8"><td class="memItemLeft" align="right" valign="top"><a id="ga86008643eeab6747885b912de89c35b8" name="ga86008643eeab6747885b912de89c35b8"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::write_text</b> (const std::string_view path, const std::string_view text)</td></tr>
-<tr class="memdesc:ga86008643eeab6747885b912de89c35b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#ga5a1ba6715ac53644ecb24f84b340b319" title="Write text data to a file.">golxzn::resman::write_text(const std::wstring_view path, const std::string_view text)</a> <br /></td></tr>
-<tr class="separator:ga86008643eeab6747885b912de89c35b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6546c04300c6a079c82242cc27a5ce7e"><td class="memItemLeft" align="right" valign="top"><a id="ga6546c04300c6a079c82242cc27a5ce7e" name="ga6546c04300c6a079c82242cc27a5ce7e"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::append_text</b> (const std::string_view path, const std::string_view text)</td></tr>
-<tr class="memdesc:ga6546c04300c6a079c82242cc27a5ce7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#gaef8ff4d5e363dc2baac9fa38cb0f7967" title="Append text data to a file.">golxzn::resman::append_text(const std::wstring_view path, const std::string_view text)</a> <br /></td></tr>
-<tr class="separator:ga6546c04300c6a079c82242cc27a5ce7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga81b3389d8dab700b18b1e0830598608c"><td class="memItemLeft" align="right" valign="top"><a id="ga81b3389d8dab700b18b1e0830598608c" name="ga81b3389d8dab700b18b1e0830598608c"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::write_text</b> (const std::string_view path, const std::wstring_view text)</td></tr>
-<tr class="memdesc:ga81b3389d8dab700b18b1e0830598608c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#ga8bd271a30d549a1019f934d88ccbd789" title="Write text data to a file.">golxzn::resman::write_text(const std::wstring_view path, const std::wstring_view text)</a> <br /></td></tr>
-<tr class="separator:ga81b3389d8dab700b18b1e0830598608c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacbe8bed6990330f4608cd456666ceeeb"><td class="memItemLeft" align="right" valign="top"><a id="gacbe8bed6990330f4608cd456666ceeeb" name="gacbe8bed6990330f4608cd456666ceeeb"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::append_text</b> (const std::string_view path, const std::wstring_view text)</td></tr>
-<tr class="memdesc:gacbe8bed6990330f4608cd456666ceeeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__write.html#gafec601ee6bb7db5bf9b5230fcfd82f3f" title="Append text data to a file.">golxzn::resman::append_text(const std::wstring_view path, const std::wstring_view text)</a> <br /></td></tr>
-<tr class="separator:gacbe8bed6990330f4608cd456666ceeeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab8ab8bc7a350ef9a9625565e6830e49c"><td class="memItemLeft" align="right" valign="top"><a id="gab8ab8bc7a350ef9a9625565e6830e49c" name="gab8ab8bc7a350ef9a9625565e6830e49c"></a>
-static std::wstring_view&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::get_association</b> (const std::string_view protocol) noexcept</td></tr>
-<tr class="memdesc:gab8ab8bc7a350ef9a9625565e6830e49c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="classgolxzn_1_1resman.html#aacbb34c5e4bbc26525386a2a7eb02957" title="Get the association object.">golxzn::resman::get_association(const std::wstring_view protocol)</a> <br /></td></tr>
-<tr class="separator:gab8ab8bc7a350ef9a9625565e6830e49c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga93f674e662fa1fec43a1186f37fc74e7"><td class="memItemLeft" align="right" valign="top"><a id="ga93f674e662fa1fec43a1186f37fc74e7" name="ga93f674e662fa1fec43a1186f37fc74e7"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::join</b> (std::string &amp;left, std::string_view right) noexcept</td></tr>
-<tr class="memdesc:ga93f674e662fa1fec43a1186f37fc74e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="classgolxzn_1_1resman.html#a818335ca2b83e2894422bbb0f26af762" title="Join two paths with a slash.">golxzn::resman::join(std::wstring &amp;left, std::wstring_view right)</a> <br /></td></tr>
-<tr class="separator:ga93f674e662fa1fec43a1186f37fc74e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga438be3270f66aec4e9c9279d85b35690"><td class="memItemLeft" align="right" valign="top"><a id="ga438be3270f66aec4e9c9279d85b35690" name="ga438be3270f66aec4e9c9279d85b35690"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::join</b> (std::string_view left, std::string_view right) noexcept</td></tr>
-<tr class="memdesc:ga438be3270f66aec4e9c9279d85b35690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="classgolxzn_1_1resman.html#a3b50994d56970c9765fecb954dbc6504" title="Join two paths with a slash.">golxzn::resman::join(std::wstring_view left, std::wstring_view right)</a> <br /></td></tr>
-<tr class="separator:ga438be3270f66aec4e9c9279d85b35690"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga582fa186505e499f9b156e6859539e15"><td class="memItemLeft" align="right" valign="top"><a id="ga582fa186505e499f9b156e6859539e15" name="ga582fa186505e499f9b156e6859539e15"></a>
-static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::parent_directory</b> (std::string &amp;path) noexcept</td></tr>
-<tr class="memdesc:ga582fa186505e499f9b156e6859539e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="classgolxzn_1_1resman.html#a00faf9188707e02ed94276c538af1ddc" title="Remove the last path component.">golxzn::resman::parent_directory(std::wstring &amp;path)</a> <br /></td></tr>
-<tr class="separator:ga582fa186505e499f9b156e6859539e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad471a99865065a9ce88c5f2dcc3fa5cb"><td class="memItemLeft" align="right" valign="top"><a id="gad471a99865065a9ce88c5f2dcc3fa5cb" name="gad471a99865065a9ce88c5f2dcc3fa5cb"></a>
-static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::parent_directory</b> (std::string_view path) noexcept</td></tr>
-<tr class="memdesc:gad471a99865065a9ce88c5f2dcc3fa5cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="classgolxzn_1_1resman.html#a7ebd636fefca163f6b9d0601eb1b0e96" title="Remove the last path component.">golxzn::resman::parent_directory(std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gad471a99865065a9ce88c5f2dcc3fa5cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5b14e56ddc7366b85de6552ec22130a2"><td class="memItemLeft" align="right" valign="top"><a id="ga5b14e56ddc7366b85de6552ec22130a2" name="ga5b14e56ddc7366b85de6552ec22130a2"></a>
-static std::wstring&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::normalize</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga5b14e56ddc7366b85de6552ec22130a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="classgolxzn_1_1resman.html#a2e68eb22953800736d5f65404292b47e" title="Fix the path separators to the &#39;/&#39; and remove the trailing slash.">golxzn::resman::normalize(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga5b14e56ddc7366b85de6552ec22130a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga04f2e8784a033f517338d52926f24c51"><td class="memItemLeft" align="right" valign="top"><a id="ga04f2e8784a033f517338d52926f24c51" name="ga04f2e8784a033f517338d52926f24c51"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::exists</b> (const std::string_view path) noexcept</td></tr>
-<tr class="memdesc:ga04f2e8784a033f517338d52926f24c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#gaaea5e79aefa47d51f5b1d8182348a92e" title="Check if an entry exists.">golxzn::resman::exists(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga04f2e8784a033f517338d52926f24c51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaedf4363815580a6efff7bfb4aab799af"><td class="memItemLeft" align="right" valign="top"><a id="gaedf4363815580a6efff7bfb4aab799af" name="gaedf4363815580a6efff7bfb4aab799af"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::is_file</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:gaedf4363815580a6efff7bfb4aab799af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#gae104ac0d9adab9f016484c85c4668b1a" title="Check if an entry is a file.">golxzn::resman::is_file(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gaedf4363815580a6efff7bfb4aab799af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7db674f427b4a8abb842155a9ffdac96"><td class="memItemLeft" align="right" valign="top"><a id="ga7db674f427b4a8abb842155a9ffdac96" name="ga7db674f427b4a8abb842155a9ffdac96"></a>
-static bool&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::is_directory</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga7db674f427b4a8abb842155a9ffdac96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#ga65c0e5449668f058b8f9a998855bb17d" title="Check if an entry is a directory.">golxzn::resman::is_directory(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga7db674f427b4a8abb842155a9ffdac96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga756dfe651b540569e14bed97d5e3181c"><td class="memItemLeft" align="right" valign="top"><a id="ga756dfe651b540569e14bed97d5e3181c" name="ga756dfe651b540569e14bed97d5e3181c"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::make_directory</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga756dfe651b540569e14bed97d5e3181c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#ga0129af48d5da51469377c4b2cb9262c8" title="Create a directory (recursively).">golxzn::resman::make_directory(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga756dfe651b540569e14bed97d5e3181c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacbab437400fbfd4f4080db254f36e7b8"><td class="memItemLeft" align="right" valign="top"><a id="gacbab437400fbfd4f4080db254f36e7b8" name="gacbab437400fbfd4f4080db254f36e7b8"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::remove_directory</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:gacbab437400fbfd4f4080db254f36e7b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#ga7f7c5d1a52e54ea5b187a0b0c5af749c" title="Remove a directory (recursively).">golxzn::resman::remove_directory(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gacbab437400fbfd4f4080db254f36e7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad5b8dfc83c54406f7ebd33dd03b2ef0c"><td class="memItemLeft" align="right" valign="top"><a id="gad5b8dfc83c54406f7ebd33dd03b2ef0c" name="gad5b8dfc83c54406f7ebd33dd03b2ef0c"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::remove_file</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:gad5b8dfc83c54406f7ebd33dd03b2ef0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#ga878b21ad06a07f9a852209957151c141" title="Remove a file.">golxzn::resman::remove_file(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gad5b8dfc83c54406f7ebd33dd03b2ef0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabf6b6aab76222983c88c17fb6d3ecbe8"><td class="memItemLeft" align="right" valign="top"><a id="gabf6b6aab76222983c88c17fb6d3ecbe8" name="gabf6b6aab76222983c88c17fb6d3ecbe8"></a>
-static <a class="el" href="structgolxzn_1_1resman_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::remove</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:gabf6b6aab76222983c88c17fb6d3ecbe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for <a class="el" href="group__fdmanip.html#gab689c1663b5e58f5da5b6e078fec5599" title="List an entry (file or directory).">golxzn::resman::remove(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:gabf6b6aab76222983c88c17fb6d3ecbe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga2762a9bb2f436d26f79a76a2bd3e9291"><td class="memItemLeft" align="right" valign="top"><a id="ga2762a9bb2f436d26f79a76a2bd3e9291" name="ga2762a9bb2f436d26f79a76a2bd3e9291"></a>
-static std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::resman::entries</b> (const std::string_view path)</td></tr>
-<tr class="memdesc:ga2762a9bb2f436d26f79a76a2bd3e9291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow stirng alias for <a class="el" href="classgolxzn_1_1resman.html#a91679f4c5baf483d607a98f6ac1b5d4b" title="Get all entries in a directory.">golxzn::resman::entries(const std::wstring_view path)</a> <br /></td></tr>
-<tr class="separator:ga2762a9bb2f436d26f79a76a2bd3e9291"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0e69072e83a553620a452a4dc2f63c74"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>golxzn::os::filesystem::read_unique_text</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga0e69072e83a553620a452a4dc2f63c74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::read_unique_text(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga0e69072e83a553620a452a4dc2f63c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga627304a55d93b4f075a2be6f0773ece3"><td class="memItemLeft" align="right" valign="top"><a id="ga627304a55d93b4f075a2be6f0773ece3" name="ga627304a55d93b4f075a2be6f0773ece3"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::write_binary</b> (const std::string_view path, const std::span&lt; uint8_t &gt; &amp;data)</td></tr>
+<tr class="memdesc:ga627304a55d93b4f075a2be6f0773ece3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::write_binary(const std::wstring_view path, const std::span&lt;uint8_t&gt; &amp;data) <br /></td></tr>
+<tr class="separator:ga627304a55d93b4f075a2be6f0773ece3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga68d775b7a06b33b164fa0888ed363287"><td class="memItemLeft" align="right" valign="top"><a id="ga68d775b7a06b33b164fa0888ed363287" name="ga68d775b7a06b33b164fa0888ed363287"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::write_binary</b> (const std::string_view path, const std::initializer_list&lt; uint8_t &gt; data)</td></tr>
+<tr class="memdesc:ga68d775b7a06b33b164fa0888ed363287"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::write_binary(const std::wstring_view path, const std::initializer_list&lt;uint8_t&gt; data) <br /></td></tr>
+<tr class="separator:ga68d775b7a06b33b164fa0888ed363287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga98ecaa9835f93d0360b9803e543a08b4"><td class="memItemLeft" align="right" valign="top"><a id="ga98ecaa9835f93d0360b9803e543a08b4" name="ga98ecaa9835f93d0360b9803e543a08b4"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::append_binary</b> (const std::string_view path, const std::span&lt; uint8_t &gt; &amp;data)</td></tr>
+<tr class="memdesc:ga98ecaa9835f93d0360b9803e543a08b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::append_binary(const std::wstring_view path, const std::span&lt;uint8_t&gt; &amp;data) <br /></td></tr>
+<tr class="separator:ga98ecaa9835f93d0360b9803e543a08b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac860db94d6ec8ee6dabe06d4b17b5977"><td class="memItemLeft" align="right" valign="top"><a id="gac860db94d6ec8ee6dabe06d4b17b5977" name="gac860db94d6ec8ee6dabe06d4b17b5977"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::append_binary</b> (const std::string_view path, const std::initializer_list&lt; uint8_t &gt; data)</td></tr>
+<tr class="memdesc:gac860db94d6ec8ee6dabe06d4b17b5977"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::append_binary(const std::wstring_view path, const std::initializer_list&lt;uint8_t&gt; data) <br /></td></tr>
+<tr class="separator:gac860db94d6ec8ee6dabe06d4b17b5977"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga98e070d4ea274a236e2f0be520f90534"><td class="memItemLeft" align="right" valign="top"><a id="ga98e070d4ea274a236e2f0be520f90534" name="ga98e070d4ea274a236e2f0be520f90534"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::write_text</b> (const std::string_view path, const std::string_view text)</td></tr>
+<tr class="memdesc:ga98e070d4ea274a236e2f0be520f90534"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::write_text(const std::wstring_view path, const std::string_view text) <br /></td></tr>
+<tr class="separator:ga98e070d4ea274a236e2f0be520f90534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga652a7a91bda2f196aca568e2bfa75541"><td class="memItemLeft" align="right" valign="top"><a id="ga652a7a91bda2f196aca568e2bfa75541" name="ga652a7a91bda2f196aca568e2bfa75541"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::append_text</b> (const std::string_view path, const std::string_view text)</td></tr>
+<tr class="memdesc:ga652a7a91bda2f196aca568e2bfa75541"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::append_text(const std::wstring_view path, const std::string_view text) <br /></td></tr>
+<tr class="separator:ga652a7a91bda2f196aca568e2bfa75541"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1247e48a40454603d16578da817324d9"><td class="memItemLeft" align="right" valign="top"><a id="ga1247e48a40454603d16578da817324d9" name="ga1247e48a40454603d16578da817324d9"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::write_text</b> (const std::string_view path, const std::wstring_view text)</td></tr>
+<tr class="memdesc:ga1247e48a40454603d16578da817324d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::write_text(const std::wstring_view path, const std::wstring_view text) <br /></td></tr>
+<tr class="separator:ga1247e48a40454603d16578da817324d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6d73f624b37907eac2ad06ad74ca24e4"><td class="memItemLeft" align="right" valign="top"><a id="ga6d73f624b37907eac2ad06ad74ca24e4" name="ga6d73f624b37907eac2ad06ad74ca24e4"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::append_text</b> (const std::string_view path, const std::wstring_view text)</td></tr>
+<tr class="memdesc:ga6d73f624b37907eac2ad06ad74ca24e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::append_text(const std::wstring_view path, const std::wstring_view text) <br /></td></tr>
+<tr class="separator:ga6d73f624b37907eac2ad06ad74ca24e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf65678cca3ebcc91ddb7e87e2bc5dae1"><td class="memItemLeft" align="right" valign="top"><a id="gaf65678cca3ebcc91ddb7e87e2bc5dae1" name="gaf65678cca3ebcc91ddb7e87e2bc5dae1"></a>
+static std::wstring_view&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::get_association</b> (const std::string_view protocol) noexcept</td></tr>
+<tr class="memdesc:gaf65678cca3ebcc91ddb7e87e2bc5dae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::get_association(const std::wstring_view protocol) <br /></td></tr>
+<tr class="separator:gaf65678cca3ebcc91ddb7e87e2bc5dae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2086ea1d92cd1a7eada3681c35899ad4"><td class="memItemLeft" align="right" valign="top"><a id="ga2086ea1d92cd1a7eada3681c35899ad4" name="ga2086ea1d92cd1a7eada3681c35899ad4"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::join</b> (std::string &amp;left, std::string_view right) noexcept</td></tr>
+<tr class="memdesc:ga2086ea1d92cd1a7eada3681c35899ad4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::join(std::wstring &amp;left, std::wstring_view right) <br /></td></tr>
+<tr class="separator:ga2086ea1d92cd1a7eada3681c35899ad4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2f70dc2466f6eb586e06ecd7e3b0e914"><td class="memItemLeft" align="right" valign="top"><a id="ga2f70dc2466f6eb586e06ecd7e3b0e914" name="ga2f70dc2466f6eb586e06ecd7e3b0e914"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::join</b> (std::string_view left, std::string_view right) noexcept</td></tr>
+<tr class="memdesc:ga2f70dc2466f6eb586e06ecd7e3b0e914"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::join(std::wstring_view left, std::wstring_view right) <br /></td></tr>
+<tr class="separator:ga2f70dc2466f6eb586e06ecd7e3b0e914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad93b9e446326f031b2cc1e616227cdce"><td class="memItemLeft" align="right" valign="top"><a id="gad93b9e446326f031b2cc1e616227cdce" name="gad93b9e446326f031b2cc1e616227cdce"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::parent_directory</b> (std::string &amp;path) noexcept</td></tr>
+<tr class="memdesc:gad93b9e446326f031b2cc1e616227cdce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::parent_directory(std::wstring &amp;path) <br /></td></tr>
+<tr class="separator:gad93b9e446326f031b2cc1e616227cdce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae70216ebe886b24148288af54129b920"><td class="memItemLeft" align="right" valign="top"><a id="gae70216ebe886b24148288af54129b920" name="gae70216ebe886b24148288af54129b920"></a>
+static std::string&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::parent_directory</b> (std::string_view path) noexcept</td></tr>
+<tr class="memdesc:gae70216ebe886b24148288af54129b920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::parent_directory(std::wstring_view path) <br /></td></tr>
+<tr class="separator:gae70216ebe886b24148288af54129b920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga66785d3bc9e373d00af1dcedd17e9b36"><td class="memItemLeft" align="right" valign="top"><a id="ga66785d3bc9e373d00af1dcedd17e9b36" name="ga66785d3bc9e373d00af1dcedd17e9b36"></a>
+static std::wstring&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::normalize</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga66785d3bc9e373d00af1dcedd17e9b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::normalize(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga66785d3bc9e373d00af1dcedd17e9b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5c06741ec544146ce55e3d5dad65124"><td class="memItemLeft" align="right" valign="top"><a id="gad5c06741ec544146ce55e3d5dad65124" name="gad5c06741ec544146ce55e3d5dad65124"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::exists</b> (const std::string_view path) noexcept</td></tr>
+<tr class="memdesc:gad5c06741ec544146ce55e3d5dad65124"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::exists(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:gad5c06741ec544146ce55e3d5dad65124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga68969f957f7050ae3afddabd9b8e5be1"><td class="memItemLeft" align="right" valign="top"><a id="ga68969f957f7050ae3afddabd9b8e5be1" name="ga68969f957f7050ae3afddabd9b8e5be1"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::is_file</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga68969f957f7050ae3afddabd9b8e5be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::is_file(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga68969f957f7050ae3afddabd9b8e5be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga114fd5dffef9cbd8415831f59b6248ee"><td class="memItemLeft" align="right" valign="top"><a id="ga114fd5dffef9cbd8415831f59b6248ee" name="ga114fd5dffef9cbd8415831f59b6248ee"></a>
+static bool&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::is_directory</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga114fd5dffef9cbd8415831f59b6248ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::is_directory(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga114fd5dffef9cbd8415831f59b6248ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga39fff7bb76ee54eb2acbf96fc60c76e1"><td class="memItemLeft" align="right" valign="top"><a id="ga39fff7bb76ee54eb2acbf96fc60c76e1" name="ga39fff7bb76ee54eb2acbf96fc60c76e1"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::make_directory</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga39fff7bb76ee54eb2acbf96fc60c76e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::make_directory(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga39fff7bb76ee54eb2acbf96fc60c76e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6979a0a392413f4b4d538ede67d7f90"><td class="memItemLeft" align="right" valign="top"><a id="gaf6979a0a392413f4b4d538ede67d7f90" name="gaf6979a0a392413f4b4d538ede67d7f90"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::remove_directory</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:gaf6979a0a392413f4b4d538ede67d7f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::remove_directory(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:gaf6979a0a392413f4b4d538ede67d7f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2d3cd0ff2c4e63216762e0bf5d4e720a"><td class="memItemLeft" align="right" valign="top"><a id="ga2d3cd0ff2c4e63216762e0bf5d4e720a" name="ga2d3cd0ff2c4e63216762e0bf5d4e720a"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::remove_file</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:ga2d3cd0ff2c4e63216762e0bf5d4e720a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::remove_file(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:ga2d3cd0ff2c4e63216762e0bf5d4e720a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab2632aa705e726e62ed444c2ee5b2558"><td class="memItemLeft" align="right" valign="top"><a id="gab2632aa705e726e62ed444c2ee5b2558" name="gab2632aa705e726e62ed444c2ee5b2558"></a>
+static <a class="el" href="structgolxzn_1_1os_1_1filesystem_1_1error.html">error</a>&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::remove</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:gab2632aa705e726e62ed444c2ee5b2558"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow string alias for golxzn::filesystem::remove(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:gab2632aa705e726e62ed444c2ee5b2558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae29b976c9d5ef6bebb56b0a89580aa57"><td class="memItemLeft" align="right" valign="top"><a id="gae29b976c9d5ef6bebb56b0a89580aa57" name="gae29b976c9d5ef6bebb56b0a89580aa57"></a>
+static std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>golxzn::os::filesystem::entries</b> (const std::string_view path)</td></tr>
+<tr class="memdesc:gae29b976c9d5ef6bebb56b0a89580aa57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Narrow stirng alias for golxzn::filesystem::entries(const std::wstring_view path) <br /></td></tr>
+<tr class="separator:gae29b976c9d5ef6bebb56b0a89580aa57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <dl class="section warning"><dt>Warning</dt><dd>Methods with a narrow string arguments instead of wide string could cause a memory allocation. </dd></dl>

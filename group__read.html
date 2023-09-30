@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>golxzn::resman: Reading files</title>
+<title>golxzn::golxzn::os::filesystem: Reading files</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,9 +21,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">golxzn::resman<span id="projectnumber">&#160;1.6.0</span>
+   <div id="projectname">golxzn::golxzn::os::filesystem<span id="projectnumber">&#160;1.6.0</span>
    </div>
-   <div id="projectbrief">golxzn resource manager</div>
+   <div id="projectbrief">golxzn filesystem submodule</div>
   </td>
  </tr>
  </tbody>
@@ -78,41 +78,41 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga07d480d8d694b35ef2f9a78e8980351f"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__read.html#ga07d480d8d694b35ef2f9a78e8980351f">golxzn::resman::read_binary</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga07d480d8d694b35ef2f9a78e8980351f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read whole binary file.  <br /></td></tr>
-<tr class="separator:ga07d480d8d694b35ef2f9a78e8980351f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6b7e3611b28d574b13ad36340c59e06e"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__read.html#ga6b7e3611b28d574b13ad36340c59e06e">golxzn::resman::read_text</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga6b7e3611b28d574b13ad36340c59e06e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read whole text file.  <br /></td></tr>
-<tr class="separator:ga6b7e3611b28d574b13ad36340c59e06e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac430426f758a53ad18526a2946f33f96"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
-<tr class="memitem:gac430426f758a53ad18526a2946f33f96"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#gac430426f758a53ad18526a2946f33f96">golxzn::resman::read_binary</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:gac430426f758a53ad18526a2946f33f96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>Custom</code> class by binary data from file.  <br /></td></tr>
-<tr class="separator:gac430426f758a53ad18526a2946f33f96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga3e4a910cd4defeecebb8f2b26993a921"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
-<tr class="memitem:ga3e4a910cd4defeecebb8f2b26993a921"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#ga3e4a910cd4defeecebb8f2b26993a921">golxzn::resman::read_text</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga3e4a910cd4defeecebb8f2b26993a921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>Custom</code> class by text data from file.  <br /></td></tr>
-<tr class="separator:ga3e4a910cd4defeecebb8f2b26993a921"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga38ff7c6741053887f7dc31719986bd29"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
-<tr class="memitem:ga38ff7c6741053887f7dc31719986bd29"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#ga38ff7c6741053887f7dc31719986bd29">golxzn::resman::read_shared_binary</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:ga38ff7c6741053887f7dc31719986bd29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
-<tr class="separator:ga38ff7c6741053887f7dc31719986bd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac1d3c600224801cfaa5444e3fb7b45dd"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
-<tr class="memitem:gac1d3c600224801cfaa5444e3fb7b45dd"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#gac1d3c600224801cfaa5444e3fb7b45dd">golxzn::resman::read_shared_text</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:gac1d3c600224801cfaa5444e3fb7b45dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
-<tr class="separator:gac1d3c600224801cfaa5444e3fb7b45dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaefaa88043e0a91cd573137993d448739"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
-<tr class="memitem:gaefaa88043e0a91cd573137993d448739"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#gaefaa88043e0a91cd573137993d448739">golxzn::resman::read_unique_binary</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:gaefaa88043e0a91cd573137993d448739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
-<tr class="separator:gaefaa88043e0a91cd573137993d448739"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6979c5ff11b43170cd78c35768a3ff1"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
-<tr class="memitem:gab6979c5ff11b43170cd78c35768a3ff1"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#gab6979c5ff11b43170cd78c35768a3ff1">golxzn::resman::read_unique_text</a> (const std::wstring_view path)</td></tr>
-<tr class="memdesc:gab6979c5ff11b43170cd78c35768a3ff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
-<tr class="separator:gab6979c5ff11b43170cd78c35768a3ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3343fdd06571368a33476c5608c21e6f"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__read.html#ga3343fdd06571368a33476c5608c21e6f">golxzn::os::filesystem::read_binary</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga3343fdd06571368a33476c5608c21e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read whole binary file.  <br /></td></tr>
+<tr class="separator:ga3343fdd06571368a33476c5608c21e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac90c08cf1f74a70fa597bb3127e14e4b"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__read.html#gac90c08cf1f74a70fa597bb3127e14e4b">golxzn::os::filesystem::read_text</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:gac90c08cf1f74a70fa597bb3127e14e4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read whole text file.  <br /></td></tr>
+<tr class="separator:gac90c08cf1f74a70fa597bb3127e14e4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6f6d139a7b1f80427299f4566ee71f80"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
+<tr class="memitem:ga6f6d139a7b1f80427299f4566ee71f80"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#ga6f6d139a7b1f80427299f4566ee71f80">golxzn::os::filesystem::read_binary</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga6f6d139a7b1f80427299f4566ee71f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>Custom</code> class by binary data from file.  <br /></td></tr>
+<tr class="separator:ga6f6d139a7b1f80427299f4566ee71f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga217f0aee9e1f2946abff5a0f4241ad66"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
+<tr class="memitem:ga217f0aee9e1f2946abff5a0f4241ad66"><td class="memTemplItemLeft" align="right" valign="top">static Custom&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#ga217f0aee9e1f2946abff5a0f4241ad66">golxzn::os::filesystem::read_text</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga217f0aee9e1f2946abff5a0f4241ad66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>Custom</code> class by text data from file.  <br /></td></tr>
+<tr class="separator:ga217f0aee9e1f2946abff5a0f4241ad66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga367e24410edba88c5a37f93dc2dcb0e4"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
+<tr class="memitem:ga367e24410edba88c5a37f93dc2dcb0e4"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#ga367e24410edba88c5a37f93dc2dcb0e4">golxzn::os::filesystem::read_shared_binary</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga367e24410edba88c5a37f93dc2dcb0e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
+<tr class="separator:ga367e24410edba88c5a37f93dc2dcb0e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7c3726153258b9a7c542a161ceb7ced7"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
+<tr class="memitem:ga7c3726153258b9a7c542a161ceb7ced7"><td class="memTemplItemLeft" align="right" valign="top">static std::shared_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#ga7c3726153258b9a7c542a161ceb7ced7">golxzn::os::filesystem::read_shared_text</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:ga7c3726153258b9a7c542a161ceb7ced7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
+<tr class="separator:ga7c3726153258b9a7c542a161ceb7ced7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac719f55827948164c26967cfa3a3b0ab"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom&gt; </td></tr>
+<tr class="memitem:gac719f55827948164c26967cfa3a3b0ab"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#gac719f55827948164c26967cfa3a3b0ab">golxzn::os::filesystem::read_unique_binary</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:gac719f55827948164c26967cfa3a3b0ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
+<tr class="separator:gac719f55827948164c26967cfa3a3b0ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gace8f3cf703ac140a30eb55613e2e699e"><td class="memTemplParams" colspan="2">template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </td></tr>
+<tr class="memitem:gace8f3cf703ac140a30eb55613e2e699e"><td class="memTemplItemLeft" align="right" valign="top">static std::unique_ptr&lt; Custom &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__read.html#gace8f3cf703ac140a30eb55613e2e699e">golxzn::os::filesystem::read_unique_text</a> (const std::wstring_view path)</td></tr>
+<tr class="memdesc:gace8f3cf703ac140a30eb55613e2e699e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct <code>std::shared_ptr&lt;Custom&gt;</code> by binary data from file.  <br /></td></tr>
+<tr class="separator:gace8f3cf703ac140a30eb55613e2e699e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga07d480d8d694b35ef2f9a78e8980351f" name="ga07d480d8d694b35ef2f9a78e8980351f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga07d480d8d694b35ef2f9a78e8980351f">&#9670;&#160;</a></span>read_binary() <span class="overload">[1/2]</span></h2>
+<a id="ga3343fdd06571368a33476c5608c21e6f" name="ga3343fdd06571368a33476c5608c21e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3343fdd06571368a33476c5608c21e6f">&#9670;&#160;</a></span>read_binary() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,7 +121,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::vector&lt; uint8_t &gt; golxzn::resman::read_binary </td>
+          <td class="memname">static std::vector&lt; uint8_t &gt; golxzn::os::filesystem::read_binary </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -147,8 +147,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gac430426f758a53ad18526a2946f33f96" name="gac430426f758a53ad18526a2946f33f96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac430426f758a53ad18526a2946f33f96">&#9670;&#160;</a></span>read_binary() <span class="overload">[2/2]</span></h2>
+<a id="ga6f6d139a7b1f80427299f4566ee71f80" name="ga6f6d139a7b1f80427299f4566ee71f80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f6d139a7b1f80427299f4566ee71f80">&#9670;&#160;</a></span>read_binary() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,7 +159,7 @@ template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Custom golxzn::resman::read_binary </td>
+          <td class="memname">Custom golxzn::os::filesystem::read_binary </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -190,8 +190,8 @@ template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom
 
 </div>
 </div>
-<a id="ga38ff7c6741053887f7dc31719986bd29" name="ga38ff7c6741053887f7dc31719986bd29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga38ff7c6741053887f7dc31719986bd29">&#9670;&#160;</a></span>read_shared_binary()</h2>
+<a id="ga367e24410edba88c5a37f93dc2dcb0e4" name="ga367e24410edba88c5a37f93dc2dcb0e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga367e24410edba88c5a37f93dc2dcb0e4">&#9670;&#160;</a></span>read_shared_binary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +202,7 @@ template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; Custom &gt; golxzn::resman::read_shared_binary </td>
+          <td class="memname">std::shared_ptr&lt; Custom &gt; golxzn::os::filesystem::read_shared_binary </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -233,8 +233,8 @@ template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom
 
 </div>
 </div>
-<a id="gac1d3c600224801cfaa5444e3fb7b45dd" name="gac1d3c600224801cfaa5444e3fb7b45dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac1d3c600224801cfaa5444e3fb7b45dd">&#9670;&#160;</a></span>read_shared_text()</h2>
+<a id="ga7c3726153258b9a7c542a161ceb7ced7" name="ga7c3726153258b9a7c542a161ceb7ced7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7c3726153258b9a7c542a161ceb7ced7">&#9670;&#160;</a></span>read_shared_text()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -245,7 +245,7 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt; Custom &gt; golxzn::resman::read_shared_text </td>
+          <td class="memname">std::shared_ptr&lt; Custom &gt; golxzn::os::filesystem::read_shared_text </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -276,8 +276,8 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
 
 </div>
 </div>
-<a id="ga6b7e3611b28d574b13ad36340c59e06e" name="ga6b7e3611b28d574b13ad36340c59e06e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6b7e3611b28d574b13ad36340c59e06e">&#9670;&#160;</a></span>read_text() <span class="overload">[1/2]</span></h2>
+<a id="gac90c08cf1f74a70fa597bb3127e14e4b" name="gac90c08cf1f74a70fa597bb3127e14e4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac90c08cf1f74a70fa597bb3127e14e4b">&#9670;&#160;</a></span>read_text() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +286,7 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static std::string golxzn::resman::read_text </td>
+          <td class="memname">static std::string golxzn::os::filesystem::read_text </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -312,8 +312,8 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
 
 </div>
 </div>
-<a id="ga3e4a910cd4defeecebb8f2b26993a921" name="ga3e4a910cd4defeecebb8f2b26993a921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3e4a910cd4defeecebb8f2b26993a921">&#9670;&#160;</a></span>read_text() <span class="overload">[2/2]</span></h2>
+<a id="ga217f0aee9e1f2946abff5a0f4241ad66" name="ga217f0aee9e1f2946abff5a0f4241ad66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga217f0aee9e1f2946abff5a0f4241ad66">&#9670;&#160;</a></span>read_text() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,7 +324,7 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Custom golxzn::resman::read_text </td>
+          <td class="memname">Custom golxzn::os::filesystem::read_text </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -355,8 +355,8 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
 
 </div>
 </div>
-<a id="gaefaa88043e0a91cd573137993d448739" name="gaefaa88043e0a91cd573137993d448739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaefaa88043e0a91cd573137993d448739">&#9670;&#160;</a></span>read_unique_binary()</h2>
+<a id="gac719f55827948164c26967cfa3a3b0ab" name="gac719f55827948164c26967cfa3a3b0ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac719f55827948164c26967cfa3a3b0ab">&#9670;&#160;</a></span>read_unique_binary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -367,7 +367,7 @@ template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt; Custom &gt; golxzn::resman::read_unique_binary </td>
+          <td class="memname">std::unique_ptr&lt; Custom &gt; golxzn::os::filesystem::read_unique_binary </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -398,8 +398,8 @@ template&lt;std::constructible_from&lt; std::vector&lt; uint8_t &gt; &gt; Custom
 
 </div>
 </div>
-<a id="gab6979c5ff11b43170cd78c35768a3ff1" name="gab6979c5ff11b43170cd78c35768a3ff1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab6979c5ff11b43170cd78c35768a3ff1">&#9670;&#160;</a></span>read_unique_text()</h2>
+<a id="gace8f3cf703ac140a30eb55613e2e699e" name="gace8f3cf703ac140a30eb55613e2e699e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gace8f3cf703ac140a30eb55613e2e699e">&#9670;&#160;</a></span>read_unique_text()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,7 +410,7 @@ template&lt;std::constructible_from&lt; std::string &gt; Custom&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt; Custom &gt; golxzn::resman::read_unique_text </td>
+          <td class="memname">std::unique_ptr&lt; Custom &gt; golxzn::os::filesystem::read_unique_text </td>
           <td>(</td>
           <td class="paramtype">const std::wstring_view&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
