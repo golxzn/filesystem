@@ -26,7 +26,7 @@ namespace golxzn::os {
 namespace details {
 
 template<class T>
-filesystem::error write_data(const std::wstring_view wide_path, const T *data, const size len,
+filesystem::error write_data(const std::wstring_view wide_path, const T *data, const usize len,
 		const std::ios::openmode mode = std::ios::out) noexcept {
 
 	if (len == 0 || data == nullptr) [[unlikely]] {
@@ -400,9 +400,9 @@ std::wstring filesystem::normalize(std::wstring_view str) {
 
 	std::vector<std::wstring_view> parts;
 	parts.reserve(std::ranges::count_if(str, [](const auto &c){ return slash.find(c) != std::wstring_view::npos; }) + 1lu);
-	size prev_slash{};
-	size curr_slash{};
-	size next_slash{};
+	usize prev_slash{};
+	usize curr_slash{};
+	usize next_slash{};
 
 	for(; next_slash != std::wstring_view::npos; prev_slash = std::exchange(curr_slash, next_slash + 1)) {
 		next_slash = str.find_first_of(slash, curr_slash);
@@ -420,9 +420,9 @@ std::wstring filesystem::normalize(std::wstring_view str) {
 		parts.emplace_back(substr);
 	}
 
-	const size length{ std::accumulate(
-		std::begin(parts), std::end(parts), size{},
-		[](size accum, const auto &str) { return accum + 1 + str.size(); }
+	const usize length{ std::accumulate(
+		std::begin(parts), std::end(parts), usize{},
+		[](usize accum, const auto &str) { return accum + 1 + str.size(); }
 	)};
 
 	std::wstring result{ std::move(prefix) };
@@ -564,7 +564,7 @@ std::wstring filesystem::to_wide(const std::string_view str) noexcept {
 
 std::string filesystem::to_narrow(const std::wstring_view str) noexcept {
 	static constexpr u16 bits_per_char{ 8 };
-	static constexpr size difference{
+	static constexpr usize difference{
 		sizeof(std::wstring_view::value_type) / sizeof(std::string::value_type)
 	};
 

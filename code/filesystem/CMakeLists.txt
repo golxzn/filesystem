@@ -24,7 +24,7 @@ add_library(golxzn_os_filesystem ${headers} ${sources})
 add_library(golxzn::os::filesystem ALIAS golxzn_os_filesystem)
 
 target_include_directories(golxzn_os_filesystem PUBLIC ${GXZN_OS_FS_CODE_DIR}/headers)
-target_compile_definitions(golxzn_os_filesystem PUBLIC ${GXZN_OS_FS_DEFINITIONS})
+target_compile_definitions(golxzn_os_filesystem PUBLIC ${GXZN_OS_FS_DEFINITIONS} ${GOLXZN_CONFIG_DEFINITIONS})
 set_target_properties(golxzn_os_filesystem PROPERTIES
 	FOLDER "golxzn/os"
 )

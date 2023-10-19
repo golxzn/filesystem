@@ -20,7 +20,7 @@ namespace golxzn::os {
 
 using u16 = uint16_t;
 using byte = std::byte;
-using size = std::size_t;
+using usize = std::size_t;
 
 #endif // defined(GOLXZN_OS_ALIASES)
 
@@ -31,7 +31,7 @@ struct transparent_hash {
 	using hash_type = std::hash<T>;
 	using is_transparent = void;
 
-	size operator()(const T &v) const noexcept { return hash_type{}(v); }
+	usize operator()(const T &v) const noexcept { return hash_type{}(v); }
 };
 
 template<>
@@ -40,9 +40,9 @@ struct transparent_hash<std::wstring> {
 	using hash_type = std::hash<std::wstring_view>;
 	using is_transparent = void;
 
-	size operator()(const std::wstring &v)      const noexcept { return hash_type{}(v); }
-	size operator()(const std::wstring_view &v) const noexcept { return hash_type{}(v); }
-	size operator()(const char_type *const v)   const noexcept { return hash_type{}(v); }
+	usize operator()(const std::wstring &v)      const noexcept { return hash_type{}(v); }
+	usize operator()(const std::wstring_view &v) const noexcept { return hash_type{}(v); }
+	usize operator()(const char_type *const v)   const noexcept { return hash_type{}(v); }
 };
 
 } // namespace
