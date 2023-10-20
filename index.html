@@ -74,25 +74,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></h1>
-<div align="center"></div><div align="center"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-test-static-lib.yml/badge.svg" alt="Tests" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
+<div align="center"></div><div align="center"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-windows.yml/badge.svg" alt="Windows" style="pointer-events: none;" class="inline"/> <img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-ubuntu.yml/badge.svg" alt="Ubuntu" style="pointer-events: none;" class="inline"/> <img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-macos.yml/badge.svg" alt="MacOS" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
 <h2><a class="anchor" id="autotoc_md0"></a>
-Platform support</h2>
-<p>✅ <b>Windows</b> (tested); <br  />
- ✅️ <b>Linux</b> (tested); <br  />
- ⚠️ <b>MacOS</b> (in progress); <br  />
-</p>
-<p>I'm planning to add support for <b>Android</b> and <b>iOS</b> in the future.</p>
-<h2><a class="anchor" id="autotoc_md1"></a>
 How does it work?</h2>
 <p>When you initialize this library using <code><a class="el" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c" title="Initialize the Resource Manager.">golxzn::os::filesystem::initialize</a></code> method, library does 2 thing:</p>
 <ol type="1">
 <li>Looks for <code>assets</code> or <code>res</code> directory starting from current application directory;</li>
 <li>Creates application directory</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md2"></a>
+<h3><a class="anchor" id="autotoc_md1"></a>
 Look for assets or res</h3>
 <p>This library goes up to the root directory and checks <code>assets</code> or <code>res</code> directory to set read-only resources directory up</p>
-<h3><a class="anchor" id="autotoc_md3"></a>
+<h3><a class="anchor" id="autotoc_md2"></a>
 Creates application directory</h3>
 <p>This library creates application directory for data which could be modified at:</p>
 <ul>
@@ -100,17 +93,17 @@ Creates application directory</h3>
 <li>For Windows: <code>APPDATA%/your_app_name</code>;</li>
 <li>For MacOS: <code>/Users/you/Library/Application Support/your_app_name</code>;</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 CMake integration</h2>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
 1. Clone this repository:</h3>
 <div class="fragment"><div class="line">git clone https://github.com/golxzn/filesystem.git</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
 2. Add subdirectory:</h3>
 <div class="fragment"><div class="line">add_subdirectory(filesystem)</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::os::filesystem)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
 3. Include header &amp; initialize:</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/os/filesystem.hpp&gt;</span></div>
 <div class="line"> </div>
