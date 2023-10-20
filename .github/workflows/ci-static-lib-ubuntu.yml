@@ -1,4 +1,4 @@
-name: CMake
+name: static-lib-ubuntu
 
 on:
   push:

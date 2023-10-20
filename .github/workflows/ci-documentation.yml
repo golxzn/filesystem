@@ -1,4 +1,4 @@
-name: CMake
+name: documentation
 
 on:
   push:
