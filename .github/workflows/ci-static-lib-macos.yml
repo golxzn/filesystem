@@ -1,4 +1,4 @@
-name: static-lib-macos
+name: MacOS
 
 on:
   push:

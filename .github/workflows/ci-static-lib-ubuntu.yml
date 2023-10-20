@@ -1,4 +1,4 @@
-name: static-lib-ubuntu
+name: Ubuntu
 
 on:
   push:
