@@ -1,21 +1,15 @@
 <h1 align="center">golxzn::os::filesystem</h1>
 <div align="center">
 
-![Tests](https://github.com/golxzn/filesystem/actions/workflows/ci-test-static-lib.yml/badge.svg)
+![Windows](https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-windows.yml/badge.svg)
+![Ubuntu](https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-ubuntu.yml/badge.svg)
+![MacOS](https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-macos.yml/badge.svg)
 
 </div>
 
 `golxzn::os::filesystem` is a simple resource manager which provides basic access to application resources
 and user directory.
 `golxzn::os::filesystem` is dependenceless. There's only STL usage and platform specific headers.
-
-## Platform support
-
-✅ __Windows__ (tested); <br>
-✅️ __Linux__ (tested); <br>
-⚠️ __MacOS__ (in progress); <br>
-
-I'm planning to add support for __Android__ and __iOS__ in the future.
 
 ## How does it work?
 

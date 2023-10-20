@@ -1,0 +1,40 @@
+name: CMake
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get GCC
+        uses: egor-tensin/setup-gcc@v1
+        with:
+          version: 13
+          platform: x64
+
+      - name: Get Ninja
+        uses: ashutoshvarma/setup-ninja@v1.1
+        with:
+          version: 1.10.0
+
+      - name: Configure
+        shell: pwsh
+        run: cmake "--preset=ci-ubuntu" --fresh
+
+      - name: Build
+        shell: pwsh
+        run: cmake --build "--preset=ci-ubuntu"
+
+      - name: Test
+        shell: pwsh
+        run: ctest "--preset=ci-ubuntu"
