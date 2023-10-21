@@ -4,10 +4,10 @@
 namespace golxzn::os::details {
 
 std::wstring appdata_directory() {
-	if (auto home{ __unix_get_home(error) }; !home.empty()) {
+	if (auto home{ __unix_get_home() }; !home.empty()) {
 		std::wstring path{ std::begin(home), std::end(home) };
-		return std::format(L"{}{}{}",
-			std::move(path), L"/Library/Application Support", appname
+		return std::format(L"{}{}",
+			std::move(path), L"/Library/Application Support"
 		);
 	}
 	return L"~/Library/Application Support";
