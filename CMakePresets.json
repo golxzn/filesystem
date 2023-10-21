@@ -5,87 +5,46 @@
 		"cmake/presets/common.json",
 		"cmake/presets/generators.json",
 		"cmake/presets/windows.json",
-		"cmake/presets/linux.json"
+		"cmake/presets/linux.json",
+		"cmake/presets/macos.json"
 	],
 	"configurePresets": [
-		{
-			"displayName": "[VS2022][MSVC] Debug (x64)",
-			"name": "vs22_msvc_x64_debug",
-			"inherits": [ "vs22_x64", "win_msvc_x64", "debug" ]
-		},
-		{
-			"displayName": "[VS2022][MSVC] Release (x64)",
-			"name": "vs22_msvc_x64_release",
-			"inherits": [ "vs22_x64", "win_msvc_x64", "release" ]
-		},
+		{ "displayName": "[VS22][MSVC][Win64] Debug",      "name": "vs22-msvc-win64-debug",        "inherits": [ "vs22-msvc-win64", "debug" ] },
+		{ "displayName": "[VS22][MSVC][Win64] Release",    "name": "vs22-msvc-win64-release",      "inherits": [ "vs22-msvc-win64", "release" ] },
 
-		{
-			"displayName": "[Ninja][MSVC] Debug (x64)",
-			"name": "ninja_msvc_x64_debug",
-			"inherits": [ "ninja", "win_msvc_x64", "debug" ]
-		},
-		{
-			"displayName": "[Ninja][MSVC] Release (x64)",
-			"name": "ninja_msvc_x64_release",
-			"inherits": [ "ninja", "win_msvc_x64", "release" ]
-		},
+		{ "displayName": "[Ninja][Clang][Win64] Debug",    "name": "ninja-clang-win64-debug",      "inherits": [ "ninja-clang-win64", "debug" ] },
+		{ "displayName": "[Ninja][Clang][Win64] Release",  "name": "ninja-clang-win64-release",    "inherits": [ "ninja-clang-win64", "release" ] },
 
-		{
-			"displayName": "[Ninja][Clang] Debug (x64)",
-			"name": "ninja_msvc_clang_x64_debug",
-			"inherits": [ "ninja", "win_msvc_clang_x64", "debug" ]
-		},
-		{
-			"displayName": "[Ninja][Clang] Release (x64)",
-			"name": "ninja_msvc_clang_x64_release",
-			"inherits": [ "ninja", "win_msvc_clang_x64", "release" ]
-		},
 
-		{
-			"displayName": "[Ninja][Clang] Debug (x64)",
-			"name": "ninja_unix_clang_x64_debug",
-			"inherits": [ "ninja", "linux_clang_14", "debug" ]
-		},
-		{
-			"displayName": "[Ninja][Clang] Release (x64)",
-			"name": "ninja_unix_clang_x64_release",
-			"inherits": [ "ninja", "linux_clang_14", "release" ]
-		},
+		{ "displayName": "[Ninja][GCC][Linux64] Debug",    "name": "ninja-gcc-linux64-debug",      "inherits": [ "ninja-gcc-linux64", "debug" ] },
+		{ "displayName": "[Ninja][GCC][Linux64] Release",  "name": "ninja-gcc-linux64-release",    "inherits": [ "ninja-gcc-linux64", "release" ] },
 
-		{
-			"displayName": "[Ninja][GCC] Debug (x64)",
-			"name": "ninja_unix_gcc_x64_debug",
-			"inherits": [ "ninja", "linux_gcc_13", "debug" ]
-		},
-		{
-			"displayName": "[Ninja][GCC] Release (x64)",
-			"name": "ninja_unix_gcc_x64_release",
-			"inherits": [ "ninja", "linux_gcc_13", "release" ]
-		},
+		{ "displayName": "[Ninja][Clang][Linux64] Debug",  "name": "ninja-clang-linux64-debug",    "inherits": [ "ninja-clang-linux64", "debug" ] },
+		{ "displayName": "[Ninja][Clang][Linux64] Release","name": "ninja-clang-linux64-release",  "inherits": [ "ninja-clang-linux64", "release" ] },
 
-		{
-			"name": "ci-windows",
-			"inherits": "ninja_msvc_x64_release"
-		},
-		{
-			"name": "ci-ubuntu",
-			"inherits": "ninja_unix_gcc_x64_release"
-		}
+
+		{ "displayName": "[XCode][MacOS64] Debug",         "name": "xcode-macos64-debug",          "inherits": [ "xcode-macos64", "debug" ] },
+		{ "displayName": "[XCode][MacOS64] Release",       "name": "xcode-macos64-release",        "inherits": [ "xcode-macos64", "release" ] },
+
+		{ "displayName": "[Ninja][XCode][MacOS64] Debug",  "name": "ninja-xcode-macos64-debug",    "inherits": [ "ninja-xcode-macos64", "debug" ] },
+		{ "displayName": "[Ninja][XCode][MacOS64] Release","name": "ninja-xcode-macos64-release",  "inherits": [ "ninja-xcode-macos64", "release" ] },
+
+		{ "displayName": "[Ninja][GCC][MacOS64] Debug",    "name": "ninja-gcc-macos64-debug",      "inherits": [ "ninja-gcc-macos64", "debug" ] },
+		{ "displayName": "[Ninja][GCC][MacOS64] Release",  "name": "ninja-gcc-macos64-release",    "inherits": [ "ninja-gcc-macos64", "release" ] },
+
+		{ "displayName": "[Ninja][Clang][MacOS64] Debug",   "name": "ninja-clang-macos64-debug",   "inherits": [ "ninja-clang-macos64", "debug" ] },
+		{ "displayName": "[Ninja][Clang][MacOS64] Release", "name": "ninja-clang-macos64-release", "inherits": [ "ninja-clang-macos64", "release" ] },
+
+
+		{ "name": "ci-windows", "inherits": "ninja-clang-win64-release" },
+		{ "name": "ci-ubuntu",  "inherits": "ninja-clang-linux64-release" },
+		{ "name": "ci-macos",   "inherits": "ninja-clang-macos64-release" }
 
 	],
 	"buildPresets": [
-		{
-			"name": "ci-windows",
-			"configurePreset": "ci-windows",
-			"inherits": "ci",
-			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" }
-		},
-		{
-			"name": "ci-ubuntu",
-			"configurePreset": "ci-ubuntu",
-			"inherits": "ci",
-			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" }
-		},
+		{ "name": "ci-windows", "configurePreset": "ci-windows", "inherits": "ci" },
+		{ "name": "ci-ubuntu",  "configurePreset": "ci-ubuntu",  "inherits": "ci" },
+		{ "name": "ci-macos",   "configurePreset": "ci-macos",   "inherits": "ci" },
 
 		{
 			"name": "ci",
@@ -95,20 +54,9 @@
 		}
 	],
 	"testPresets": [
-		{
-			"name": "ci-windows",
-			"configurePreset": "ci-windows",
-			"inherits": "ci",
-			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" }
-		},
-		{
-			"name": "ci-ubuntu",
-			"configurePreset": "ci-ubuntu",
-			"inherits": "ci",
-			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" }
-		},
-
-
+		{ "name": "ci-windows", "configurePreset": "ci-windows", "inherits": "ci" },
+		{ "name": "ci-ubuntu",  "configurePreset": "ci-ubuntu",  "inherits": "ci" },
+		{ "name": "ci-macos",   "configurePreset": "ci-macos",   "inherits": "ci" },
 
 		{
 			"name": "ci",

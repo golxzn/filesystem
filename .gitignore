@@ -7,8 +7,10 @@
 kms.conf
 
 build/
+out/
+Testing/
 
-docs
+docs/*
 !docs/Doxyfile.in
 
 bin/*

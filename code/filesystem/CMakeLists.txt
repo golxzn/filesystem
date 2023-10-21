@@ -8,7 +8,7 @@ if (GXZN_OS_FS_GENERATE_INFO_HEADER)
 		FILENAME filesystem_about
 		NAMESPACE golxzn::about
 		PARAMETERS
-			APP_NAME "golxzn::os::filesystem"
+			APP_NAME "golxzn.os.filesystem"
 			APP_VERSION "${PROJECT_VERSION}"
 			APP_DESCRIPTION "${PROJECT_DESCRIPTION}"
 	)

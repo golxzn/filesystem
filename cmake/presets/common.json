@@ -17,31 +17,18 @@
 			  }
 		},
 		{
-			"name": "disable_docs",
+			"name": "disable-docs",
 			"hidden": true,
 			"cacheVariables": {
 				"GXZN_OS_FS_GENERATE_DOCS": "FALSE"
 			}
 		},
 		{
-			"name": "export_compile_commands",
-			"hidden": true,
-			"cacheVariables": {
-				"CMAKE_EXPORT_COMPILE_COMMANDS": true
-			}
-		},
-		{
-			"name": "c_standard",
+			"name": "standards",
 			"hidden": true,
 			"cacheVariables": {
 				"CMAKE_C_STANDARD": "17",
-				"CMAKE_C_STANDARD_REQUIRED": true
-			}
-		},
-		{
-			"name": "cpp_standard",
-			"hidden": true,
-			"cacheVariables": {
+				"CMAKE_C_STANDARD_REQUIRED": true,
 				"CMAKE_CXX_STANDARD": "20",
 				"CMAKE_CXX_STANDARD_REQUIRED": true
 			}
@@ -50,7 +37,8 @@
 		{
 			"name": "misc",
 			"hidden": true,
-			"inherits": [ "export_compile_commands", "disable_docs", "c_standard", "cpp_standard" ]
+			"binaryDir": "${sourceDir}/build/${presetName}",
+			"inherits": [ "disable-docs", "standards" ]
 		},
 
 		{

@@ -1,29 +1,40 @@
 {
 	"version": 5,
+	"include": [
+		"common.json",
+		"generators.json",
+		"compilers.json"
+	],
 	"configurePresets": [
 		{
-			"name": "win_default",
+			"name": "windows-default",
 			"hidden": true,
-			"binaryDir": "${sourceDir}/build/${presetName}",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" },
 			"cacheVariables": {
 				"GXZN_OS_FS_DEFINITIONS_INIT": "GXZN_OS_FS_WINDOWS"
 			}
 		},
 		{
-			"name": "win_msvc_clang_x64",
+			"name": "windows-clang-vendor",
 			"hidden": true,
-			"inherits": [ "win_default" ],
-			"toolchainFile": "${sourceDir}/cmake/toolchains/windows/msvc_clang_x64.cmake"
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"hostOS": [ "Windows" ],
+					"intelliSenseMode": "windows-clang-x64",
+					"enableClangTidyCodeAnalysis": true
+				}
+			}
+		},
+
+		{
+			"name": "vs22-msvc-win64",
+			"hidden": true,
+			"inherits": [ "windows-default", "vs22-x64" ]
 		},
 		{
-			"name": "win_msvc_x64",
+			"name": "ninja-clang-win64",
 			"hidden": true,
-			"inherits": [ "win_default" ],
-			"toolchainFile": "${sourceDir}/cmake/toolchains/windows/msvc_cl_x64.cmake",
-			"cacheVariables": {
-				"CMAKE_CXX_FLAGS": "/MP16 /EHsc"
-			}
+			"inherits": [ "windows-default", "windows-clang-vendor", "clang", "ninja" ]
 		}
 	]
 }
