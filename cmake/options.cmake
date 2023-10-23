@@ -27,6 +27,7 @@ set(GXZN_OS_FS_OUT ${CMAKE_BINARY_DIR})
 set(GXZN_OS_FS_CODE_DIR ${GXZN_OS_FS_ROOT}/code/filesystem CACHE PATH "Code directory")
 set(GXZN_OS_FS_TEST_DIR ${GXZN_OS_FS_ROOT}/code/tests      CACHE PATH "Tests directory")
 set(GXZN_OS_FS_DOCS_DIR ${GXZN_OS_FS_ROOT}/docs            CACHE PATH "Documentation directory")
+set(GXZN_OS_FS_DOCS_PROJECT_NAME "📂 golxzn::os::filesystem 📂")
 
 # App info
 set(GXZN_OS_FS_APP_AUTHOR         "Ruslan Golovinskii")
