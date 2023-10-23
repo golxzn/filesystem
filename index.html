@@ -5,14 +5,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.7"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>golxzn.os.filesystem: golxzn.os.filesystem</title>
+<title>📂 golxzn::os::filesystem 📂: 📂 golxzn::os::filesystem 📂</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -21,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">golxzn.os.filesystem<span id="projectnumber">&#160;1.6.4</span>
+   <div id="projectname">📂 golxzn::os::filesystem 📂<span id="projectnumber">&#160;1.6.4</span>
    </div>
    <div id="projectbrief">golxzn filesystem submodule</div>
   </td>
@@ -48,6 +54,22 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('index.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -70,41 +92,33 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title"><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn.os.filesystem</a> </div></div>
+  <div class="headertitle"><div class="title">📂 <a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a> 📂 </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p><h1 align="center"><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></h1>
-<div align="center"></div><div align="center"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-windows.yml/badge.svg" alt="Windows" style="pointer-events: none;" class="inline"/> <img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-ubuntu.yml/badge.svg" alt="Ubuntu" style="pointer-events: none;" class="inline"/> <img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-macos.yml/badge.svg" alt="MacOS" style="pointer-events: none;" class="inline"/></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
-<h2><a class="anchor" id="autotoc_md0"></a>
-How does it work?</h2>
+<div align="center"></div><div align="center"><a href="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-windows.yml"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-windows.yml/badge.svg" alt="Windows" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-ubuntu.yml"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-ubuntu.yml/badge.svg" alt="Ubuntu" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-macos.yml"><img src="https://github.com/golxzn/filesystem/actions/workflows/ci-static-lib-macos.yml/badge.svg" alt="MacOS" style="pointer-events: none;" class="inline"/></a></div><div align="center"></div><p><code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is a simple resource manager which provides basic access to application resources and user directory. <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> is dependenceless. There's only STL usage and platform specific headers.</p>
+<h2><b>How does it work?</b></h2>
 <p>When you initialize this library using <code><a class="el" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c" title="Initialize the Resource Manager.">golxzn::os::filesystem::initialize</a></code> method, library does 2 thing:</p>
 <ol type="1">
 <li>Looks for <code>assets</code> or <code>res</code> directory starting from current application directory;</li>
 <li>Creates application directory</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md1"></a>
-Look for assets or res</h3>
+<h3>Look for assets or res</h3>
 <p>This library goes up to the root directory and checks <code>assets</code> or <code>res</code> directory to set read-only resources directory up</p>
-<h3><a class="anchor" id="autotoc_md2"></a>
-Creates application directory</h3>
+<h3>Creates application directory</h3>
 <p>This library creates application directory for data which could be modified at:</p>
 <ul>
 <li>For Linux: <code>/home/you/.config/your_app_name</code>;</li>
 <li>For Windows: <code>APPDATA%/your_app_name</code>;</li>
 <li>For MacOS: <code>/Users/you/Library/Application Support/your_app_name</code>;</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
-CMake integration</h2>
-<h3><a class="anchor" id="autotoc_md4"></a>
-1. Clone this repository:</h3>
+<h2><b>CMake integration</b> 1. Clone this repository</h2>
 <div class="fragment"><div class="line">git clone https://github.com/golxzn/filesystem.git</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
-2. Add subdirectory:</h3>
+</div><!-- fragment --><h3>2. Add subdirectory</h3>
 <div class="fragment"><div class="line">add_subdirectory(filesystem)</div>
 <div class="line"> </div>
 <div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::os::filesystem)</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
-3. Include header &amp; initialize:</h3>
+</div><!-- fragment --><h3>3. Include header &amp; initialize</h3>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/os/filesystem.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>your {</div>
@@ -140,11 +154,21 @@ CMake integration</h2>
 </div><!-- fragment --><p>You could use either a <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> namespace or just <code>gxzn::os::fs</code>:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c">golxzn::os::filesystem::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
 <div class="line">gxzn::os::fs::initialize(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
-</div><!-- fragment --> </div></div><!-- PageDoc -->
+</div><!-- fragment --><hr  />
+<h2>Thanks</h2>
+<p>Documentations is powered by:</p>
+<ul>
+<li><a href="https://www.doxygen.nl/">💪 Doxygen</a></li>
+<li><a href="https://github.com/jothepro/doxygen-awesome-css">💘 doxygen-awesome-css</a>. </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+  </ul>
+</div>
 </body>
 </html>
