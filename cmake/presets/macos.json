@@ -1,0 +1,38 @@
+{
+	"version": 5,
+	"include": [
+		"common.json",
+		"generators.json",
+		"compilers.json"
+	],
+	"configurePresets": [
+		{
+			"name": "macos-default",
+			"hidden": true,
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Darwin" },
+			"cacheVariables": {
+				"GXZN_OS_FS_DEFINITIONS_INIT": "GXZN_OS_FS_MACOS;GXZN_OS_FS_UNIX"
+			}
+		},
+		{
+			"name": "xcode-macos64",
+			"hidden": true,
+			"inherits": [ "macos-default", "xcode" ]
+		},
+		{
+			"name": "ninja-xcode-macos64",
+			"hidden": true,
+			"inherits": [ "macos-default", "xcode", "ninja" ]
+		},
+		{
+			"name": "ninja-gcc-macos64",
+			"hidden": true,
+			"inherits": [ "macos-default", "gcc", "ninja" ]
+		},
+		{
+			"name": "ninja-clang-macos64",
+			"hidden": true,
+			"inherits": [ "macos-default", "clang", "ninja" ]
+		}
+	]
+}

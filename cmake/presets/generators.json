@@ -4,13 +4,52 @@
 		{
 			"name": "ninja",
 			"hidden": true,
-			"generator": "Ninja"
+			"generator": "Ninja",
+			"architecture": {
+				"value": "x64",
+				"strategy": "external"
+			},
+			"cacheVariables": {
+				"CMAKE_EXPORT_COMPILE_COMMANDS": true
+			}
+		},
+
+		{
+			"name": "xcode",
+			"hidden": true,
+			"generator": "Xcode",
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Darwin" },
+			"architecture": {
+				"value": "x64",
+				"strategy": "external"
+			},
+			"cacheVariables": {
+				"CMAKE_EXPORT_COMPILE_COMMANDS": true
+			}
+		},
+
+		{
+			"name": "vs-vendor",
+			"hidden": true,
+			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Windows" },
+			"environment": {
+				"CXXFLAGS": "/MP16 /EHsc",
+				"LDFLAGS": "/SAFESEH:NO"
+			},
+			"vendor": {
+				"microsoft.com/VisualStudioSettings/CMake/1.0": {
+					"hostOS": [ "Windows" ],
+					"intelliSenseMode": "windows-msvc-x64",
+					"enableMicrosoftCodeAnalysis": true
+				}
+			}
 		},
 		{
-			"name": "vs22_x64",
+			"name": "vs22-x64",
 			"hidden": true,
 			"generator": "Visual Studio 17 2022",
-			"architecture": "x64"
+			"architecture": "x64",
+			"inherits": "vs-vendor"
 		}
 	]
 }

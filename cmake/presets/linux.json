@@ -1,26 +1,28 @@
 {
 	"version": 5,
+	"include": [
+		"common.json",
+		"generators.json",
+		"compilers.json"
+	],
 	"configurePresets": [
 		{
-			"name": "linux_default",
+			"name": "linux-default",
 			"hidden": true,
-			"binaryDir": "${sourceDir}/build/${presetName}",
 			"condition": { "lhs": "${hostSystemName}", "type": "equals", "rhs": "Linux" },
 			"cacheVariables": {
 				"GXZN_OS_FS_DEFINITIONS_INIT": "GXZN_OS_FS_LINUX;GXZN_OS_FS_UNIX"
 			}
 		},
 		{
-			"name": "linux_clang_14",
+			"name": "ninja-gcc-linux64",
 			"hidden": true,
-			"inherits": [ "linux_default" ],
-			"toolchainFile": "${sourceDir}/cmake/toolchains/linux/clang_14.cmake"
+			"inherits": [ "linux-default", "gcc", "ninja" ]
 		},
 		{
-			"name": "linux_gcc_13",
+			"name": "ninja-clang-linux64",
 			"hidden": true,
-			"inherits": [ "linux_default" ],
-			"toolchainFile": "${sourceDir}/cmake/toolchains/linux/gcc_13.cmake"
+			"inherits": [ "linux-default", "clang", "ninja" ]
 		}
 	]
 }
