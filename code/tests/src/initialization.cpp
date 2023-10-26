@@ -96,10 +96,10 @@ TEST_CASE("filesystem", "[filesystem][initialization]") {
 		REQUIRE(user_data_dir.rfind(L"C:/Users/", 0) == 0);
 		REQUIRE(ends_with(user_data_dir, L"/AppData/Roaming/filesystem_tests"));
 #elif defined(GXZN_OS_FS_LINUX)
-		REQUIRE(user_data_dir.starts_with(L"/home/"));
+		REQUIRE(user_data_dir.rfind(L"/home/", 0) == 0);
 		REQUIRE(ends_with(user_data_dir, L"/.config/filesystem_tests"));
 #elif defined(GXZN_OS_FS_MACOS)
-		REQUIRE(user_data_dir.starts_with(L"/Users/"));
+		REQUIRE(user_data_dir.rfind(L"/Users/", 0) == 0);
 		REQUIRE(ends_with(user_data_dir, L"/Library/Application Support/filesystem_tests"));
 #endif
 	} // SECTION("User data directory")
