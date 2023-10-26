@@ -1,3 +1,11 @@
+/**
+ * @file golxzn/os/filesystem.hpp
+ * @author Ruslan Golovinskii (golxzn@gmail.com)
+ * @brief Header file with the declaration of the Golxzn Filesystem class
+ * @date 2023-10-25
+ *
+ * @copyright Copyright (c) 2023
+ */
 #pragma once
 
 #if !defined(GOLXZN_OS_FILESYSTEM)
@@ -27,22 +35,27 @@ using usize = std::size_t;
 namespace details {
 
 template<class T>
-struct transparent_hash {
-	using hash_type = std::hash<T>;
-	using is_transparent = void;
+struct data_view {
+public:
+	using value_type = T;
+	using const_pointer = const T *;
 
-	usize operator()(const T &v) const noexcept { return hash_type{}(v); }
-};
+	template<class Iterator>
+	constexpr data_view(Iterator begin, Iterator end) noexcept : m_data{ &*begin }, m_length{ end - begin } {}
 
-template<>
-struct transparent_hash<std::wstring> {
-	using char_type = std::wstring::value_type;
-	using hash_type = std::hash<std::wstring_view>;
-	using is_transparent = void;
+	template<class Container>
+	constexpr data_view(const Container &container) noexcept
+		: data_view{ std::begin(container), std::end(container) } {}
 
-	usize operator()(const std::wstring &v)      const noexcept { return hash_type{}(v); }
-	usize operator()(const std::wstring_view &v) const noexcept { return hash_type{}(v); }
-	usize operator()(const char_type *const v)   const noexcept { return hash_type{}(v); }
+	[[nodiscard]] constexpr const_pointer data() const noexcept{ return m_data; }
+	[[nodiscard]] constexpr usize size() const noexcept { return m_length; }
+
+	[[nodiscard]] constexpr const_pointer begin() const noexcept{ return m_data; }
+	[[nodiscard]] constexpr const_pointer end() const noexcept{ return std::next(m_data, m_length); }
+
+private:
+	const_pointer m_data{};
+	const usize m_length{};
 };
 
 } // namespace
@@ -55,9 +68,7 @@ struct transparent_hash<std::wstring> {
 class filesystem final {
 public:
 	/** @brief Map of the protocol extensions and their prefixes */
-	using associations_type = std::unordered_map<
-		std::wstring, std::wstring, details::transparent_hash<std::wstring>, std::equal_to<>
-	>;
+	using associations_type = std::unordered_map<std::wstring, std::wstring>;
 
 	static constexpr std::wstring_view none{ L"" }; ///< Empty wide string
 	static constexpr std::wstring::value_type separator{ L'/' }; ///< Path separator
@@ -166,8 +177,9 @@ public:
 	 * @param path Path to the file
 	 * @return `Custom` - Constructed class
 	 */
-	template<std::constructible_from<std::vector<byte>> Custom>
-	[[nodiscard]] static Custom read_binary(const std::wstring_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_binary(const std::wstring_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, Custom>;
 
 	/**
 	 * @brief Construct @p Custom class by text data from file
@@ -176,8 +188,9 @@ public:
 	 * @param path Path to the file
 	 * @return `Custom` - Constructed class
 	 */
-	template<std::constructible_from<std::string> Custom>
-	[[nodiscard]] static Custom read_text(const std::wstring_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_text(const std::wstring_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, Custom>;
 
 	/**
 	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
@@ -186,8 +199,9 @@ public:
 	 * @param path Path to the file
 	 * @return `std::shared_ptr<Custom>` - Constructed shared class
 	 */
-	template<std::constructible_from<std::vector<byte>> Custom>
-	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::wstring_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_shared_binary(const std::wstring_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::shared_ptr<Custom>>;
 
 	/**
 	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
@@ -196,8 +210,9 @@ public:
 	 * @param path Path to the file
 	 * @return `std::shared_ptr<Custom>` - Constructed shared class
 	 */
-	template<std::constructible_from<std::string> Custom>
-	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::wstring_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_shared_text(const std::wstring_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::shared_ptr<Custom>>;
 
 	/**
 	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
@@ -206,8 +221,9 @@ public:
 	 * @param path Path to the file
 	 * @return `std::unique_ptr<Custom>` - Constructed unique class
 	 */
-	template<std::constructible_from<std::vector<byte>> Custom>
-	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::wstring_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_unique_binary(const std::wstring_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::unique_ptr<Custom>>;
 
 	/**
 	 * @brief Construct @p std::shared_ptr<Custom> by binary data from file
@@ -216,8 +232,9 @@ public:
 	 * @param path Path to the file
 	 * @return `std::unique_ptr<Custom>` - Constructed unique class
 	 */
-	template<std::constructible_from<std::string> Custom>
-	[[nodiscard]] static std::unique_ptr<Custom> read_unique_text(const std::wstring_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_unique_text(const std::wstring_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::unique_ptr<Custom>>;
 
 	/** @} */
 
@@ -232,7 +249,7 @@ public:
 	 * @param data Data to write to the file
 	 * @return golxzn::os::filesystem::error - The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error write_binary(const std::wstring_view path, const std::span<byte> &data);
+	[[nodiscard]] static error write_binary(const std::wstring_view path, const details::data_view<byte> &data);
 
 	/**
 	 * @brief Write binary data to a file
@@ -250,7 +267,7 @@ public:
 	 * @param data Data to write to the file
 	 * @return golxzn::os::filesystem::error - The error message or an empty string if there's no error
 	 */
-	[[nodiscard]] static error append_binary(const std::wstring_view path, const std::span<byte> &data);
+	[[nodiscard]] static error append_binary(const std::wstring_view path, const details::data_view<byte> &data);
 
 	/**
 	 * @brief Append binary data to a file
@@ -502,37 +519,43 @@ public:
 	[[nodiscard]] static std::string read_text(const std::string_view path);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_binary(const std::wstring_view path)
-	template<std::constructible_from<std::vector<byte>> Custom>
-	[[nodiscard]] static Custom read_binary(const std::string_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_binary(const std::string_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, Custom>;
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_text(const std::wstring_view path)
-	template<std::constructible_from<std::string> Custom>
-	[[nodiscard]] static Custom read_text(const std::string_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_text(const std::string_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, Custom>;
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_shared_binary(const std::wstring_view path)
-	template<std::constructible_from<std::vector<byte>> Custom>
-	[[nodiscard]] static std::shared_ptr<Custom> read_shared_binary(const std::string_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_shared_binary(const std::string_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::shared_ptr<Custom>>;
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_shared_text(const std::wstring_view path)
-	template<std::constructible_from<std::string> Custom>
-	[[nodiscard]] static std::shared_ptr<Custom> read_shared_text(const std::string_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_shared_text(const std::string_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::shared_ptr<Custom>>;
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_unique_binary(const std::wstring_view path)
-	template<std::constructible_from<std::vector<byte>> Custom>
-	[[nodiscard]] static std::unique_ptr<Custom> read_unique_binary(const std::string_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_unique_binary(const std::string_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::unique_ptr<Custom>>;
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::read_unique_text(const std::wstring_view path)
-	template<std::constructible_from<std::string> Custom>
-	[[nodiscard]] static std::unique_ptr<Custom> read_unique_text(const std::string_view path);
+	template<class Custom>
+	[[nodiscard]] static auto read_unique_text(const std::string_view path)
+		-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::unique_ptr<Custom>>;
 
-	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const std::span<byte> &data)
-	[[nodiscard]] static error write_binary(const std::string_view path, const std::span<byte> &data);
+	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const details::data_view<byte> &data)
+	[[nodiscard]] static error write_binary(const std::string_view path, const details::data_view<byte> &data);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::write_binary(const std::wstring_view path, const std::initializer_list<byte> data)
 	[[nodiscard]] static error write_binary(const std::string_view path, const std::initializer_list<byte> data);
 
-	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const std::span<byte> &data)
-	[[nodiscard]] static error append_binary(const std::string_view path, const std::span<byte> &data);
+	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const details::data_view<byte> &data)
+	[[nodiscard]] static error append_binary(const std::string_view path, const details::data_view<byte> &data);
 
 	/// @brief Narrow string alias for golxzn::os::filesystem::append_binary(const std::wstring_view path, const std::initializer_list<byte> data)
 	[[nodiscard]] static error append_binary(const std::string_view path, const std::initializer_list<byte> data);
@@ -608,66 +631,78 @@ using fs = filesystem;
 
 //======================================== Implementation ========================================//
 
-
-template<std::constructible_from<std::vector<byte>> Custom>
-Custom filesystem::read_binary(const std::wstring_view path) {
+template<class Custom>
+auto filesystem::read_binary(const std::wstring_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, Custom> {
 	return Custom{ read_binary(path) };
 }
-template<std::constructible_from<std::string> Custom>
-Custom filesystem::read_text(const std::wstring_view path) {
+template<class Custom>
+auto filesystem::read_text(const std::wstring_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, Custom> {
 	return Custom{ read_text(path) };
 }
 
-template<std::constructible_from<std::vector<byte>> Custom>
-std::shared_ptr<Custom> filesystem::read_shared_binary(const std::wstring_view path) {
+template<class Custom>
+auto filesystem::read_shared_binary(const std::wstring_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::shared_ptr<Custom>> {
 	return std::make_shared<Custom>(read_binary(path));
 }
 
-template<std::constructible_from<std::string> Custom>
-std::shared_ptr<Custom> filesystem::read_shared_text(const std::wstring_view path) {
+template<class Custom>
+auto filesystem::read_shared_text(const std::wstring_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::shared_ptr<Custom>> {
 	return std::make_shared<Custom>(read_text(path));
 }
 
-template<std::constructible_from<std::vector<byte>> Custom>
-std::unique_ptr<Custom> filesystem::read_unique_binary(const std::wstring_view path) {
+template<class Custom>
+auto filesystem::read_unique_binary(const std::wstring_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::unique_ptr<Custom>> {
 	return std::make_unique<Custom>(read_binary(path));
 }
 
-template<std::constructible_from<std::string> Custom>
-std::unique_ptr<Custom> filesystem::read_unique_text(const std::wstring_view path) {
+template<class Custom>
+auto filesystem::read_unique_text(const std::wstring_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::unique_ptr<Custom>> {
 	return std::make_unique<Custom>(read_text(path));
 }
 
 
-template<std::constructible_from<std::vector<byte>> Custom>
-Custom filesystem::read_binary(const std::string_view path) {
+template<class Custom>
+auto filesystem::read_binary(const std::string_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, Custom> {
 	return Custom{ read_binary(path) };
 }
-
-template<std::constructible_from<std::string> Custom>
-Custom filesystem::read_text(const std::string_view path) {
+template<class Custom>
+auto filesystem::read_text(const std::string_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, Custom> {
 	return Custom{ read_text(path) };
 }
 
-template<std::constructible_from<std::vector<byte>> Custom>
-std::shared_ptr<Custom> filesystem::read_shared_binary(const std::string_view path) {
+template<class Custom>
+auto filesystem::read_shared_binary(const std::string_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::shared_ptr<Custom>> {
 	return std::make_shared<Custom>(read_binary(path));
 }
 
-template<std::constructible_from<std::string> Custom>
-std::shared_ptr<Custom> filesystem::read_shared_text(const std::string_view path) {
+template<class Custom>
+auto filesystem::read_shared_text(const std::string_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::shared_ptr<Custom>> {
 	return std::make_shared<Custom>(read_text(path));
 }
 
-template<std::constructible_from<std::vector<byte>> Custom>
-std::unique_ptr<Custom> filesystem::read_unique_binary(const std::string_view path) {
+template<class Custom>
+auto filesystem::read_unique_binary(const std::string_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::vector<byte>>, std::unique_ptr<Custom>> {
 	return std::make_unique<Custom>(read_binary(path));
 }
 
-template<std::constructible_from<std::string> Custom>
-std::unique_ptr<Custom> filesystem::read_unique_text(const std::string_view path) {
+template<class Custom>
+auto filesystem::read_unique_text(const std::string_view path)
+	-> std::enable_if_t<std::is_constructible_v<Custom, std::string>, std::unique_ptr<Custom>> {
 	return std::make_unique<Custom>(read_text(path));
 }
+
+
 
 } // namespace golxzn::os
 

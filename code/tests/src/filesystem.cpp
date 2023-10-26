@@ -74,7 +74,7 @@ TEST_CASE("filesystem", "[filesystem][filesystem]") {
 		REQUIRE_FALSE(entries.empty());
 		for (const auto &entry : entries) {
 			INFO("Entry: " << entry);
-			REQUIRE(entry.starts_with("res://"));
+			REQUIRE(entry.rfind("res://", 0) == 0);
 			REQUIRE(gxzn::os::fs::exists(entry));
 		}
 	}

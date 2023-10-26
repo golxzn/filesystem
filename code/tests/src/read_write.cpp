@@ -7,9 +7,12 @@
 
 #include <golxzn/os/filesystem.hpp>
 
+namespace {
+
 #define b(x) static_cast<gxzn::os::byte>(x)
 
-std::string dump(const auto &content) {
+template<class T>
+std::string dump(const T &content) {
 	std::stringstream out;
 	for (auto byte : content) {
 		out << std::hex << std::setfill('0') << std::setw(2) << static_cast<int32_t>(byte) << ' ';
@@ -17,6 +20,8 @@ std::string dump(const auto &content) {
 
 	return out.str();
 }
+
+} // anonymous namespace
 
 TEST_CASE("filesystem", "[filesystem][read_write]") {
 	REQUIRE_FALSE(gxzn::os::fs::initialize(L"filesystem_tests").has_error());

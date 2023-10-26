@@ -1,4 +1,3 @@
-#include <ranges>
 #include <algorithm>
 #include <filesystem>
 
@@ -11,8 +10,16 @@ namespace {
 
 std::wstring get_current_path() {
 	auto current_path{ std::filesystem::current_path().wstring() };
-	std::ranges::replace(current_path, L'\\', gxzn::os::fs::separator);
+	std::replace(std::begin(current_path), std::end(current_path), L'\\', gxzn::os::fs::separator);
 	return current_path;
+}
+
+bool ends_with(const std::wstring_view str, const std::wstring_view end) {
+	if (str.size() < end.size()) {
+		return false;
+	}
+	auto rbegin{ std::rbegin(str) };
+	return std::equal(rbegin, std::next(rbegin, end.size()), std::rbegin(end));
 }
 
 } // anonymous namespace
@@ -78,7 +85,7 @@ TEST_CASE("filesystem", "[filesystem][initialization]") {
 		INFO("gxzn::os::fs::current_directory: " << gxzn::os::fs::to_narrow(current_dir));
 		INFO("current path:                      " << gxzn::os::fs::to_narrow(current_path));
 		REQUIRE_FALSE(current_dir.empty());
-		REQUIRE(current_dir.starts_with(current_path));
+		REQUIRE(current_dir.rfind(current_path, 0) == 0);
 	} // SECTION("Current directory")
 
 	SECTION("User data directory") {
@@ -86,14 +93,14 @@ TEST_CASE("filesystem", "[filesystem][initialization]") {
 		INFO("gxzn::os::fs::user_data_directory: " << gxzn::os::fs::to_narrow(user_data_dir));
 		REQUIRE_FALSE(user_data_dir.empty());
 #if defined(GXZN_OS_FS_WINDOWS)
-		REQUIRE(user_data_dir.starts_with(L"C:/Users/"));
-		REQUIRE(user_data_dir.ends_with(L"/AppData/Roaming/filesystem_tests"));
+		REQUIRE(user_data_dir.rfind(L"C:/Users/", 0) == 0);
+		REQUIRE(ends_with(user_data_dir, L"/AppData/Roaming/filesystem_tests"));
 #elif defined(GXZN_OS_FS_LINUX)
 		REQUIRE(user_data_dir.starts_with(L"/home/"));
-		REQUIRE(user_data_dir.ends_with(L"/.config/filesystem_tests"));
+		REQUIRE(ends_with(user_data_dir, L"/.config/filesystem_tests"));
 #elif defined(GXZN_OS_FS_MACOS)
 		REQUIRE(user_data_dir.starts_with(L"/Users/"));
-		REQUIRE(user_data_dir.ends_with(L"/Library/Application Support/filesystem_tests"));
+		REQUIRE(ends_with(user_data_dir, L"/Library/Application Support/filesystem_tests"));
 #endif
 	} // SECTION("User data directory")
 }

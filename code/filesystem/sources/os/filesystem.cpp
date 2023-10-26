@@ -1,5 +1,4 @@
 #include <deque>
-#include <ranges>
 #include <vector>
 #include <cstdlib>
 #include <numeric>
@@ -118,7 +117,12 @@ void filesystem::associate(const std::wstring_view protocol_view, std::wstring &
 	if (protocol_view.empty()) [[unlikely]] return;
 
 	std::wstring protocol{ protocol_view };
-	if (!protocol_view.ends_with(protocol_separator)) [[unlikely]] {
+	const auto rbegin{ std::rbegin(protocol_view) };
+	const auto ends_with_separator{
+		std::equal(rbegin, std::next(rbegin, protocol_separator.size()),
+			std::rbegin(protocol_separator))
+	};
+	if (!ends_with_separator) [[unlikely]] {
 		protocol += protocol_separator;
 	}
 
@@ -173,7 +177,7 @@ std::string filesystem::read_text(const std::wstring_view wide_path) {
 	return {};
 }
 
-filesystem::error filesystem::write_binary(const std::wstring_view path, const std::span<byte> &data) {
+filesystem::error filesystem::write_binary(const std::wstring_view path, const details::data_view<byte> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{ L"[filesystem::write_binary] Protocol prefix expected in the path: '" +
 			std::wstring{ path } + L'\''
@@ -205,7 +209,7 @@ filesystem::error filesystem::write_binary(const std::wstring_view path, const s
 	return details::write_data(replace_association_prefix(path), data.begin(), data.size());
 }
 
-filesystem::error filesystem::append_binary(const std::wstring_view path, const std::span<byte> &data) {
+filesystem::error filesystem::append_binary(const std::wstring_view path, const details::data_view<byte> &data) {
 	if (path.find(protocol_separator) == std::wstring_view::npos) [[unlikely]] {
 		return error{ L"[filesystem::write_binary] Protocol prefix expected in the path: '" +
 			std::wstring{ path } + L'\''
@@ -310,7 +314,7 @@ filesystem::error filesystem::append_text(const std::wstring_view path, const st
 std::wstring_view filesystem::get_association(const std::wstring_view protocol) noexcept {
 	if (protocol.empty()) [[unlikely]] return none;
 
-	if (const auto found{ associations_map.find(protocol) };
+	if (const auto found{ associations_map.find(std::wstring{ protocol }) };
 			found != std::cend(associations_map)) [[likely]] {
 		return found->second;
 	}
@@ -399,7 +403,9 @@ std::wstring filesystem::normalize(std::wstring_view str) {
 	}
 
 	std::vector<std::wstring_view> parts;
-	parts.reserve(std::ranges::count_if(str, [](const auto &c){ return slash.find(c) != std::wstring_view::npos; }) + 1lu);
+	parts.reserve(std::count_if(std::begin(str), std::end(str),
+		[](const auto &c){ return slash.find(c) != std::wstring_view::npos; }) + 1lu
+	);
 	usize prev_slash{};
 	usize curr_slash{};
 	usize next_slash{};
@@ -609,7 +615,7 @@ std::string filesystem::read_text(const std::string_view path) {
 	return read_text(to_wide(path));
 }
 
-filesystem::error filesystem::write_binary(const std::string_view path, const std::span<byte> &data) {
+filesystem::error filesystem::write_binary(const std::string_view path, const details::data_view<byte> &data) {
 	return write_binary(to_wide(path), data);
 }
 
@@ -617,7 +623,7 @@ filesystem::error filesystem::write_binary(const std::string_view path, const st
 	return write_binary(to_wide(path), data);
 }
 
-filesystem::error filesystem::append_binary(const std::string_view path, const std::span<byte> &data) {
+filesystem::error filesystem::append_binary(const std::string_view path, const details::data_view<byte> &data) {
 	return append_binary(to_wide(path), data);
 }
 
@@ -763,7 +769,7 @@ std::wstring filesystem::replace_association_prefix(std::wstring_view path) noex
 }
 
 std::wstring filesystem::setup_assets_directories(const std::wstring_view assets_path) {
-	if (assets_path.starts_with(separator) || assets_path.find(L":") == 1) {
+	if (assets_path.rfind(separator, 0) == 0 || assets_path.find(L":") == 1) {
 		return normalize(assets_path);
 	}
 

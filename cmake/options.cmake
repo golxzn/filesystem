@@ -13,10 +13,11 @@ else()
 	set(GXZN_OS_FS_IS_TOPLEVEL_PROJECT FALSE)
 endif()
 
-option(GXZN_OS_FS_BUILD_TEST           "Build filesystem's tests" ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
-option(GXZN_OS_FS_DEV_MODE             "Developer mode" ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
-option(GXZN_OS_FS_GENERATE_INFO_HEADER "Generate info header" OFF)
+option(GXZN_OS_FS_SHOW_SUBMODULE_INFO  "Show submodule info"         ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
+option(GXZN_OS_FS_BUILD_TEST           "Build filesystem's tests"    ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
+option(GXZN_OS_FS_DEV_MODE             "Developer mode"              ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
 option(GXZN_OS_FS_GENERATE_DOCS        "Generate MCSS documentation" ${GXZN_OS_FS_IS_TOPLEVEL_PROJECT})
+option(GXZN_OS_FS_GENERATE_INFO_HEADER "Generate info header"        OFF)
 mark_as_advanced(GXZN_OS_FS_DEV_MODE GXZN_OS_FS_GENERATE_INFO_HEADER GXZN_OS_FS_GENERATE_DOCS)
 
 include(GetSystemInfo)
@@ -33,11 +34,11 @@ set(GXZN_OS_FS_DOCS_PROJECT_NAME "📂 golxzn::os::filesystem 📂")
 set(GXZN_OS_FS_APP_AUTHOR         "Ruslan Golovinskii")
 
 if (NOT CMAKE_CXX_STANDARD)
-	set(CMAKE_CXX_STANDARD 20)
+	set(CMAKE_CXX_STANDARD 17)
 endif()
 
-if(CMAKE_CXX_STANDARD LESS 20)
-	message(FATAL_ERROR "CMAKE_CXX_STANDARD must be at least 20")
+if(CMAKE_CXX_STANDARD LESS 17)
+	message(FATAL_ERROR "CMAKE_CXX_STANDARD must be at least 17")
 endif()
 
 find_program(ccache_program ccache)
@@ -45,6 +46,8 @@ if (NOT ${ccache_program} MATCHES "NOTFOUND")
 	set(CMAKE_C_COMPILER_LAUNCHER ccache)
 	set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 endif()
+
+if (GXZN_OS_FS_SHOW_SUBMODULE_INFO)
 
 message(STATUS "-- -- -- -- -- -- -- filesystem configuration -- -- -- -- -- -- -- --")
 message(STATUS "System:                 ${GXZN_OS_FS_SYSTEM} (${GXZN_OS_FS_ARCH})")
@@ -63,3 +66,5 @@ if(GXZN_OS_FS_DEV_MODE)
 endif()
 
 message(STATUS "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
+
+endif()
