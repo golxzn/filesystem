@@ -7,7 +7,7 @@ std::wstring appdata_directory() {
 	if (const auto home{ std::getenv("XDG_CONFIG_HOME") }; home != nullptr) {
 		return filesystem::to_wide(home);
 	} else if (auto home{ __unix_get_home() }; !home.empty()) {
-		resman::join(home, L"/.config");
+		filesystem::join(home, L"/.config");
 		return home;
 	}
 	return L"~/.config";
