@@ -27,7 +27,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">📂 golxzn::os::filesystem 📂<span id="projectnumber">&#160;1.6.4</span>
+   <div id="projectname">📂 golxzn::os::filesystem 📂<span id="projectnumber">&#160;1.6.5</span>
    </div>
    <div id="projectbrief">golxzn filesystem submodule</div>
   </td>
@@ -119,7 +119,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line"> </div>
 <div class="line">target_link_libraries(YourProjectName PUBLIC golxzn::os::filesystem)</div>
 </div><!-- fragment --><h3>3. Include header &amp; initialize</h3>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;golxzn/os/filesystem.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="filesystem_8hpp.html">golxzn/os/filesystem.hpp</a>&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">namespace </span>your {</div>
 <div class="line"> </div>
@@ -150,6 +150,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <div class="line">        gxzn::os::fs::load_shared_binary&lt;your::Image&gt;(app_settings.get_splash_screen_path())</div>
 <div class="line">    };</div>
 <div class="line">}</div>
+<div class="ttc" id="afilesystem_8hpp_html"><div class="ttname"><a href="filesystem_8hpp.html">filesystem.hpp</a></div><div class="ttdoc">Header file with the declaration of the Golxzn Filesystem class.</div></div>
 <div class="ttc" id="agroup__initialization_html_ga4aa7571d9f453c440ffd3e27d00e600c"><div class="ttname"><a href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c">golxzn::os::filesystem::initialize</a></div><div class="ttdeci">static error initialize(const std::wstring_view application_name, const std::wstring_view assets_path=default_assets_directory_name)</div><div class="ttdoc">Initialize the Resource Manager.</div></div>
 </div><!-- fragment --><p>You could use either a <code><a class="el" href="classgolxzn_1_1os_1_1filesystem.html" title="Golxzn Resource Manager.">golxzn::os::filesystem</a></code> namespace or just <code>gxzn::os::fs</code>:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="group__initialization.html#ga4aa7571d9f453c440ffd3e27d00e600c">golxzn::os::filesystem::initialize</a>(<span class="stringliteral">&quot;your_app_name&quot;</span>);</div>
